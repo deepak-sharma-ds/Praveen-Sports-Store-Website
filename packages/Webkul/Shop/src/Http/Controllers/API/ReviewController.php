@@ -150,13 +150,19 @@ class ReviewController extends APIController
 
     public function randomNewReview(): JsonResource
     {
-        $review = $this->productReviewRepository
-            ->findWhere([
-                'status'     => self::STATUS_APPROVED,
-            ])
-            ->random()
-            ->take(10);
+        try {
+            $reviews = $this->productReviewRepository->getModel()
+                ->where('status', self::STATUS_APPROVED)
+                ->inRandomOrder()
+                ->take(10)
+                ->get();
 
-        return new ProductReviewResource($review);
+            return ProductReviewResource::collection($reviews);
+        } catch (\Throwable $th) {
+            return new JsonResource([
+                'message' => $th->getMessage()
+                // 'message' => trans('shop::app.products.view.reviews.empty-review'),
+            ]);
+        }
     }
 }

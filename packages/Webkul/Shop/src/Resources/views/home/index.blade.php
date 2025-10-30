@@ -54,6 +54,10 @@
                         :src="route('shop.api.products.reviews.random')"
                         :navigation-link="route('shop.home.index')"
                     />
+                @elseif ($customization->name == 'Dont miss deal')
+                    <x-shop::deal-countdown.carousel
+                        :note="'Cannot be combined with any other offer'"
+                    />
                 @else
                     <!-- push style -->
                     @if (! empty($data['css']))

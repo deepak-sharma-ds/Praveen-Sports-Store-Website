@@ -27,6 +27,14 @@
     "file": "assets/cash-on-delivery-Ck2rBtSq.png",
     "src": "src/Resources/assets/images/cash-on-delivery.png"
   },
+  "src/Resources/assets/images/review-banner.png": {
+    "file": "assets/review-banner-XYZ123.png",
+    "src": "src/Resources/assets/images/review-banner.png"
+  },
+  "src/Resources/assets/images/deal-banner.png": {
+    "file": "assets/deal-banner-XYZ123gfg.png",
+    "src": "src/Resources/assets/images/deal-banner.png"
+  },
   "src/Resources/assets/images/default-language.svg": {
     "file": "assets/default-language-BxH8WlkY.svg",
     "src": "src/Resources/assets/images/default-language.svg"
