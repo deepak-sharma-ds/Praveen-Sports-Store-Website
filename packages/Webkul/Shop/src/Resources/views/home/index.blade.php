@@ -47,29 +47,48 @@
 
                 @break
             @case ($customization::STATIC_CONTENT)
-                <!-- push style -->
-                @if (! empty($data['css']))
-                    @push ('styles')
-                        <style>
-                            {{ $data['css'] }}
-                        </style>
-                    @endpush
+                @if ($customization->name == 'Product Review')
+                    {{-- @include('theme::home.review-carousel') --}}
+                    <x-shop::reviews.carousel
+                        :title="'Customer Reviews'"
+                        :src="route('shop.api.products.reviews.random')"
+                        :navigation-link="route('shop.home.index')"
+                    />
+                @else
+                    <!-- push style -->
+                    @if (! empty($data['css']))
+                        @push ('styles')
+                            <style>
+                                {{ $data['css'] }}
+                            </style>
+                        @endpush
+                    @endif
+
+                    <!-- render html -->
+                    @if (! empty($data['html']))
+                        {!! $data['html'] !!}
+                    @endif
                 @endif
 
-                <!-- render html -->
-                @if (! empty($data['html']))
-                    {!! $data['html'] !!}
-                @endif
 
                 @break
             @case ($customization::CATEGORY_CAROUSEL)
                 <!-- Categories carousel -->
-                <x-shop::categories.carousel
-                    :title="$data['title'] ?? ''"
-                    :src="route('shop.api.categories.index', $data['filters'] ?? [])"
-                    :navigation-link="route('shop.home.index')"
-                    aria-label="{{ trans('shop::app.home.index.categories-carousel') }}"
-                />
+                @if ($customization->name == 'Featured Categories')
+                    <x-shop::categories.featured_carousel
+                        :title="$data['title'] ?? ''"
+                        :src="route('shop.api.categories.index', $data['filters'] ?? [])"
+                        :navigation-link="route('shop.home.index')"
+                        aria-label="{{ trans('shop::app.home.index.categories-carousel') }}"
+                    />
+                @else
+                    <x-shop::categories.carousel
+                        :title="$data['title'] ?? ''"
+                        :src="route('shop.api.categories.index', $data['filters'] ?? [])"
+                        :navigation-link="route('shop.home.index')"
+                        aria-label="{{ trans('shop::app.home.index.categories-carousel') }}"
+                    />
+                @endif
 
                 @break
             @case ($customization::PRODUCT_CAROUSEL)

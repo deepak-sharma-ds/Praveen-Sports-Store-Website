@@ -144,7 +144,19 @@ class ReviewController extends APIController
     private function censorReviewerName(string $name): string
     {
         return collect(explode(' ', $name))
-            ->map(fn ($part) => substr($part, 0, 1).str_repeat('*', max(strlen($part) - 1, 0)))
+            ->map(fn($part) => substr($part, 0, 1) . str_repeat('*', max(strlen($part) - 1, 0)))
             ->join(' ');
+    }
+
+    public function randomNewReview(): JsonResource
+    {
+        $review = $this->productReviewRepository
+            ->findWhere([
+                'status'     => self::STATUS_APPROVED,
+            ])
+            ->random()
+            ->take(10);
+
+        return new ProductReviewResource($review);
     }
 }

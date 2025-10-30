@@ -47,6 +47,10 @@ Route::group(['prefix' => 'api'], function () {
         Route::get('reviews/{review_id}/translate', 'translate')->name('shop.api.products.reviews.translate');
     });
 
+    Route::controller(ReviewController::class)->group(function () {
+        Route::get('reviews-random', 'randomNewReview')->name('shop.api.products.reviews.random');
+    });
+
     Route::controller(CompareController::class)->prefix('compare-items')->group(function () {
         Route::get('', 'index')->name('shop.api.compare.index');
 
