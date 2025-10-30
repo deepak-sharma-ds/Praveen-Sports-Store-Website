@@ -13,13 +13,6 @@
             <div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1180:px-8">
                 <!-- Left Navigation Section -->
                 <div class="flex items-center gap-x-10 max-[1180px]:gap-x-5">
-                    <!-- Logo Shimmer -->
-                    <span
-                        class="shimmer block h-[29px] w-[131px] rounded"
-                        role="presentation"
-                    >
-                    </span>
-
                     <!-- Categories Shimmer -->
                     <div class="flex items-center gap-5">
                         <span
@@ -40,6 +33,13 @@
                         >
                         </span>
                     </div>
+
+                    <!-- Logo Shimmer -->
+                    <span
+                        class="shimmer block h-[29px] w-[131px] rounded"
+                        role="presentation"
+                    >
+                    </span>
                 </div>
 
                 <!-- Right Navigation Section -->
@@ -86,15 +86,15 @@
                 <!-- Left Navigation -->
                 <div class="flex items-center gap-x-1.5">
                     <!-- Hamburger Menu Shimmer -->
-                    <span 
-                        class="shimmer block h-6 w-6 rounded" 
+                    <span
+                        class="shimmer block h-6 w-6 rounded"
                         role="presentation"
                     >
                     </span>
-                    
+
                     <!-- Logo Shimmer -->
-                    <span 
-                        class="shimmer block h-[29px] w-[131px] rounded" 
+                    <span
+                        class="shimmer block h-[29px] w-[131px] rounded"
                         role="presentation"
                     >
                     </span>
@@ -103,22 +103,22 @@
                 <!-- Right Navigation Icons -->
                 <div class="flex items-center gap-x-5 max-md:gap-x-4">
                     <!-- Compare Icon Shimmer -->
-                    <span 
-                        class="shimmer block h-6 w-6 rounded" 
+                    <span
+                        class="shimmer block h-6 w-6 rounded"
                         role="presentation"
                     >
                     </span>
-                    
+
                     <!-- Cart Icon Shimmer -->
-                    <span 
-                        class="shimmer block h-6 w-6 rounded" 
+                    <span
+                        class="shimmer block h-6 w-6 rounded"
                         role="presentation"
                     >
                     </span>
-                    
+
                     <!-- Profile Icon Shimmer -->
-                    <span 
-                        class="shimmer block h-6 w-6 rounded" 
+                    <span
+                        class="shimmer block h-6 w-6 rounded"
                         role="presentation"
                     >
                     </span>
@@ -142,12 +142,12 @@
 {!! view_render_event('bagisto.shop.layout.header.after') !!}
 
 @pushOnce('scripts')
-    <script 
-        type="text/x-template" 
+    <script
+        type="text/x-template"
         id="v-header-switcher-template"
     >
         <v-desktop-header v-if="isDesktop"></v-desktop-header>
-        
+
         <v-mobile-header v-else></v-mobile-header>
     </script>
 
@@ -187,15 +187,15 @@
         });
     </script>
 
-    <script 
-        type="text/x-template" 
+    <script
+        type="text/x-template"
         id="v-desktop-header-template"
     >
         <x-shop::layouts.header.desktop />
     </script>
 
-    <script 
-        type="text/x-template" 
+    <script
+        type="text/x-template"
         id="v-mobile-header-template"
     >
         <x-shop::layouts.header.mobile />
