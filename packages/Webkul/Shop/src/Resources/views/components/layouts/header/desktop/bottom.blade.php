@@ -103,6 +103,15 @@
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.after') !!}
 
+            @auth('customer')
+                @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
+                    <a href="{{ route('shop.customers.account.wishlist.index') }}" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.wishlist')"
+                        class="relative flex items-center">
+                        <span class="icon-heart cursor-pointer text-2xl hover:text-primary transition"></span>
+                    </a>
+                @endif
+            @endauth
+
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile.before') !!}
 
             <!-- user profile -->
