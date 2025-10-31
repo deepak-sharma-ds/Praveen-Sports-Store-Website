@@ -127,6 +127,17 @@
         @endif
 
         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
+
+        <!-- Card we accept -->
+        <div class="flex flex-col gap-4">
+            <h2 class="text-2xs italic leading-7 text-navyBlue max-md:text-xs max-sm:text-lg" role="heading"
+                aria-level="2">
+                We Accept
+            </h2>
+            <div class="flex items-center gap-4">
+                <img src="{{ asset('storage/theme/13/allCard.png') }}" alt="card" class="object-contain" width="150" height="75" />
+            </div>
+        </div>
     </div>
 
     <div class="flex justify-between bg-[#F1EADF] px-[60px] py-3.5 max-md:justify-center max-sm:px-5">
