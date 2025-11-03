@@ -22,7 +22,7 @@
 
                     <span class="relative">
                         <span
-                            class="icon-cart cursor-pointer text-2xl"
+                            class="icon-cart cursor-pointer text-2xl inline-flex items-center justify-center w-9 h-9 rounded-full bg-white"
                             role="button"
                             aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
                             tabindex="0"

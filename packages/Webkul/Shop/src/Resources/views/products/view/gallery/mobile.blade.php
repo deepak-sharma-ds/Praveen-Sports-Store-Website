@@ -32,7 +32,7 @@
                 ref="sliderContainer"
             >
                 <div
-                    class="grid max-h-screen w-screen content-center bg-cover bg-no-repeat"
+                    class="grid w-full content-center bg-cover bg-no-repeat"
                     v-for="(media, index) in options"
                     ref="slide"
                 >
@@ -52,7 +52,7 @@
 
                     <template v-else>
                         <img
-                            class="aspect-square max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
+                            class="w-full max-w-full select-none transition-transform duration-300 ease-in-out"
                             :src="media.large_image_url"
                             :alt="media.large_image_url"
                         />
