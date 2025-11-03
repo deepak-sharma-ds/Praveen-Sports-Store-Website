@@ -1,23 +1,27 @@
 {
-  "_veeValidate-AStS9x6w.js": {
-    "file": "assets/veeValidate-AStS9x6w.js",
+  "_veeValidate-BnSi22_q.js": {
+    "file": "assets/veeValidate-BnSi22_q.js",
     "name": "veeValidate",
     "imports": [
-      "_vue-BpIHnJ7o.js"
+      "_vue-DaFNcYaj.js"
     ]
   },
-  "_vendor-DIwtuusy.js": {
-    "file": "assets/vendor-DIwtuusy.js",
+  "_vendor-CW6uOYFM.js": {
+    "file": "assets/vendor-CW6uOYFM.js",
     "name": "vendor"
   },
-  "_vue-BpIHnJ7o.js": {
-    "file": "assets/vue-BpIHnJ7o.js",
+  "_vue-DaFNcYaj.js": {
+    "file": "assets/vue-DaFNcYaj.js",
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-BoUQhNYM.css",
+    "file": "assets/app-BeqmstUU.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
+  },
+  "src/Resources/assets/fonts/Poppins-Regular.ttf": {
+    "file": "assets/Poppins-Regular-CTKNfV9P.ttf",
+    "src": "src/Resources/assets/fonts/Poppins-Regular.ttf"
   },
   "src/Resources/assets/fonts/bagisto-shop.woff": {
     "file": "assets/bagisto-shop-BHAKyv0r.woff",
@@ -27,13 +31,9 @@
     "file": "assets/cash-on-delivery-Ck2rBtSq.png",
     "src": "src/Resources/assets/images/cash-on-delivery.png"
   },
-  "src/Resources/assets/images/review-banner.png": {
-    "file": "assets/review-banner-XYZ123.png",
-    "src": "src/Resources/assets/images/review-banner.png"
-  },
-  "src/Resources/assets/images/deal-banner.png": {
-    "file": "assets/deal-banner-XYZ123gfg.png",
-    "src": "src/Resources/assets/images/deal-banner.png"
+  "src/Resources/assets/images/deal-banner.png.png": {
+    "file": "assets/deal-banner.png-Cqd1Ca8Q.png",
+    "src": "src/Resources/assets/images/deal-banner.png.png"
   },
   "src/Resources/assets/images/default-language.svg": {
     "file": "assets/default-language-BxH8WlkY.svg",
@@ -79,6 +79,10 @@
     "file": "assets/paypal-CIu1GKlz.png",
     "src": "src/Resources/assets/images/paypal.png"
   },
+  "src/Resources/assets/images/review-banner.png": {
+    "file": "assets/review-banner-Dt7OHHA8.png",
+    "src": "src/Resources/assets/images/review-banner.png"
+  },
   "src/Resources/assets/images/review.png": {
     "file": "assets/review-ZWqERyaT.png",
     "src": "src/Resources/assets/images/review.png"
@@ -104,14 +108,14 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-C4XCDcMP.js",
+    "file": "assets/app-h2RhPG73.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vue-BpIHnJ7o.js",
-      "_vendor-DIwtuusy.js",
-      "_veeValidate-AStS9x6w.js"
+      "_vue-DaFNcYaj.js",
+      "_vendor-CW6uOYFM.js",
+      "_veeValidate-BnSi22_q.js"
     ],
     "css": [
       "assets/app-DsP8OK1c.css"
