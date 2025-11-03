@@ -1,6 +1,7 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.before') !!}
 
-<div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1180:px-8">
+<div
+    class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1180:px-8">
     <!--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
@@ -9,7 +10,7 @@
     <div class="flex items-center gap-x-10 max-[1180px]:gap-x-5">
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.before') !!}
 
-        <v-desktop-category>
+        {{-- <v-desktop-category>
             <div class="flex items-center gap-5">
                 <span
                     class="shimmer h-6 w-20 rounded"
@@ -26,22 +27,18 @@
                     role="presentation"
                 ></span>
             </div>
-        </v-desktop-category>
+        </v-desktop-category> --}}
+
+        <!-- -- Desktop Static tab --- -->
+        <x-shop::layouts.header.desktop.tab />
 
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.after') !!}
     </div>
 
     {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.before') !!}
-    <a
-        href="{{ route('shop.home.index') }}"
-        aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.bagisto')"
-    >
-        <img
-            src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-            width="131"
-            height="29"
-            alt="{{ config('app.name') }}"
-        >
+    <a href="{{ route('shop.home.index') }}" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.bagisto')">
+        <img src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}" width="131"
+            height="29" alt="{{ config('app.name') }}">
     </a>
 
     {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.after') !!}
@@ -53,39 +50,23 @@
 
         <!-- Search Bar Container -->
         <div class="relative w-full">
-            <form
-                action="{{ route('shop.search.index') }}"
-                class="flex max-w-[445px] items-center"
-                role="search"
-            >
-                <label
-                    for="organic-search"
-                    class="sr-only"
-                >
+            <form action="{{ route('shop.search.index') }}" class="flex max-w-[445px] items-center" role="search">
+                <label for="organic-search" class="sr-only">
                     @lang('shop::app.components.layouts.header.desktop.bottom.search')
                 </label>
 
-                <div class="icon-search pointer-events-none absolute top-2.5 flex items-center text-xl ltr:left-3 rtl:right-3"></div>
+                <div
+                    class="icon-search pointer-events-none absolute top-2.5 flex items-center text-xl ltr:left-3 rtl:right-3">
+                </div>
 
-                <input
-                    type="text"
-                    name="query"
-                    value="{{ request('query') }}"
+                <input type="text" name="query" value="{{ request('query') }}"
                     class="block w-full rounded-lg border border-transparent bg-zinc-100 px-11 py-3 text-xs font-medium text-gray-900 transition-all hover:border-gray-400 focus:border-gray-400"
                     minlength="{{ core()->getConfigData('catalog.products.search.min_query_length') }}"
                     maxlength="{{ core()->getConfigData('catalog.products.search.max_query_length') }}"
-                    placeholder="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')"
-                    aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')"
-                    aria-required="true"
-                    pattern="[^\\]+"
-                    required
-                >
+                    placeholder="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.search-text')" aria-required="true" pattern="[^\\]+"
+                    required>
 
-                <button
-                    type="submit"
-                    class="hidden"
-                    aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.submit')"
-                >
+                <button type="submit" class="hidden" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.submit')">
                 </button>
 
                 @if (core()->getConfigData('catalog.products.settings.image_search'))
@@ -102,15 +83,9 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.compare.before') !!}
 
             <!-- Compare -->
-            @if(core()->getConfigData('catalog.products.settings.compare_option'))
-                <a
-                    href="{{ route('shop.compare.index') }}"
-                    aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.compare')"
-                >
-                    <span
-                        class="icon-compare inline-block cursor-pointer text-2xl"
-                        role="presentation"
-                    ></span>
+            @if (core()->getConfigData('catalog.products.settings.compare_option'))
+                <a href="{{ route('shop.compare.index') }}" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.compare')">
+                    <span class="icon-compare inline-block cursor-pointer text-2xl" role="presentation"></span>
                 </a>
             @endif
 
@@ -119,7 +94,7 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.mini_cart.before') !!}
 
             <!-- Mini cart -->
-            @if(core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+            @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
                 @include('shop::checkout.cart.mini-cart')
             @endif
 
@@ -137,14 +112,12 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile.before') !!}
 
             <!-- user profile -->
-            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
+            <x-shop::dropdown
+                position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <span
                         class="icon-users inline-flex items-center justify-center w-9 h-9 rounded-full bg-white cursor-pointer text-2xl"
-                        role="button"
-                        aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.profile')"
-                        tabindex="0"
-                    ></span>
+                        role="button" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.profile')" tabindex="0"></span>
                 </x-slot>
 
                 <!-- Guest Dropdown -->
@@ -167,17 +140,13 @@
                         <div class="mt-6 flex gap-4">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
 
-                            <a
-                                href="{{ route('shop.customer.session.create') }}"
-                                class="primary-button m-0 mx-auto block w-max rounded-2xl px-7 text-center text-base max-md:rounded-lg ltr:ml-0 rtl:mr-0"
-                            >
+                            <a href="{{ route('shop.customer.session.create') }}"
+                                class="primary-button m-0 mx-auto block w-max rounded-2xl px-7 text-center text-base max-md:rounded-lg ltr:ml-0 rtl:mr-0">
                                 @lang('shop::app.components.layouts.header.desktop.bottom.sign-in')
                             </a>
 
-                            <a
-                                href="{{ route('shop.customers.register.index') }}"
-                                class="secondary-button m-0 mx-auto block w-max rounded-2xl border-2 px-7 text-center text-base max-md:rounded-lg max-md:py-3 ltr:ml-0 rtl:mr-0"
-                            >
+                            <a href="{{ route('shop.customers.register.index') }}"
+                                class="secondary-button m-0 mx-auto block w-max rounded-2xl border-2 px-7 text-center text-base max-md:rounded-lg max-md:py-3 ltr:ml-0 rtl:mr-0">
                                 @lang('shop::app.components.layouts.header.desktop.bottom.sign-up')
                             </a>
 
@@ -207,42 +176,31 @@
                         <div class="mt-2.5 grid gap-1 pb-2.5">
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile_dropdown.links.before') !!}
 
-                            <a
-                                class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
-                                href="{{ route('shop.customers.account.profile.index') }}"
-                            >
+                            <a class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+                                href="{{ route('shop.customers.account.profile.index') }}">
                                 @lang('shop::app.components.layouts.header.desktop.bottom.profile')
                             </a>
 
-                            <a
-                                class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
-                                href="{{ route('shop.customers.account.orders.index') }}"
-                            >
+                            <a class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+                                href="{{ route('shop.customers.account.orders.index') }}">
                                 @lang('shop::app.components.layouts.header.desktop.bottom.orders')
                             </a>
 
                             @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
-                                <a
-                                    class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
-                                    href="{{ route('shop.customers.account.wishlist.index') }}"
-                                >
+                                <a class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+                                    href="{{ route('shop.customers.account.wishlist.index') }}">
                                     @lang('shop::app.components.layouts.header.desktop.bottom.wishlist')
                                 </a>
                             @endif
 
                             <!--Customers logout-->
                             @auth('customer')
-                                <x-shop::form
-                                    method="DELETE"
-                                    action="{{ route('shop.customer.session.destroy') }}"
-                                    id="customerLogout"
-                                />
+                                <x-shop::form method="DELETE" action="{{ route('shop.customer.session.destroy') }}"
+                                    id="customerLogout" />
 
-                                <a
-                                    class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+                                <a class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                                     href="{{ route('shop.customer.session.destroy') }}"
-                                    onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
-                                >
+                                    onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
                                     @lang('shop::app.components.layouts.header.desktop.bottom.logout')
                                 </a>
                             @endauth
@@ -570,7 +528,7 @@
                 },
 
                 pairCategoryChildren(category) {
-                    if (! category.children) return [];
+                    if (!category.children) return [];
 
                     return category.children.reduce((result, value, index, array) => {
                         if (index % 2 === 0) {
