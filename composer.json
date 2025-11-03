@@ -18,6 +18,7 @@
         "ext-pdo_mysql": "*",
         "ext-tokenizer": "*",
         "astrotomic/laravel-translatable": "^11.0.0",
+        "bagisto/bagisto-package-generator": "^2.1",
         "bagisto/image-cache": "dev-master",
         "barryvdh/laravel-dompdf": "^2.0.0",
         "diglactic/laravel-breadcrumbs": "^9.0",
@@ -45,7 +46,8 @@
         "shetabit/visitor": "^4.1",
         "spatie/laravel-responsecache": "^7.4",
         "spatie/laravel-sitemap": "^7.3",
-        "stevebauman/purify": "^6.3"
+        "stevebauman/purify": "^6.3",
+        "stripe/stripe-php": "^18.1"
     },
     "require-dev": {
         "bagisto/laravel-datafaker": "2.3.*",
@@ -95,7 +97,8 @@
             "Webkul\\SocialShare\\": "packages/Webkul/SocialShare/src",
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
-            "Webkul\\User\\": "packages/Webkul/User/src"
+            "Webkul\\User\\": "packages/Webkul/User/src",
+            "Webkul\\CustomStripePayment\\": "packages/Webkul/CustomStripePayment/src"
         }
     },
     "autoload-dev": {
