@@ -1,15 +1,11 @@
 <!-- SEO Meta Content -->
 @push('meta')
-    <meta name="description" content="@lang('shop::app.checkout.onepage.index.checkout')"/>
+    <meta name="description" content="@lang('shop::app.checkout.onepage.index.checkout')" />
 
-    <meta name="keywords" content="@lang('shop::app.checkout.onepage.index.checkout')"/>
+    <meta name="keywords" content="@lang('shop::app.checkout.onepage.index.checkout')" />
 @endPush
 
-<x-shop::layouts
-    :has-header="false"
-    :has-feature="false"
-    :has-footer="false"
->
+<x-shop::layouts :has-header="false" :has-feature="false" :has-footer="false">
     <!-- Page Title -->
     <x-slot:title>
         @lang('shop::app.checkout.onepage.index.checkout')
@@ -19,19 +15,12 @@
 
     <!-- Page Header -->
     <div class="flex-wrap">
-        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-sm:px-4">
+        <div
+            class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-sm:px-4">
             <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
-                <a
-                    href="{{ route('shop.home.index') }}"
-                    class="flex min-h-[30px]"
-                    aria-label="@lang('shop::checkout.onepage.index.bagisto')"
-                >
-                    <img
-                        src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-                        alt="{{ config('app.name') }}"
-                        width="131"
-                        height="29"
-                    >
+                <a href="{{ route('shop.home.index') }}" class="flex min-h-[30px]" aria-label="@lang('shop::checkout.onepage.index.bagisto')">
+                    <img src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                        alt="{{ config('app.name') }}" width="131" height="29">
                 </a>
             </div>
 
@@ -49,7 +38,7 @@
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.before') !!}
 
         <!-- Breadcrumbs -->
-        @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        @if (core()->getConfigData('general.general.breadcrumbs.shop'))
             <x-shop::breadcrumbs name="checkout" />
         @endif
 
@@ -118,6 +107,14 @@
                                 {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.after') !!}
                             </template>
 
+                            <template v-else-if="cart.payment_method == 'stripepayment'">
+                                {!! view_render_event('bagisto.shop.checkout.onepage.summary.stripepayment.before') !!}
+
+                                <v-stripe-smart-button></v-stripe-smart-button>
+
+                                {!! view_render_event('bagisto.shop.checkout.onepage.summary.stripepayment.after') !!}
+                            </template>
+
                             <template v-else>
                                 <x-shop::button
                                     type="button"
@@ -146,7 +143,7 @@
                             prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
 
                             subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
-                            
+
                             shipping: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_shipping_amount') }}",
                         },
 
@@ -208,7 +205,7 @@
                     scrollToCurrentStep() {
                         let container = document.getElementById('steps-container');
 
-                        if (! container) {
+                        if (!container) {
                             return;
                         }
 
@@ -234,7 +231,10 @@
                             .catch(error => {
                                 this.isPlacingOrder = false
 
-                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: error.response.data.message
+                                });
                             });
                     }
                 },

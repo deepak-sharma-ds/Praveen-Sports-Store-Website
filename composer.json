@@ -98,7 +98,9 @@
             "Webkul\\Tax\\": "packages/Webkul/Tax/src",
             "Webkul\\Theme\\": "packages/Webkul/Theme/src",
             "Webkul\\User\\": "packages/Webkul/User/src",
-            "Webkul\\CustomStripePayment\\": "packages/Webkul/CustomStripePayment/src"
+            "Webkul\\CustomStripePayment\\": "packages/Webkul/CustomStripePayment/src",
+            "Webkul\\StripePayment\\": "packages/Webkul/StripePayment/src"
+
         }
     },
     "autoload-dev": {

@@ -44,4 +44,5 @@ return [
     Webkul\Theme\Providers\ThemeServiceProvider::class,
     Webkul\User\Providers\UserServiceProvider::class,
     Webkul\CustomStripePayment\Providers\CustomStripePaymentServiceProvider::class,
+    Webkul\StripePayment\Providers\StripePaymentServiceProvider::class,
 ];
