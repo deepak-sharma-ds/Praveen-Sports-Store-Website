@@ -15,7 +15,7 @@
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-BeqmstUU.css",
+    "file": "assets/app-DeSdoA5k.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -31,9 +31,9 @@
     "file": "assets/cash-on-delivery-Ck2rBtSq.png",
     "src": "src/Resources/assets/images/cash-on-delivery.png"
   },
-  "src/Resources/assets/images/deal-banner.png.png": {
-    "file": "assets/deal-banner.png-Cqd1Ca8Q.png",
-    "src": "src/Resources/assets/images/deal-banner.png.png"
+  "src/Resources/assets/images/deal-banner.png": {
+    "file": "assets/deal-banner-Cqd1Ca8Q.png",
+    "src": "src/Resources/assets/images/deal-banner.png"
   },
   "src/Resources/assets/images/default-language.svg": {
     "file": "assets/default-language-BxH8WlkY.svg",
