@@ -15,27 +15,25 @@
 
         <script type="text/x-template" id="v-stripe-smart-button-template">
             <div class="w-full">
-                <!-- Stripe Express Checkout (Apple Pay / Google Pay / Browser Pay) -->
-                <div v-if="paymentRequestAvailable" class="mb-4">
-                    <div ref="paymentRequestButton" class="payment-request-button"></div>
+                <div class="mb-4">
+                    <div v-show="paymentRequestAvailable" ref="paymentRequestButton" class="payment-request-button"></div>
                 </div>
 
-                <!-- Fallback: Card Element -->
-                <div v-else>
+                <div class="card-element-wrapper">
                     <div ref="cardElement" id="card-element" class="p-4 border rounded"></div>
                     <div v-if="cardError" class="text-red-600 mt-2">@{{ cardError }}</div>
+                </div>
 
-                    <div class="mt-4">
-                        <button
-                            type="button"
-                            class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3"
-                            :disabled="isProcessing"
-                            @click="payWithCard"
-                        >
-                            <span v-if="isProcessing">Processing…</span>
-                            <span v-else>Pay with card</span>
-                        </button>
-                    </div>
+                <div class="mt-4">
+                    <button
+                        type="button"
+                        class="primary-button w-max rounded-2xl bg-navyBlue px-11 py-3"
+                        :disabled="isProcessing"
+                        @click="payWithCard"
+                    >
+                        <span v-if="isProcessing">Processing…</span>
+                        <span v-else>Pay with card</span>
+                    </button>
                 </div>
             </div>
         </script>
@@ -62,11 +60,11 @@
                 },
 
                 mounted() {
-                    this.initStripe();
+                    this.register();
                 },
 
                 methods: {
-                    async initStripe() {
+                    async register() {
                         if (typeof Stripe === 'undefined') {
                             this.$emitter.emit('add-flash', {
                                 type: 'error',
@@ -80,7 +78,6 @@
                         });
                         this.elements = this.stripe.elements();
 
-                        // Card setup (fallback)
                         const style = {
                             base: {
                                 fontSize: '16px',
@@ -95,90 +92,81 @@
                             style
                         });
                         this.card.mount(this.$refs.cardElement);
-                        this.card.on('change', e => this.cardError = e.error ? e.error.message : null);
 
-                        // Initialize Payment Request Button
-                        await this.setupPaymentRequest();
-                    },
+                        this.card.on('change', (event) => {
+                            if (event.error) this.cardError = event.error.message;
+                            else this.cardError = null;
+                        });
 
-                    async setupPaymentRequest() {
-                        try {
-                            const amount = await this.getCartAmountInMinorUnits();
+                        // Payment Request setup
+                        this.paymentRequest = this.stripe.paymentRequest({
+                            country: '{{ core()->getConfigData('sales.general.country') ?? 'US' }}',
+                            currency: this.currency.toLowerCase(),
+                            total: {
+                                label: '{{ config('app.name') }} Order',
+                                amount: await this.getCartAmountInMinorUnits()
+                            },
+                            requestPayerName: true,
+                            requestPayerEmail: true
+                        });
 
-                            this.paymentRequest = this.stripe.paymentRequest({
-                                country: '{{ core()->getConfigData('sales.general.country') ?? 'US' }}',
-                                currency: this.currency.toLowerCase(),
-                                total: {
-                                    label: '{{ config('app.name') }} Order',
-                                    amount: amount,
-                                },
-                                requestPayerName: true,
-                                requestPayerEmail: true,
+                        const result = await this.paymentRequest.canMakePayment();
+                        if (result) {
+                            const prButton = this.elements.create('paymentRequestButton', {
+                                paymentRequest: this.paymentRequest,
                             });
 
-                            const result = await this.paymentRequest.canMakePayment();
-                            console.log('canMakePayment result:', result);
+                            prButton.mount(this.$refs.paymentRequestButton);
+                            this.paymentRequestAvailable = true;
 
-                            if (result) {
-                                const prButton = this.elements.create('paymentRequestButton', {
-                                    paymentRequest: this.paymentRequest,
-                                    style: {
-                                        paymentRequestButton: {
-                                            type: 'default', // 'default', 'buy', 'donate'
-                                            theme: 'dark', // 'dark', 'light', 'light-outline'
-                                            height: '45px'
+                            this.paymentRequest.on('paymentmethod', async (ev) => {
+                                const clientSecret = await this.fetchClientSecret();
+                                if (!clientSecret) {
+                                    ev.complete('fail');
+                                    return;
+                                }
+
+                                const confirmResult = await this.stripe.confirmCardPayment(
+                                    clientSecret, {
+                                        payment_method: ev.paymentMethod.id
+                                    }, {
+                                        handleActions: false
+                                    });
+
+                                if (confirmResult.error) {
+                                    ev.complete('fail');
+                                    this.$emitter.emit('add-flash', {
+                                        type: 'error',
+                                        message: confirmResult.error.message
+                                    });
+                                } else {
+                                    if (confirmResult.paymentIntent && confirmResult.paymentIntent
+                                        .status === 'requires_action') {
+                                        const actionResult = await this.stripe.confirmCardPayment(
+                                            clientSecret);
+                                        if (actionResult.error) {
+                                            ev.complete('fail');
+                                            this.$emitter.emit('add-flash', {
+                                                type: 'error',
+                                                message: actionResult.error.message
+                                            });
+                                            return;
                                         }
-                                    }
-                                });
-
-                                prButton.mount(this.$refs.paymentRequestButton);
-                                this.paymentRequestAvailable = true;
-
-                                this.paymentRequest.on('paymentmethod', async (ev) => {
-                                    const clientSecret = await this.fetchClientSecret();
-                                    if (!clientSecret) {
-                                        ev.complete('fail');
-                                        return;
-                                    }
-
-                                    const {
-                                        error,
-                                        paymentIntent
-                                    } = await this.stripe.confirmCardPayment(
-                                        clientSecret, {
-                                            payment_method: ev.paymentMethod.id
-                                        }, {
-                                            handleActions: false
-                                        }
-                                    );
-
-                                    if (error) {
-                                        ev.complete('fail');
-                                        this.$emitter.emit('add-flash', {
-                                            type: 'error',
-                                            message: error.message
-                                        });
-                                        return;
                                     }
 
                                     ev.complete('success');
-                                    await this.postPaymentSuccess(paymentIntent);
-                                });
-                            } else {
-                                console.warn('Stripe Express Checkout not available in this browser.');
-                            }
-                        } catch (error) {
-                            console.error('Payment Request setup failed:', error);
+                                    await this.postPaymentSuccess(confirmResult.paymentIntent || {});
+                                }
+                            });
                         }
                     },
 
                     async getCartAmountInMinorUnits() {
                         try {
                             const resp = await this.$axios.get("{{ route('stripe.cart-amount') }}");
-                            return resp.data?.amount || 0;
-                        } catch {
-                            return 0;
-                        }
+                            if (resp.data && resp.data.amount) return resp.data.amount;
+                        } catch (e) {}
+                        return 0;
                     },
 
                     async fetchClientSecret() {
@@ -186,7 +174,7 @@
                             const resp = await this.$axios.post("{{ route('stripe.create-payment-intent') }}", {
                                 _token: "{{ csrf_token() }}"
                             });
-                            if (resp.data.success) {
+                            if (resp.data.success && resp.data.client_secret) {
                                 this.clientSecret = resp.data.client_secret;
                                 return this.clientSecret;
                             }
@@ -220,7 +208,7 @@
                             if (result.error) {
                                 this.cardError = result.error.message;
                                 this.isProcessing = false;
-                            } else if (result.paymentIntent.status === 'succeeded') {
+                            } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
                                 window.location.href = "{{ route('shop.checkout.onepage.success') }}";
                             }
                         } catch (err) {
@@ -239,11 +227,9 @@
                                 _token: "{{ csrf_token() }}",
                                 payment_intent_id: paymentIntent.id
                             });
-
-                            const redirectUrl = resp.data.redirect_url ||
-                                "{{ route('shop.checkout.onepage.success') }}";
-                            window.location.href = redirectUrl;
-                        } catch {
+                            if (resp.data.redirect_url) window.location.href = resp.data.redirect_url;
+                            else window.location.href = "{{ route('shop.checkout.onepage.success') }}";
+                        } catch (e) {
                             window.location.href = "{{ route('shop.checkout.cart.index') }}";
                         }
                     }
