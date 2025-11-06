@@ -3,47 +3,49 @@
 
 @pushOnce('scripts')
     {{-- <script type="text/x-template" id="v-reviews-carousel-template">
-        <div v-if="!isLoading && reviews.length" class="container mt-14 max-lg:px-8">
-            <div class="relative">
-                <div
-                    ref="swiperContainer"
-                    class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth"
-                >
+        <section class="bg-white py-14">
+            <div v-if="!isLoading && reviews.length" class="container max-lg:px-8">
+                <div class="relative">
                     <div
-                        class="min-w-[300px] max-w-[300px] p-4 border rounded-lg bg-white shadow-sm text-center"
-                        v-for="review in reviews"
-                        :key="review.id"
+                        ref="swiperContainer"
+                        class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth mb-5"
                     >
-                        <h5 class="font-semibold text-lg mb-2" v-text="review.title"></h5>
-                        <p class="text-gray-600 text-sm mb-3" v-text="review.comment"></p>
-                        <p class="text-yellow-500 mb-2">
-                            <span v-for="n in 5" :key="n">
-                                <span v-if="n <= review.rating">★</span>
-                                <span v-else>☆</span>
-                            </span>
-                        </p>
-                        <p class="text-gray-500 text-sm">
-                            — <span v-text="review.name"></span>
-                        </p>
+                        <div
+                            class="w-full"
+                            v-for="review in reviews"
+                            :key="review.id"
+                        >
+                            <h5 class="font-semibold text-lg mb-2" v-text="review.title"></h5>
+                            <p class="text-gray-600 text-sm mb-3" v-text="review.comment"></p>
+                            <p class="text-yellow-500 mb-2">
+                                <span v-for="n in 5" :key="n">
+                                    <span v-if="n <= review.rating">★</span>
+                                    <span v-else>☆</span>
+                                </span>
+                            </p>
+                            <p class="text-gray-500 text-sm">
+                                — <span v-text="review.name"></span>
+                            </p>
+                        </div>
                     </div>
+
+                    <!-- Navigation Arrows -->
+                    <span
+                        class="icon-arrow-left-stylish inline-flex h-7 w-7 cursor-pointer items-center justify-center bg-white text-2xl transition hover:bg-black hover:text-white mr-3"
+                        role="button"
+                        aria-label="Previous"
+                        @click="swipeLeft"
+                    ></span>
+
+                    <span
+                        class="icon-arrow-right-stylish inline-flex h-7 w-7 cursor-pointer items-center justify-center bg-white text-2xl transition hover:bg-black hover:text-white"
+                        role="button"
+                        aria-label="Next"
+                        @click="swipeRight"
+                    ></span>
                 </div>
-
-                <!-- Navigation Arrows -->
-                <span
-                    class="icon-arrow-left-stylish absolute -left-10 top-9 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white"
-                    role="button"
-                    aria-label="Previous"
-                    @click="swipeLeft"
-                ></span>
-
-                <span
-                    class="icon-arrow-right-stylish absolute -right-6 top-9 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white"
-                    role="button"
-                    aria-label="Next"
-                    @click="swipeRight"
-                ></span>
             </div>
-        </div>
+        </section>
 
         <!-- Shimmer -->
         <template v-if="isLoading">
@@ -51,60 +53,63 @@
         </template>
     </script> --}}
     <script type="text/x-template" id="v-reviews-carousel-template">
-    <div v-if="!isLoading && reviews.length" class="container mt-14 max-lg:px-8">
-        <div class="flex flex-wrap items-center gap-10">
+    <section class="bg-white py-14">
+        <div v-if="!isLoading && reviews.length" class="container max-lg:px-8">
+            <div class="flex flex-wrap items-center gap-10">
 
-            <!-- LEFT SIDE: Reviews Carousel -->
-            <div class="relative flex-1 min-w-[60%]">
-                <div
-                    ref="swiperContainer"
-                    class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth"
-                >
+                <!-- LEFT SIDE: Reviews Carousel -->
+                <div class="relative flex-1 min-w-[60%]">
                     <div
-                        class="min-w-[300px] max-w-[300px] p-4 border rounded-lg bg-white shadow-sm text-center"
-                        v-for="review in reviews"
-                        :key="review.id"
+                        ref="swiperContainer"
+                        class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth mb-5"
                     >
-                        <h5 class="font-semibold text-lg mb-2" v-text="review.title"></h5>
-                        <p class="text-gray-600 text-sm mb-3" v-text="review.comment"></p>
-                        <p class="text-yellow-500 mb-2">
-                            <span v-for="n in 5" :key="n">
-                                <span v-if="n <= review.rating">★</span>
-                                <span v-else>☆</span>
-                            </span>
-                        </p>
-                        <p class="text-gray-500 text-sm">
-                            — <span v-text="review.name"></span>
-                        </p>
+                        <div
+                            class="w-full"
+                            v-for="review in reviews"
+                            :key="review.id"
+                        >
+                            <h5 class="font-semibold text-lg mb-2" v-text="review.title"></h5>
+                            <p class="text-yellow-500 mb-2">
+                                <span v-for="n in 5" :key="n">
+                                    <span v-if="n <= review.rating">★</span>
+                                    <span v-else>☆</span>
+                                </span>
+                            </p>
+                            <p class="text-gray-600 text-sm mb-3" v-text="review.comment"></p>
+                            <p class="text-gray-500 text-sm">
+                                — <span v-text="review.name"></span>
+                            </p>
+                        </div>
                     </div>
+
+                    <!-- Navigation Arrows -->
+                    <span
+                        class="icon-arrow-left-stylish inline-flex h-7 w-7 cursor-pointer items-center justify-center bg-white text-2xl transition hover:bg-black hover:text-white mr-3"
+                        role="button"
+                        aria-label="Previous"
+                        @click="swipeLeft"
+                    ></span>
+
+                    <span
+                        class="icon-arrow-right-stylish inline-flex h-7 w-7 cursor-pointer items-center justify-center bg-white text-2xl transition hover:bg-black hover:text-white"
+                        role="button"
+                        aria-label="Next"
+                        @click="swipeRight"
+                    ></span>
                 </div>
 
-                <!-- Navigation Arrows -->
-                <span
-                    class="icon-arrow-left-stylish absolute -left-10 top-1/2 -translate-y-1/2 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white"
-                    role="button"
-                    aria-label="Previous"
-                    @click="swipeLeft"
-                ></span>
-
-                <span
-                    class="icon-arrow-right-stylish absolute -right-6 top-1/2 -translate-y-1/2 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white"
-                    role="button"
-                    aria-label="Next"
-                    @click="swipeRight"
-                ></span>
-            </div>
-
-            <!-- RIGHT SIDE: Static Image -->
-            <div class="flex-1 min-w-[35%] flex justify-center">
-                <img
-                    src="{{ bagisto_asset('images/review-banner.png', 'shop') }}"
-                    alt="Customer Reviews"
-                    class="rounded-2xl shadow-md max-w-full h-auto object-cover"
-                />
+                <!-- RIGHT SIDE: Static Image -->
+                <div class="flex-1 min-w-[35%] flex flex-col">
+                    <img
+                        src="{{ bagisto_asset('images/review-banner.png', 'shop') }}"
+                        alt="Customer Reviews"
+                        class="rounded-md max-w-full w-full h-auto object-cover"
+                    />
+                    <p class="mt-2.5">Stratos 1.1 5 Star Lite Cricket Bat</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Shimmer -->
     <template v-if="isLoading">

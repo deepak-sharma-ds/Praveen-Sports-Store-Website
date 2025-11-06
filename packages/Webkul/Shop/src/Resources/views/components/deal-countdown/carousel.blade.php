@@ -4,7 +4,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-deal-countdown-template">
-        <div class="relative w-full overflow-hidden rounded-2xl shadow-md">
+        <div class="relative w-full overflow-hidden z-0">
             <!-- Background Image -->
             <img
                 :src="image"
@@ -12,45 +12,40 @@
                 class="w-full h-[540px] object-cover"
             />
 
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-black/30"></div>
-
             <!-- Countdown Box -->
             <div
-                class="absolute top-1/2 right-10 -translate-y-1/2 z-10 w-[300px] p-6 rounded-xl text-white text-center shadow-lg"
-                style="background: linear-gradient(135deg, #9c27b0 0%, #3f51b5 100%);"
-            >
-                <h2 class="text-xl font-bold uppercase mb-1" v-text="title"></h2>
-                <p class="text-xs mb-3 tracking-wide" v-text="subtitle"></p>
+                class="absolute top-1/2 right-[10%] -translate-y-1/2 z-10 w-[440px] py-6 px-12 rounded-xl text-white text-center shadow-lg bg-gradient-to-tr from-[#0F1D71] to-[#902129]">
+                <h2 class="text-4xl font-secondary font-bold uppercase mb-2" v-text="title"></h2>
+                <p class="text-base font-medium uppercase" v-text="subtitle"></p>
 
                 <!-- Countdown Timer -->
-                <div class="grid grid-cols-4 gap-1 text-center mb-4">
+                <div class="grid grid-cols-4 gap-1 text-center mb-4 text-[44px] font-semibold">
                     <div>
-                        <p class="text-2xl font-bold" v-text="time.days"></p>
-                        <p class="text-[10px] uppercase">Days</p>
+                        <p v-text="time.days"></p>
+                        <p class="text-base font-normal">Days</p>
                     </div>
                     <div>
-                        <p class="text-2xl font-bold" v-text="time.hours"></p>
-                        <p class="text-[10px] uppercase">Hours</p>
+                        <p v-text="time.hours"></p>
+                        <p class="text-base font-normal">Hours</p>
                     </div>
                     <div>
-                        <p class="text-2xl font-bold" v-text="time.minutes"></p>
-                        <p class="text-[10px] uppercase">Mins</p>
+                        <p v-text="time.minutes"></p>
+                        <p class="text-base font-normal">Mins</p>
                     </div>
                     <div>
-                        <p class="text-2xl font-bold" v-text="time.seconds"></p>
-                        <p class="text-[10px] uppercase">Secs</p>
+                        <p v-text="time.seconds"></p>
+                        <p class="text-base font-normal">Secs</p>
                     </div>
                 </div>
 
                 <!-- CTA Button -->
                 <a
                     :href="buttonUrl"
-                    class="inline-block bg-white text-purple-700 text-sm font-semibold px-4 py-1.5 rounded hover:bg-gray-100 transition"
+                    class="inline-flex bg-white text-[#902129] rounded py-2.5 px-4 border border-[#AC153A] font-medium text-base uppercase transition-all hover:bg-[#AC153A] hover:text-white"
                     v-text="buttonText"
                 ></a>
 
-                <p class="text-[10px] mt-2 opacity-80 italic">
+                <p class="text-base mt-2 font-medium">
                     *Cannot be combined with any other offer
                 </p>
             </div>

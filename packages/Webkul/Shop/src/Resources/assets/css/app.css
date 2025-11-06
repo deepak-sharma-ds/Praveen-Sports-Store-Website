@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 @font-face {
     font-family: "bagisto-shop";
     src: url("../fonts/bagisto-shop.woff") format("woff");
@@ -9,6 +11,33 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Monument Extended';
+    src: url('../fonts/MonumentExtended-Ultrabold.woff2') format('woff2'),
+        url('../fonts/MonumentExtended-Ultrabold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Monument Extended';
+    src: url('../fonts/MonumentExtended-Regular.woff2') format('woff2'),
+        url('../fonts/MonumentExtended-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+body{
+    font-family: "Outfit", sans-serif;
+    font-weight: normal;
+}
+.font-secondary{
+    font-family: 'Monument Extended', sans-serif;
+    font-weight: normal;
+}
+
 
 img.lazy {
   visibility: hidden;
@@ -373,7 +402,7 @@ img.lazy {
     }
 
     * {
-        @apply box-border font-poppins;
+        @apply box-border;
     }
 
     .scrollbar-hide::-webkit-scrollbar {

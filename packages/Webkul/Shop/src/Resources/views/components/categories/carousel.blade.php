@@ -14,8 +14,12 @@
         type="text/x-template"
         id="v-categories-carousel-template"
     >
+    <section class="bg-[#EDEDED] py-14">
+        <div class="text-center mb-10 font-secondary text-[32px] uppercase">
+            <h2>Made for Match Winners</h2>
+        </div>
         <div
-            class="container mt-14 max-lg:px-8 max-md:mt-7 max-md:!px-0 max-sm:mt-5"
+            class="container max-lg:px-8 max-md:!px-0"
             v-if="! isLoading && categories?.length"
         >
             <div class="relative">
@@ -24,12 +28,12 @@
                     class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-lg:gap-4"
                 >
                     <div
-                        class="w-1/3 grid grid-cols-1 justify-items-center gap-4 font-medium max-md:gap-2.5 max-md:first:ml-4 max-sm:gap-1.5"
+                        class="w-1/3 grid grid-cols-1 justify-items-center text-center gap-4 font-medium max-md:gap-2.5 max-md:first:ml-4 max-sm:gap-1.5"
                         v-for="category in categories"
                     >
                         <a
                             :href="category.slug"
-                            class="relative w-full inline-block pt-[100%]"
+                            class="relative w-full inline-block pt-[100%] before:content-[''] before:absolute before:top-0 before:left-[10%] before:right-[10%] before:bottom-0 before:bg-gradient-to-t before:from-[#E6BF42] before:to-[#90212900] before:rounded-t-full"
                             :aria-label="category.name"
                         >
                             <x-shop::media.images.lazy
@@ -52,7 +56,7 @@
                             class=""
                         >
                             <p
-                                class="text-center text-base text-[#0F1D71] uppercase"
+                                class="text-base text-[#0F1D71] uppercase font-secondary"
                                 v-text="category.name"
                             >
                             </p>
@@ -84,6 +88,7 @@
                 </span> -->
             </div>
         </div>
+    </section>
 
         <!-- Category Carousel Shimmer -->
         <template v-if="isLoading">
@@ -145,5 +150,6 @@
                 },
             },
         });
+        
     </script>
 @endPushOnce

@@ -78,7 +78,7 @@
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.search_bar.after') !!}
 
         <!-- Right Navigation Links -->
-        <div class="mt-1.5 flex gap-x-8 max-[1100px]:gap-x-6 max-lg:gap-x-2.5">
+        <div class="mt-1.5 flex gap-x-3 max-[1100px]:gap-x-6 max-lg:gap-x-2.5">
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.compare.before') !!}
 
@@ -124,7 +124,7 @@
                 @guest('customer')
                     <x-slot:content>
                         <div class="grid gap-2.5">
-                            <p class="font-dmserif text-xl">
+                            <p class="text-xl">
                                 @lang('shop::app.components.layouts.header.desktop.bottom.welcome-guest')
                             </p>
 
@@ -141,12 +141,12 @@
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_in_button.before') !!}
 
                             <a href="{{ route('shop.customer.session.create') }}"
-                                class="primary-button m-0 mx-auto block w-max rounded-2xl px-7 text-center text-base max-md:rounded-lg ltr:ml-0 rtl:mr-0">
+                                class="primary-button m-0 mx-auto block w-max rounded px-7 py-2 text-center text-base leading-normal">
                                 @lang('shop::app.components.layouts.header.desktop.bottom.sign-in')
                             </a>
 
                             <a href="{{ route('shop.customers.register.index') }}"
-                                class="secondary-button m-0 mx-auto block w-max rounded-2xl border-2 px-7 text-center text-base max-md:rounded-lg max-md:py-3 ltr:ml-0 rtl:mr-0">
+                                class="secondary-button m-0 mx-auto block w-max rounded px-7 py-2 text-center text-base leading-normal">
                                 @lang('shop::app.components.layouts.header.desktop.bottom.sign-up')
                             </a>
 

@@ -14,8 +14,12 @@
         type="text/x-template"
         id="v-categories-featured_carousel-template"
     >
+    <section class="bg-[#EDEDED]">
+        <div class="text-center mb-10 font-secondary text-[32px] uppercase">
+            <h2>Featured Categories</h2>
+        </div>
         <div
-            class="container mt-14 max-lg:px-8 max-md:mt-7 max-md:!px-0 max-sm:mt-5"
+            class="container max-lg:px-8 max-md:!px-0"
             v-if="! isLoading && categories?.length"
         >
             <div class="relative">
@@ -49,10 +53,9 @@
 
                         <a
                             :href="category.slug"
-                            class="absolute bottom-0 left-0 w-full p-4 text-left"
+                            class="rounded-b-md absolute bottom-0 left-0 w-full text-lg p-4 leading-snug text-left text-white font-secondary bg-gradient-to-t from-black to-transparent"
                         >
                             <p
-                                class="text-center text-lg text-black max-md:text-base max-md:font-normal max-sm:text-sm"
                                 v-text="category.name"
                             >
                             </p>
@@ -79,7 +82,7 @@
                 </span> -->
             </div>
         </div>
-
+    </section>
         <!-- Category Carousel Shimmer -->
         <template v-if="isLoading">
             <x-shop::shimmer.categories.carousel

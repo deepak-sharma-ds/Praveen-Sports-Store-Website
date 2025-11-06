@@ -2,7 +2,7 @@
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-desktop-tabs-template">
-        <div class="flex items-center gap-8 font-medium text-gray-800">
+        <div class="flex items-center gap-8 font-medium text-black uppercase tracking-widest">
             <a href="{{ route('shop.home.index') }}"
                class="hover:text-primary transition"
                :class="{ 'text-primary font-semibold': activeTab === 'home' }">
