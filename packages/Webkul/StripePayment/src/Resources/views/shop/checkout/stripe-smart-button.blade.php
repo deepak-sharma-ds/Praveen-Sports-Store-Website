@@ -13,7 +13,9 @@
     @pushOnce('scripts')
         <script src="https://js.stripe.com/v3/"></script>
 
-        <script type="text/x-template" id="v-stripe-smart-button-template">
+        {{-- 💡 Blade sometimes breaks Vue templates. This prevents it. --}}
+        @verbatim
+            <script type="text/x-template" id="v-stripe-smart-button-template">
             <div class="w-full">
                 <!-- Stripe Express Checkout (Apple Pay / Google Pay / Browser Pay) -->
                 <div v-if="paymentRequestAvailable" class="mb-4">
@@ -39,6 +41,7 @@
                 </div>
             </div>
         </script>
+        @endverbatim
 
         <script type="module">
             console.log('Initializing Stripe Smart Button component');
@@ -56,8 +59,8 @@
                         cardError: null,
                         paymentRequest: null,
                         paymentRequestAvailable: false,
-                        currency: '{{ $currencyToUse }}',
-                        publishableKey: '{{ $publishableKey }}',
+                        currency: @json($currencyToUse),
+                        publishableKey: @json($publishableKey),
                     };
                 },
 
@@ -79,6 +82,7 @@
                             locale: 'auto'
                         });
                         this.elements = this.stripe.elements();
+                        console.log('✅ Stripe.js initialized.');
 
                         // Card setup (fallback)
                         const style = {
@@ -98,6 +102,7 @@
                         this.card.on('change', e => this.cardError = e.error ? e.error.message : null);
 
                         // Initialize Payment Request Button
+                        console.log("Initialize Payment Request Button");
                         await this.setupPaymentRequest();
                     },
 
@@ -106,10 +111,10 @@
                             const amount = await this.getCartAmountInMinorUnits();
 
                             this.paymentRequest = this.stripe.paymentRequest({
-                                country: '{{ core()->getConfigData('sales.general.country') ?? 'US' }}',
+                                country: 'IN', // ✅ Country code, not currency
                                 currency: this.currency.toLowerCase(),
                                 total: {
-                                    label: '{{ config('app.name') }} Order',
+                                    label: 'ANA Sports Order',
                                     amount: amount,
                                 },
                                 requestPayerName: true,
@@ -120,19 +125,26 @@
                             console.log('canMakePayment result:', result);
 
                             if (result) {
+                                this.paymentRequestAvailable = true;
+                                await this.$nextTick();
+
                                 const prButton = this.elements.create('paymentRequestButton', {
                                     paymentRequest: this.paymentRequest,
                                     style: {
                                         paymentRequestButton: {
-                                            type: 'default', // 'default', 'buy', 'donate'
-                                            theme: 'dark', // 'dark', 'light', 'light-outline'
+                                            type: 'buy',
+                                            theme: 'dark',
                                             height: '45px'
                                         }
                                     }
                                 });
 
-                                prButton.mount(this.$refs.paymentRequestButton);
-                                this.paymentRequestAvailable = true;
+                                if (this.$refs.paymentRequestButton) {
+                                    prButton.mount(this.$refs.paymentRequestButton);
+                                    console.log('✅ Stripe Express Button mounted.');
+                                } else {
+                                    console.error('❌ paymentRequestButton ref missing.');
+                                }
 
                                 this.paymentRequest.on('paymentmethod', async (ev) => {
                                     const clientSecret = await this.fetchClientSecret();
