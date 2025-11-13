@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "562beeed9f258dbeaa11c810b4ca7ee3",
+    "content-hash": "fc98148d8b101dc2866b2aaf4d8a644e",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -10914,6 +10914,54 @@
                 }
             ],
             "time": "2024-11-21T01:49:47+00:00"
+        },
+        {
+            "name": "webbycrown/blog-for-bagisto",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webbycrown/blog-for-bagisto.git",
+                "reference": "dd3be2e9b270b938915a3c5d8d1f52931212c739"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webbycrown/blog-for-bagisto/zipball/dd3be2e9b270b938915a3c5d8d1f52931212c739",
+                "reference": "dd3be2e9b270b938915a3c5d8d1f52931212c739",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": [],
+                    "providers": [
+                        "Webbycrown\\BlogBagisto\\Providers\\BlogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webbycrown\\BlogBagisto\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WebbyCrown Solutions",
+                    "email": "info@webbycrown.com"
+                }
+            ],
+            "description": "Blog for Bagisto",
+            "support": {
+                "issues": "https://github.com/webbycrown/blog-for-bagisto/issues",
+                "source": "https://github.com/webbycrown/blog-for-bagisto/tree/1.0.1"
+            },
+            "time": "2025-11-12T10:36:02+00:00"
         }
     ],
     "packages-dev": [

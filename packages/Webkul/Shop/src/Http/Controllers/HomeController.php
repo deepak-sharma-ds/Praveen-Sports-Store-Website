@@ -98,6 +98,31 @@ class HomeController extends Controller
      */
     public function siteMap()
     {
-        return view('shop::home.site-map');
+        $xmlPath = public_path('storage/sitemap.xml');
+
+        if (!file_exists($xmlPath)) {
+            abort(404, "Sitemap XML not found.");
+        }
+
+        $index = simplexml_load_file($xmlPath);
+
+        $allUrls = [];
+
+        // Loop each child sitemap file
+        foreach ($index->sitemap as $sitemap) {
+            $fileUrl = (string) $sitemap->loc;
+
+            // Convert full URL → local path
+            $localPath = public_path(parse_url($fileUrl, PHP_URL_PATH));
+
+            if (file_exists($localPath)) {
+                $childXml = simplexml_load_file($localPath);
+
+                foreach ($childXml->url as $urlEntry) {
+                    $allUrls[] = (string) $urlEntry->loc;
+                }
+            }
+        }
+        return view('shop::home.site-map', compact('allUrls'));
     }
 }
