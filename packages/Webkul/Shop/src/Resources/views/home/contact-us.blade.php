@@ -81,6 +81,26 @@
                         <x-shop::form.control-group.error control-name="contact" />
                     </x-shop::form.control-group>
 
+                     <!-- Location -->
+                    <x-shop::form.control-group>
+                        <x-shop::form.control-group.label>
+                            @lang('shop::app.home.contact.location')
+                        </x-shop::form.control-group.label>
+
+                        <x-shop::form.control-group.control
+                            type="text"
+                            class="px-6 py-5 max-md:py-3 max-sm:py-3.5"
+                            name="location"
+                            rules="phone"
+                            :value="old('location')"
+                            :label="trans('shop::app.home.contact.location')"
+                            :placeholder="trans('shop::app.home.contact.location')"
+                            :aria-label="trans('shop::app.home.contact.location')"
+                        />
+
+                        <x-shop::form.control-group.error control-name="location" />
+                    </x-shop::form.control-group>
+
                     <!-- Message -->
                     <x-shop::form.control-group>
                         <x-shop::form.control-group.label class="required">
@@ -91,7 +111,7 @@
                             type="textarea"
                             class="px-6 py-5 max-md:py-3 max-sm:py-3.5"
                             name="message"
-                            rules="required"
+                            rules="required|max:200"
                             :label="trans('shop::app.home.contact.message')"
                             :placeholder="trans('shop::app.home.contact.describe-here')"
                             :aria-label="trans('shop::app.home.contact.message')"

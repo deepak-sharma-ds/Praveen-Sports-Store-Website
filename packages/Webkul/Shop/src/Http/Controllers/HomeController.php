@@ -77,6 +77,7 @@ class HomeController extends Controller
                 'name',
                 'email',
                 'contact',
+                'location',
                 'message',
             ])));
 
@@ -88,5 +89,15 @@ class HomeController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * Summary of Site Map.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function siteMap()
+    {
+        return view('shop::home.site-map');
     }
 }

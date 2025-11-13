@@ -184,4 +184,15 @@ return [
         'store'  => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Custom variable of env
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default channel code for your application.
+    |
+    */
+
+    'admin_email' => env('ADMIN_EMAIL', 'deepak.sharma5@dotsquares.com'),
+
 ];

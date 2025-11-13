@@ -20,7 +20,7 @@ Route::get('page/{slug}', [PageController::class, 'view'])
 /**
  * Fallback route.
  */
-Route::fallback(ProductsCategoriesProxyController::class.'@index')
+Route::fallback(ProductsCategoriesProxyController::class . '@index')
     ->name('shop.product_or_category.index')
     ->middleware('cache.response');
 
@@ -37,6 +37,10 @@ Route::get('contact-us', [HomeController::class, 'contactUs'])
 
 Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail'])
     ->name('shop.home.contact_us.send_mail')
+    ->middleware('cache.response');
+
+    Route::get('site-map', [HomeController::class, 'siteMap'])
+    ->name('shop.home.site_map')
     ->middleware('cache.response');
 
 /**

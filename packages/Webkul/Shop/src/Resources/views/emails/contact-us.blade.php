@@ -7,7 +7,7 @@
 
         <p style="font-size: 16px;color: #384860;line-height: 24px;margin-bottom: 40px">
             @lang('shop::app.emails.contact-us.to')
-            
+
             <a href="mailto:{{ $contactUs['email'] }}">{{ $contactUs['email'] }}</a>,
 
             @lang('shop::app.emails.contact-us.reply-to-mail')
@@ -16,6 +16,12 @@
                 @lang('shop::app.emails.contact-us.reach-via-phone')
 
                 <a href="tel:{{ $contactUs['contact'] }}">{{ $contactUs['contact'] }}</a>.
+            @endif
+
+            @if($contactUs['location'])
+                @lang('shop::app.emails.contact-us.reach-via-location')
+
+                <a href="tel:{{ $contactUs['location'] }}">{{ $contactUs['location'] }}</a>.
             @endif
         </p>
     </p>
