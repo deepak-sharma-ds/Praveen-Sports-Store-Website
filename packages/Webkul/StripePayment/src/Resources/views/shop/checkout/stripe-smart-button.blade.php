@@ -228,18 +228,16 @@
                                     card: this.card
                                 }
                             });
-                            console.log(result);
 
                             if (result.error) {
                                 this.cardError = result.error.message;
                                 this.isProcessing = false;
                             } else if (result.paymentIntent.status === 'succeeded') {
-                                console.log(result);
                                 await this.postPaymentSuccess(result.paymentIntent);
                                 // window.location.href = "{{ route('shop.checkout.onepage.success') }}";
                             }
                         } catch (err) {
-                            console.error(err);
+                            // console.error(err);
                             this.$emitter.emit('add-flash', {
                                 type: 'error',
                                 message: 'Payment failed.'
