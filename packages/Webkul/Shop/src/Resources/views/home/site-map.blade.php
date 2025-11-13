@@ -9,7 +9,7 @@
         <!-- Form Container -->
         <div
             class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
-            <div class ="container">
+            {{-- <div class ="container">
                 <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
                     <!-- Site Map heading -->
                     Company Information
@@ -66,6 +66,26 @@
             </div>
 
             <div class ="container">
+                <!-- Shop Categories -->
+                <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
+                    Shop Products
+                </h1>
+
+                <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
+                <ul>
+                    @php
+                        $products = app('Webkul\Product\Repositories\ProductRepository')->getAll();
+                    @endphp
+
+                    @foreach ($products as $product)
+                        <li><a href="{{ url('/') . '/' . $product->slug }}">{{ $product->name }}</a></li>
+                    @endforeach
+
+                </ul>
+                </p>
+            </div>
+
+            <div class ="container">
                 <!-- Policies -->
                 <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
                     Policies
@@ -76,11 +96,26 @@
                     <li><a href="{{ route('shop.cms.page', 'privacy-policy') }}">Privacy Policy</a></li>
                 </ul>
                 </p>
+            </div> --}}
+
+            <div class ="container">
+                <!-- Policies -->
+                <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
+                    Sitemap
+                </h1>
+
+                <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
+                <ul>
+                    @foreach ($allUrls as $url)
+                        <li>
+                            <a href="{{ $url }}" class="text-blue-600 hover:underline">
+                                {{ $url }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+                </p>
             </div>
         </div>
     </div>
-
-    @push('scripts')
-        {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
-    @endpush
 </x-shop::layouts>

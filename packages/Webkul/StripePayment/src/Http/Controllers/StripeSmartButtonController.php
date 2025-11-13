@@ -211,7 +211,8 @@ class StripeSmartButtonController extends Controller
             'tax_total' => (string) $cart->tax_total,
             'shipping_amount' => (string) ($cart->selected_shipping_rate->price ?? 0),
             'discount' => (string) $cart->discount_amount,
-            'total' => (string) $amountFloat,
+            // 'total' => (string) $amountFloat,
+            'total' => (string) $cart->formatted_tax_total,
             'item_count' => (string) $cart->items->count(),
         ];
 
