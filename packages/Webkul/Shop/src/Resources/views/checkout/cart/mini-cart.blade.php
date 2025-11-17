@@ -54,12 +54,12 @@
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.header.before') !!}
 
                     <div class="flex items-center justify-between">
-                        <p class="text-2xl font-medium max-md:text-xl max-sm:text-xl">
+                        <p class="text-xl font-secondary font-medium">
                             @lang('shop::app.checkout.cart.mini-cart.shopping-cart')
                         </p>
                     </div>
 
-                    <p class="text-base max-md:text-zinc-500 max-sm:text-xs">
+                    <p class="text-base">
                         {{ core()->getConfigData('sales.checkout.mini_cart.offer_info')}}
                     </p>
 

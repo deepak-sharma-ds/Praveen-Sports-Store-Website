@@ -57,7 +57,7 @@
 
     <!-- Breadcrumbs -->
     @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
-        <div class="flex justify-center px-7 max-lg:hidden">
+        <div class="bg-[#fff] flex justify-center px-7 max-lg:hidden">
             <x-shop::breadcrumbs
                 name="product"
                 :entity="$product"
@@ -71,7 +71,7 @@
     </v-product>
 
     <!-- Information Section -->
-    <div class="1180:mt-20">
+    <div class="py-10">
         <div class="max-1180:hidden">
             <x-shop::tabs
                 position="center"
@@ -282,17 +282,17 @@
                         v-model="is_buy_now"
                     >
 
-                    <div class="container px-[60px] max-1180:px-0">
-                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-4">
+                    <div class="bg-[#EDEDED] py-10 container px-[60px] max-1180:px-0">
+                        <div class="flex gap-9 justify-center max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-4">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
                             <!-- Details -->
-                            <div class="relative max-w-[590px] max-1180:w-full max-1180:max-w-full max-1180:px-5 max-sm:px-4">
+                            <div class="relative flex-1 max-w-[700px]">
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
-                                    <h1 class="break-words text-3xl font-medium max-sm:text-xl">
+                                    <h1 class="break-words text-3xl font-secondary font-normal">
                                         {{ $product->name }}
                                     </h1>
 
@@ -323,7 +323,7 @@
                                         @click="scrollToReview"
                                     >
                                         <x-shop::products.ratings
-                                            class="transition-all hover:border-gray-400 max-sm:px-3 max-sm:py-1"
+                                            class="transition-all border-none !p-0"
                                             :average="$avgRatings"
                                             :total="$totalRatings"
                                             ::rating="true"
@@ -399,7 +399,7 @@
 
                                         <x-shop::button
                                             type="submit"
-                                            class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            class="w-full max-w-full max-md:py-3 rounded-lg max-sm:py-1.5 bg-black text-white hover:opacity-85"
                                             button-type="secondary-button"
                                             :loading="false"
                                             :title="trans('shop::app.products.view.add-to-cart')"
@@ -436,7 +436,7 @@
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="mt-10 flex gap-9 max-md:mt-4 max-md:flex-wrap max-sm:justify-center max-sm:gap-3">
+                                <div class="mt-10 flex">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div

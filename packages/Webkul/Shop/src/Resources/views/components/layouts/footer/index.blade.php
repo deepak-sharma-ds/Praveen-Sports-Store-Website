@@ -45,7 +45,7 @@
             <div class="absolute top-0 left-0 bottom-0 right-0 z-[1] bg-gradient-to-t from-black to-black opacity-10">
             </div>
             <div
-                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full p-10 text-white font-medium max-w-[540px]">
+                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full p-10 text-white font-medium max-w-[540px] z-[2]">
                 <h2 class="font-secondary text-4xl font-normal uppercase">Power. Precision. Price Drop.</h2>
                 <p class="mt-4">Enjoy 20% off on select professional cricket bats. Limited-time offer — gear up before
                     it's gone!</p>
@@ -169,7 +169,7 @@
 
                             @foreach ($footerLinkSection as $link)
                                 <li>
-                                    <a href="{{ $link['url'] }}" class="text-sm font-medium max-sm:text-xs">
+                                    <a href="{{ $link['url'] }}" class="text-base font-medium">
                                         {{ $link['title'] }}
                                     </a>
                                 </li>
@@ -195,26 +195,29 @@
 
                 <div>
                     <x-shop::form :action="route('shop.subscription.store')" class="mt-2.5 rounded max-sm:mt-0">
-                        <div class="relative w-full">
-                            <x-shop::form.control-group.control type="email"
-                                class="block w-[420px] max-w-full rounded-xl border-2 border-[#e9decc] bg-white px-5 py-4 text-base max-1060:w-full max-md:p-3.5 max-sm:mb-0 max-sm:rounded-lg max-sm:border-2 max-sm:p-2 max-sm:text-sm"
-                                name="email" rules="required|email" label="Email" :aria-label="trans('shop::app.components.layouts.footer.email')"
-                                placeholder="email@example.com" />
+                        <div class="relative w-full flex items-center gap-2">
+                            <x-shop::form.control-group.control
+                                type="email"
+                                class="w-full bg-white border border-white py-3 px-4 leading-6 rounded !m-0"
+                                name="email"
+                                rules="required|email"
+                                label="Email"
+                                :aria-label="trans('shop::app.components.layouts.footer.email')"
+                                placeholder="email@example.com"
+                            />
 
-                            <x-shop::form.control-group.error control-name="email" />
-
-                            <button type="submit"
-                                class="absolute top-1 bottom-1 right-1 flex w-max items-center rounded-xl bg-[#902129] px-7 py-2.5 font-medium hover:bg-black ">
-                                <svg width="17" height="14" viewBox="0 0 17 14" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M10.7633 0.254972C10.6204 0.426158 10.5395 0.658181 10.5384 0.900532C10.5374 1.14288 10.6161 1.37594 10.7575 1.54897L14.32 5.83097H0.761666C0.559659 5.83097 0.365927 5.92727 0.223086 6.09868C0.0802464 6.27008 0 6.50256 0 6.74497C0 6.98738 0.0802464 7.21986 0.223086 7.39127C0.365927 7.56268 0.559659 7.65897 0.761666 7.65897H14.3142L10.7517 11.945C10.6114 12.1188 10.5335 12.3515 10.5346 12.5934C10.5357 12.8353 10.6157 13.067 10.7575 13.239C10.8283 13.323 10.9122 13.3895 11.0044 13.4347C11.0966 13.4798 11.1954 13.5027 11.2949 13.502C11.3945 13.5014 11.4931 13.4772 11.5849 13.4309C11.6767 13.3845 11.76 13.3169 11.83 13.232L16.6583 7.39597C16.7243 7.31139 16.7778 7.21401 16.8167 7.10797C16.8562 6.99676 16.8761 6.87689 16.875 6.75597C16.8751 6.51688 16.7974 6.2872 16.6583 6.11597L11.83 0.279972C11.7616 0.193659 11.6797 0.124483 11.5889 0.0764541C11.4981 0.0284248 11.4002 0.00249695 11.301 0.000171626C11.2018 -0.00215369 11.1032 0.0191702 11.0109 0.0629081C10.9186 0.106646 10.8344 0.171929 10.7633 0.254972Z"
-                                        fill="#FFD0DE" />
+                            <button
+                                type="submit"
+                                class="inline-flex w-max items-center py-3 px-4 leading-6 !rounded bg-[#902129] h-[50px]"
+                            >
+                                <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.7633 0.254972C10.6204 0.426158 10.5395 0.658181 10.5384 0.900532C10.5374 1.14288 10.6161 1.37594 10.7575 1.54897L14.32 5.83097H0.761666C0.559659 5.83097 0.365927 5.92727 0.223086 6.09868C0.0802464 6.27008 0 6.50256 0 6.74497C0 6.98738 0.0802464 7.21986 0.223086 7.39127C0.365927 7.56268 0.559659 7.65897 0.761666 7.65897H14.3142L10.7517 11.945C10.6114 12.1188 10.5335 12.3515 10.5346 12.5934C10.5357 12.8353 10.6157 13.067 10.7575 13.239C10.8283 13.323 10.9122 13.3895 11.0044 13.4347C11.0966 13.4798 11.1954 13.5027 11.2949 13.502C11.3945 13.5014 11.4931 13.4772 11.5849 13.4309C11.6767 13.3845 11.76 13.3169 11.83 13.232L16.6583 7.39597C16.7243 7.31139 16.7778 7.21401 16.8167 7.10797C16.8562 6.99676 16.8761 6.87689 16.875 6.75597C16.8751 6.51688 16.7974 6.2872 16.6583 6.11597L11.83 0.279972C11.7616 0.193659 11.6797 0.124483 11.5889 0.0764541C11.4981 0.0284248 11.4002 0.00249695 11.301 0.000171626C11.2018 -0.00215369 11.1032 0.0191702 11.0109 0.0629081C10.9186 0.106646 10.8344 0.171929 10.7633 0.254972Z" fill="#FFD0DE"/>
                                 </svg>
 
                             </button>
                         </div>
-                        <h2 class="text-sm font-secondary mt-6" role="heading" aria-level="2">
+                         <x-shop::form.control-group.error control-name="email" />
+                        <h2 class="text-sm font-secondary mt-6 mb-3" role="heading" aria-level="2">
                             We Accept
                         </h2>
                         <div class="flex items-center gap-4">

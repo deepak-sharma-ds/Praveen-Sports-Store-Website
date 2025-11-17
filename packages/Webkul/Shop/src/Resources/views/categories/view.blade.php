@@ -27,14 +27,17 @@
 
     <!-- Hero Image -->
     @if ($category->banner_path)
-        <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
+        <div class="bg-[#EDEDED] container px-[60px] max-lg:px-8 max-sm:px-4 py-[150px] text-white text-center relative z-0 before:absolute before:inset-0 before:z-[1] before:bg-black/50 before:content-['']">
             <x-shop::media.images.lazy
-                class="aspect-[4/1] max-h-full max-w-full rounded-xl"
+                class="absolute inset-0 h-full w-full object-cover object-center"
                 src="{{ $category->banner_url }}"
                 alt="{{ $category->name }}"
-                width="1320"
-                height="300"
+                width="1920"
+                height="500"
             />
+            <div class="flex items-center text-center justify-center relative z-[2]">
+                <h2 class="text-5xl font-normal font-secondary">{!! $category->name !!}</h2>
+            </div>
         </div>
     @endif
 
@@ -44,7 +47,7 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="container mt-[34px] px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4 max-md:text-sm max-sm:text-xs">
+            <div class="bg-[#EDEDED] container py-[34px] px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
                 {!! $category->description !!}
             </div>
         @endif
@@ -65,8 +68,8 @@
             type="text/x-template"
             id="v-category-template"
         >
-            <div class="container px-[60px] max-lg:px-8 max-md:px-4">
-                <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
+            <div class="bg-[#EDEDED] pb-10 container px-[60px] max-lg:px-8 max-md:px-4">
+                <div class="flex items-start gap-10 max-lg:gap-5">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
@@ -126,7 +129,7 @@
                         <div v-else class="mt-8 max-md:mt-5">
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
+                                <div class="grid grid-cols-4 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
                                     <x-shop::shimmer.products.cards.grid count="12" />
                                 </div>
                             </template>
@@ -136,7 +139,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
+                                    <div class="grid grid-cols-4 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"

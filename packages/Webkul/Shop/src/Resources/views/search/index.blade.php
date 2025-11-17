@@ -22,17 +22,16 @@
         {{ $title }}
     </x-slot>
 
-    <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
+    <div class="bg-[#EDEDED] container px-[60px] max-lg:px-8 max-sm:px-4 py-[150px] text-white text-center relative z-0 before:absolute before:inset-0 before:z-[1] before:bg-black/50 before:content-['']">
+        <img src="http://127.0.0.1:5173/src/Resources/assets/images/deal-banner.png" alt="Search Icon" class="absolute inset-0 h-full w-full object-cover object-center" />
         @if (request()->has('image-search'))
             @include('shop::search.images.results')
         @endif
-
-        <div class="mt-8 flex items-center justify-between max-md:mt-5">
-            <h2 class="text-2xl font-medium max-sm:text-base">
+        <div class="flex items-center text-center justify-center relative z-[2]">
+            <h2 class="text-5xl font-normal font-secondary">
                 <span v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'" ></span>
             </h2>
         </div>
-
         @if ($searchInstead)
             <form
                 action="{{ route('shop.search.index', ['suggest' => false]) }}"
@@ -78,8 +77,8 @@
             type="text/x-template"
             id="v-search-template"
         >
-            <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
-                <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
+            <div class="bg-[#EDEDED] container px-[60px] max-lg:px-8 max-sm:px-4">
+                <div class="flex items-start gap-10 max-lg:gap-5 py-10">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
 
@@ -143,7 +142,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="mt-8 grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:mt-5 max-md:justify-items-center max-md:gap-x-4 max-md:gap-y-5">
+                                    <div class="mt-8 grid grid-cols-4 gap-8 max-1060:grid-cols-2 max-md:mt-5 max-md:justify-items-center max-md:gap-x-4 max-md:gap-y-5">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"

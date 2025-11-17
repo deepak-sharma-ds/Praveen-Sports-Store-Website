@@ -161,7 +161,7 @@
             </x-slot>
 
             <!-- Filter Item Content -->
-            <x-slot:content class="!p-0">
+            <x-slot:content>
                 <!-- Price Range Filter -->
                 <ul v-if="filter.type === 'price'">
                     <li>

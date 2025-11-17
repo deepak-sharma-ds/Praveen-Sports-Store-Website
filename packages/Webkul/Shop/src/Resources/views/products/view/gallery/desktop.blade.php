@@ -59,7 +59,7 @@
 
     <!-- Product Base Image and Video with Shimmer-->
     <div
-        class="max-h-[610px] max-w-[560px]"
+        class="max-h-[610px] max-w-[700px]"
         v-show="isMediaLoading"
     >
         <div class="shimmer min-h-[607px] min-w-[560px] rounded-xl bg-zinc-200"></div>
