@@ -23,7 +23,7 @@
 @if (request()->routeIs('shop.home.index'))
     <section class="grid grid-cols-2 gap-2.5 text-lg">
         <div class="relative text-center z-0">
-            <img src="http://127.0.0.1:8000/storage/theme/13/banner-left.png" alt=""
+            <img src="/storage/theme/13/banner-left.png" alt=""
                 class="w-full h-full object-cover" />
             <div class="absolute top-0 left-0 bottom-0 right-0 z-[1] bg-gradient-to-t from-black to-black opacity-10">
             </div>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="relative text-center z-0">
-            <img src="http://127.0.0.1:8000/storage/theme/13/banner-right.png" alt=""
+            <img src="/storage/theme/13/banner-right.png" alt=""
                 class="w-full h-full object-cover" />
             <div class="absolute top-0 left-0 bottom-0 right-0 z-[1] bg-gradient-to-t from-black to-black opacity-10">
             </div>
@@ -76,23 +76,23 @@
     </div>
     <div class="grid grid-cols-5 gap-[1px]">
         <div class="relative pt-[120%]">
-            <img src="http://127.0.0.1:8000/storage/theme/13/zNfOkoGp2Wc1ZjOKgxgXGxLCZirn47STlMoFzxpa.webp"
+            <img src="/storage/theme/13/zNfOkoGp2Wc1ZjOKgxgXGxLCZirn47STlMoFzxpa.webp"
                 alt="" class="w-full h-full object-cover absolute top-0 left-0" />
         </div>
         <div class="relative pt-[120%]">
-            <img src="http://127.0.0.1:8000/storage/theme/13/oMsyjpkx8GralhZGI6azqN4dWswDluSy1FFu4ISP.webp"
+            <img src="/storage/theme/13/oMsyjpkx8GralhZGI6azqN4dWswDluSy1FFu4ISP.webp"
                 alt="" class="w-full h-full object-cover absolute top-0 left-0" />
         </div>
         <div class="relative pt-[120%]">
-            <img src="http://127.0.0.1:8000/storage/theme/13/FOVZJqJ5qWByjIDFmdyn33KLJLrhXMk3o6QhDKwN.webp"
+            <img src="/storage/theme/13/FOVZJqJ5qWByjIDFmdyn33KLJLrhXMk3o6QhDKwN.webp"
                 alt="" class="w-full h-full object-cover absolute top-0 left-0" />
         </div>
         <div class="relative pt-[120%]">
-            <img src="http://127.0.0.1:8000/storage/theme/13/jSFtwgau6b1pb45lVY2BTvrVWFnZBsB289UtElWI.webp"
+            <img src="/storage/theme/13/jSFtwgau6b1pb45lVY2BTvrVWFnZBsB289UtElWI.webp"
                 alt="" class="w-full h-full object-cover absolute top-0 left-0" />
         </div>
         <div class="relative pt-[120%]">
-            <img src="http://127.0.0.1:8000/storage/theme/13/SxcL9eRC6BE9M8jWtuWfNWtBQfLXz6kCByBi3VMF.webp"
+            <img src="/storage/theme/13/SxcL9eRC6BE9M8jWtuWfNWtBQfLXz6kCByBi3VMF.webp"
                 alt="" class="w-full h-full object-cover absolute top-0 left-0" />
         </div>
     </div>
