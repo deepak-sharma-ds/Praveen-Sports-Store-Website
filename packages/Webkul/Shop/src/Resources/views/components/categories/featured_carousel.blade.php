@@ -1,12 +1,6 @@
-<v-categories-featured_carousel
-    src="{{ $src }}"
-    title="{{ $title }}"
-    navigation-link="{{ $navigationLink ?? '' }}"
->
-    <x-shop::shimmer.categories.featured_carousel
-        :count="4"
-        :navigation-link="$navigationLink ?? false"
-    />
+<v-categories-featured_carousel src="{{ $src }}" title="{{ $title }}"
+    navigation-link="{{ $navigationLink ?? '' }}">
+    <x-shop::shimmer.categories.featured_carousel :count="4" :navigation-link="$navigationLink ?? false" />
 </v-categories-featured_carousel>
 
 @pushOnce('scripts')
@@ -36,19 +30,26 @@
                             class="w-full overflow-hidden rounded-md"
                             :aria-label="category.name"
                         >
-                            <x-shop::media.images.lazy
-                                ::src="category.logo?.small_image_url || fallback"
+                            <!-- <x-shop::media.images.lazy
+                                ::src="category.logo?.original_image_url || fallback"
                                 ::srcset="`
-                                    ${(category.logo?.small_image_url || fallback)} 60w,
-                                    ${(category.logo?.medium_image_url || fallback)} 110w,
-                                    ${(category.logo?.large_image_url || fallback)} 300w
+                                    ${(category.logo?.small_image_url || fallback)} 200w,
+                                    ${(category.logo?.medium_image_url || fallback)} 400w,
+                                    ${(category.logo?.large_image_url || fallback)} 800w,
+                                    ${(category.logo?.original_image_url || fallback)} 1200w
                                 `"
-                                sizes="(max-width: 640px) 60px, 110px"
-                                width="110"
-                                height="110"
+                                sizes="(max-width: 640px) 200px, (max-width: 1024px) 400px, 800px"
+                                width="400"
+                                height="400"
                                 class="aspect-[9/16] w-full h-auto object-cover rounded-md"
                                 ::alt="category.name"
+                            /> -->
+                            <x-shop::media.images.lazy
+                                ::src="category.logo?.original_image_url || fallback"
+                                class="w-auto h-auto rounded-md"
+                                ::alt="category.name"
                             />
+
                         </a>
 
                         <a

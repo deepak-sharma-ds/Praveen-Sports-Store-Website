@@ -29,7 +29,7 @@ class Large implements FilterInterface
 
             return $image->fit($width, $height);
         } elseif (Str::contains(url()->current(), '/category')) {
-            return $image->fit(165, 165);
+            return $image->fit(800, 800);
         } elseif (Str::contains(url()->current(), '/attribute_option')) {
             return $image->fit(330, 330);
         }

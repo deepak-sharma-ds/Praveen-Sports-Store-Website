@@ -29,7 +29,7 @@ class Small implements FilterInterface
 
             return $image->fit($width, $height);
         } elseif (Str::contains(url()->current(), '/category')) {
-            return $image->fit(80, 80);
+            return $image->fit(200, 200);
         } elseif (Str::contains(url()->current(), '/attribute_option')) {
             return $image->fit(60, 60);
         }

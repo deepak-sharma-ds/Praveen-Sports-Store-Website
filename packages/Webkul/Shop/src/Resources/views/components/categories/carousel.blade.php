@@ -1,12 +1,5 @@
-<v-categories-carousel
-    src="{{ $src }}"
-    title="{{ $title }}"
-    navigation-link="{{ $navigationLink ?? '' }}"
->
-    <x-shop::shimmer.categories.carousel
-        :count="3"
-        :navigation-link="$navigationLink ?? false"
-    />
+<v-categories-carousel src="{{ $src }}" title="{{ $title }}" navigation-link="{{ $navigationLink ?? '' }}">
+    <x-shop::shimmer.categories.carousel :count="3" :navigation-link="$navigationLink ?? false" />
 </v-categories-carousel>
 
 @pushOnce('scripts')
@@ -36,7 +29,7 @@
                             class="relative w-full inline-block pt-[100%] before:content-[''] before:absolute before:top-0 before:left-[10%] before:right-[10%] before:bottom-0 before:bg-gradient-to-t before:from-[#E6BF42] before:to-[#90212900] before:rounded-t-full"
                             :aria-label="category.name"
                         >
-                            <x-shop::media.images.lazy
+                            <!-- <x-shop::media.images.lazy
                                 ::src="category.logo?.small_image_url || fallback"
                                 ::srcset="`
                                     ${(category.logo?.small_image_url || fallback)} 60w,
@@ -46,6 +39,11 @@
                                 sizes="(max-width: 640px) 60px, 110px"
                                 width="110"
                                 height="110"
+                                class="w-full h-auto absolute bottom-0 left-0 object-contain object-bottom"
+                                ::alt="category.name"
+                            /> -->
+                            <x-shop::media.images.lazy
+                                ::src="category.logo?.original_image_url || fallback"
                                 class="w-full h-auto absolute bottom-0 left-0 object-contain object-bottom"
                                 ::alt="category.name"
                             />
@@ -150,6 +148,5 @@
                 },
             },
         });
-        
     </script>
 @endPushOnce
