@@ -23,7 +23,7 @@
     </x-slot>
 
     <div class="bg-[#EDEDED] container px-[60px] max-lg:px-8 max-sm:px-4 py-[150px] text-white text-center relative z-0 before:absolute before:inset-0 before:z-[1] before:bg-black/50 before:content-['']">
-        <img src="http://127.0.0.1:5173/src/Resources/assets/images/deal-banner.png" alt="Search Icon" class="absolute inset-0 h-full w-full object-cover object-center" />
+        <img src="{{ bagisto_asset('images/deal-banner.png') }}" alt="Search Icon" class="absolute inset-0 h-full w-full object-cover object-center" />
         @if (request()->has('image-search'))
             @include('shop::search.images.results')
         @endif
