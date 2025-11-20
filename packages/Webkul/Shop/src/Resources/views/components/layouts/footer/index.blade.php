@@ -32,7 +32,7 @@
                 <h2 class="font-secondary text-4xl font-normal uppercase">Swing Smarter, Save Bigger</h2>
                 <p class="mt-4">Get 15% off on all premium cricket bats. Perfect balance, powerful shots</p>
                 <div class="text-center mt-5">
-                    <a href="#"
+                    <a href="15-off-deals"
                         class="uppercase inline-flex items-center gap-2.5 text-[#902129] hover:text-white border border-[#902129] px-4 py-2.5 bg-white rounded hover:bg-[#902129] transition-all duration-300">
                         Shop Now
                     </a>
@@ -50,7 +50,7 @@
                 <p class="mt-4">Enjoy 20% off on select professional cricket bats. Limited-time offer — gear up before
                     it's gone!</p>
                 <div class="text-center mt-5">
-                    <a href="#"
+                    <a href="/20-off-deals"
                         class="uppercase inline-flex items-center gap-2.5 text-[#902129] hover:text-white border border-[#902129] px-4 py-2.5 bg-white rounded hover:bg-[#902129] transition-all duration-300">
                         Shop Now
                     </a>

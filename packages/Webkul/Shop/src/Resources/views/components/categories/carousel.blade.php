@@ -129,7 +129,11 @@
                         .then(response => {
                             this.isLoading = false;
 
-                            this.categories = response.data.data;
+                            // this.categories = response.data.data;
+                            // Filtered unwanted categories
+                            this.categories = response.data.data.filter(category => {
+                                return !['15-off-deals', '20-off-deals'].includes(category.slug);
+                            });
                         }).catch(error => {
                             console.log(error);
                         });

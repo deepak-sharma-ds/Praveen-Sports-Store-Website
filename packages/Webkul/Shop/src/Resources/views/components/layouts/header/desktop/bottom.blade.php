@@ -104,7 +104,7 @@
                 @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                     <a href="{{ route('shop.customers.account.wishlist.index') }}" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.wishlist')"
                         class="relative flex items-center">
-                        <span class="icon-heart cursor-pointer text-2xl hover:text-primary transition"></span>
+                        <span class="icon-heart cursor-pointer text-2xl inline-flex items-center justify-center w-9 h-9 rounded-full bg-white"></span>
                     </a>
                 @endif
             @endauth
