@@ -105,7 +105,7 @@
             type="text/x-template"
             id="v-wishlist-products-item-template"
         >
-            <div class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-md:my-5 max-md:last:mb-0">
+            <div class="mt-8 flex flex-wrap gap-20 max-1023:flex-col max-md:my-5 max-md:last:mb-0">
                 <div class="grid flex-1 gap-8 max-md:flex-none">
                     <div class="grid gap-y-6 max-md:gap-y-0">
                         <!-- Wishlist item -->

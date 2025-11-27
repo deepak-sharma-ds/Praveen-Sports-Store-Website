@@ -28,7 +28,7 @@
             @include('shop::search.images.results')
         @endif
         <div class="flex items-center text-center justify-center relative z-[2]">
-            <h2 class="text-5xl font-normal font-secondary">
+            <h2 class="text-[40px] xl:text-5xl font-normal font-secondary">
                 <span v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'" ></span>
             </h2>
         </div>
@@ -134,7 +134,7 @@
                         <div v-else>
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="mt-8 grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:gap-x-4 max-sm:mt-5 max-sm:justify-items-center max-sm:gap-y-5">
+                                <div class="grid grid-cols-2 xl:grid-cols-3 gap-8 2xl:grid-cols-4 max-md:justify-items-center max-md:gap-x-4 mt-8 max-md:mt-5">
                                     <x-shop::shimmer.products.cards.grid count="12" />
                                 </div>
                             </template>
@@ -142,7 +142,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="mt-8 grid grid-cols-4 gap-8 max-1060:grid-cols-2 max-md:mt-5 max-md:justify-items-center max-md:gap-x-4 max-md:gap-y-5">
+                                    <div class="grid grid-cols-2 xl:grid-cols-3 gap-8 2xl:grid-cols-4 max-md:justify-items-center max-md:gap-x-4 mt-8 max-md:mt-5">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"

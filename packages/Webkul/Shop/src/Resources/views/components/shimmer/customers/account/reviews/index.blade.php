@@ -4,7 +4,7 @@
     <div class="shimmer h-8 w-24"></div>
 </div>
 
-<div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-md:mt-5">
+<div class="mt-14 grid gap-5 max-1023:grid-cols-[1fr] max-md:mt-5">
     @for ($i = 0;  $i < $count; $i++)
         <!-- Single card -->
         <div class="rounded-xl border p-6 max-md:p-4">

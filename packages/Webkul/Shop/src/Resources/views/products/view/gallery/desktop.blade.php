@@ -1,7 +1,7 @@
-<!-- For large screens greater than 1180px. -->
-<div class="sticky top-20 flex h-max gap-8 max-1180:hidden">
+<!-- For large screens greater than 1239px. -->
+<div class="sticky top-20 flex-col-reverse h-max gap-8 hidden lg:flex">
     <!-- Product Image and Videos Slider -->
-    <div class="flex-24 h-509 flex min-w-[100px] max-w-[100px] flex-wrap place-content-start justify-center gap-2.5 overflow-y-auto overflow-x-hidden">
+    <div class="w-full flex place-content-start justify-center gap-2.5 overflow-x-auto overflow-y-hidden">
         <!-- Arrow Up -->
         <span
             class="icon-arrow-up cursor-pointer text-2xl"
@@ -16,7 +16,7 @@
         <!-- Swiper Container -->
         <div
             ref="swiperContainer"
-            class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
+            class="flex flex-row w-full gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
         >
             <template v-for="(media, index) in [...media.images, ...media.videos]">
                 <video
@@ -66,11 +66,11 @@
     </div>
 
     <div
-        class="max-h-[610px] max-w-[560px]"
+        class="w-full"
         v-show="! isMediaLoading"
     >
         <img
-            class="min-w-[450px] cursor-pointer rounded-xl"
+            class="w-full cursor-pointer rounded-xl"
             :src="baseFile.path"
             v-if="baseFile.type == 'image'"
             alt="{{ $product->name }}"
@@ -83,7 +83,7 @@
         />
 
         <div
-            class="min-w-[450px] cursor-pointer rounded-xl"
+            class="w-full cursor-pointer rounded-xl"
             tabindex="0"
             v-if="baseFile.type == 'video'"
         >

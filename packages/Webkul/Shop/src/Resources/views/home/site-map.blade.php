@@ -4,118 +4,21 @@
     <x-slot:title>
         Site Map
     </x-slot>
-
-    <div class="container mt-8 max-1180:px-5 max-md:mt-6 max-md:px-4">
-        <!-- Form Container -->
-        <div
-            class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
-            {{-- <div class ="container">
-                <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
-                    <!-- Site Map heading -->
-                    Company Information
-                </h1>
-
-                <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
-                    <!-- Site Map Links -->
-                <ul>
-                    <li><a href="{{ route('shop.home.index') }}">Home</a></li>
-                    <li><a href="{{ route('shop.cms.page', 'about-us') }}">About Us</a></li>
-                    <li><a href="{{ route('shop.cms.page', 'contact-us') }}">Contact</a></li>
-                    <li><a href="{{ route('shop.customer.session.index') }}">My Account</a></li>
-                    <li><a href="{{ route('shop.customers.account.orders.index') }}">My Orders</a></li>
-                    <li><a href="{{ route('shop.checkout.cart.index') }}">Cart</a></li>
-                </ul>
-                </p>
-            </div>
-
-            <div class ="container">
-                <!-- Account -->
-                <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
-                    Account
-                </h1>
-
-                <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
-                <ul>
-                    <li><a href="{{ route('shop.customers.account.profile.index') }}">My Account</a></li>
-                    <li><a href="{{ route('shop.customers.account.orders.index') }}">My Orders</a></li>
-                    <li><a href="{{ route('shop.customers.account.wishlist.index') }}">My Wishlist</a></li>
-                    <li><a href="{{ route('shop.checkout.cart.index') }}">My Cart</a></li>
-                    <li><a href="{{ route('shop.customer.session.create') }}">Sign In</a></li>
-                    <li><a href="{{ route('shop.customers.register.index') }}">Register</a></li>
-
-                </ul>
-                </p>
-            </div>
-
-            <div class ="container">
-                <!-- Shop Categories -->
-                <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
-                    Shop Categories
-                </h1>
-
-                <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
-                <ul>
-                    @foreach (core()->getCurrentChannel()->root_category->children as $category)
-                        @if ($category->status)
-                            <li><a href="{{ url('/') . '/' . $category->slug }}">{{ $category->name }}</a></li>
-                        @endif
-                    @endforeach
-
-                </ul>
-                </p>
-            </div>
-
-            <div class ="container">
-                <!-- Shop Categories -->
-                <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
-                    Shop Products
-                </h1>
-
-                <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
-                <ul>
-                    @php
-                        $products = app('Webkul\Product\Repositories\ProductRepository')->getAll();
-                    @endphp
-
-                    @foreach ($products as $product)
-                        <li><a href="{{ url('/') . '/' . $product->slug }}">{{ $product->name }}</a></li>
-                    @endforeach
-
-                </ul>
-                </p>
-            </div>
-
-            <div class ="container">
-                <!-- Policies -->
-                <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
-                    Policies
-                </h1>
-
-                <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
-                <ul>
-                    <li><a href="{{ route('shop.cms.page', 'privacy-policy') }}">Privacy Policy</a></li>
-                </ul>
-                </p>
-            </div> --}}
-
-            <div class ="container">
-                <!-- Policies -->
-                <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
-                    Sitemap
-                </h1>
-
-                <p class="mt-4 text-xl text-zinc-500 max-sm:mt-1 max-sm:text-sm">
-                <ul>
-                    @foreach ($allUrls as $url)
-                        <li>
-                            <a href="{{ $url }}" class="text-blue-600 hover:underline">
-                                {{ $url }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-                </p>
-            </div>
+    <section class="relative">
+        <img class="object-cover max-h-[536px]" src="http://127.0.0.1:8000/storage/tinymce/cA5X9MMKtgU12Ou2UrdezzSg8KMNLBqMAnVFa7mg.png" alt="" width="1920" height="542">
+        <div class="bg-black bg-opacity-35 w-full px-4 lg:px-14 content-center text-center text-white absolute inset-0">
+            <h1 class="font-secondary text-2xl md:text-[40px] xl:text-[52px] font-normal uppercase">Sitemap</h1>
         </div>
+    </section>
+    <div class="bg-[#EDEDED] w-full px-4 lg:px-14 py-10 md:py-14">
+        <ul class="grid md:grid-cols-2 gap-x-6 gap-y-2">
+            @foreach ($allUrls as $url)
+                <li>
+                    <a href="{{ $url }}" class="text-black hover:underline">
+                        {{ $url }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
     </div>
 </x-shop::layouts>

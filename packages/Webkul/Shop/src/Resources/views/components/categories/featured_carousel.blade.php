@@ -9,17 +9,17 @@
         id="v-categories-featured_carousel-template"
     >
     <section class="bg-[#EDEDED]">
-        <div class="text-center mb-10 font-secondary text-[32px] uppercase">
+        <div class="text-center mb-5 lg:mb-10 font-secondary text-[32px] uppercase px-5">
             <h2>Featured Categories</h2>
         </div>
         <div
-            class="container max-lg:px-8 max-md:!px-0"
+            class="px-4 lg:px-[60px]"
             v-if="! isLoading && categories?.length"
         >
             <div class="relative">
                 <div
                     ref="swiperContainer"
-                    class="scrollbar-hide flex gap-4 overflow-auto scroll-smooth"
+                    class="scrollbar-hide grid grid-cols-2 md:flex gap-4 overflow-auto scroll-smooth"
                 >
                     <div
                         class="relative w-full"
@@ -46,7 +46,7 @@
                             /> -->
                             <x-shop::media.images.lazy
                                 ::src="category.logo?.original_image_url || fallback"
-                                class="w-auto h-auto rounded-md"
+                                class="w-full h-full object-cover rounded-md"
                                 ::alt="category.name"
                             />
 
@@ -54,7 +54,7 @@
 
                         <a
                             :href="category.slug"
-                            class="rounded-b-md absolute bottom-0 left-0 w-full text-lg p-4 leading-snug text-left text-white font-secondary bg-gradient-to-t from-black to-transparent"
+                            class="rounded-b-md absolute bottom-0 left-0 w-full text-base xl:text-lg p-2 xl:p-4 leading-snug text-left text-white font-secondary bg-gradient-to-t from-black to-transparent"
                         >
                             <p
                                 v-text="category.name"

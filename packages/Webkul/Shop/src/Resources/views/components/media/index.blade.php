@@ -9,7 +9,7 @@
     height="{{ $height }}"
 >
     <x-shop::media.images.lazy
-        class="mb-4 h-[200px] w-[200px] rounded-xl max-sm:h-[100px] max-sm:w-[100px]"
+        class="mb-4 h-[100px] w-[100px] rounded-xl max-sm:h-[60px] max-sm:w-[60px]"
     />
 </v-media>
 
@@ -21,11 +21,11 @@
         <div class="mb-4 flex cursor-pointer flex-col rounded-lg">
             <div :class="{'border border-dashed border-gray-300 rounded-2xl': isDragOver }">
                 <div
-                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px]"
+                    class="flex h-[100px] w-[100px] cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[60px] max-sm:w-[60px]"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
-                        class="group relative flex h-[200px] w-[200px] max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px]"
+                        class="group relative flex h-[100px] w-[100px] max-md:h-36 max-md:w-36 max-sm:h-[60px] max-sm:w-[60px]"
                         @mouseenter="uploadedFiles.showDeleteButton = true"
                         @mouseleave="uploadedFiles.showDeleteButton = false"
                     >
@@ -48,7 +48,7 @@
 
                 <label 
                     :for="`${$.uid}_fileInput`"
-                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px] max-sm:gap-1"
+                    class="flex h-[100px] w-[100px] cursor-pointer flex-col items-center justify-center text-center gap-2 rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[60px] max-sm:w-[60px] max-sm:gap-1"
                     :style="{'max-width': this.width, 'max-height': this.height}"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
@@ -61,7 +61,7 @@
                     >
                     </label>
 
-                    <p class="font-medium max-md:hidden max-sm:text-xs">
+                    <p class="font-medium max-md:hidden text-sm max-sm:text-xs">
                         @lang("shop::app.components.media.index.add-image")
                     </p>
 

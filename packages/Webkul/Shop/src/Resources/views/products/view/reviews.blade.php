@@ -1,7 +1,7 @@
 {!! view_render_event('bagisto.shop.products.view.reviews.after', ['product' => $product]) !!}
 
 <v-product-reviews>
-    <div class="container max-1180:px-5">
+    <div class="w-full">
         <x-shop::shimmer.products.reviews />
     </div>
 </v-product-reviews>
@@ -14,7 +14,7 @@
         type="text/x-template"
         id="v-product-reviews-template"
     >
-        <div class="container max-1180:mt-3.5 max-1180:px-5 max-md:px-4 max-sm:px-3.5">
+        <div class="w-full">
             <!-- Create Review Form Container -->
             <div
                 class="w-full"
@@ -26,11 +26,11 @@
                 >
                     <!-- Review Form -->
                     <form
-                        class="grid grid-cols-[auto_1fr] justify-center gap-10 max-md:grid-cols-[1fr] max-md:gap-0"
+                        class="grid grid-cols-[auto_1fr] justify-center gap-5 max-md:grid-cols-[1fr] max-md:gap-0"
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
-                        <div class="max-w-[286px]">
+                        <div class="max-w-[100px]">
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
@@ -129,7 +129,7 @@
 
                             <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-normal max-sm:gap-x-0">
                                 <button
-                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:max-w-full max-md:rounded-lg max-md:py-3 max-sm:py-1.5"
+                                    class="bg-black border border-black text-white w-full max-w-[374px] px-6 py-2.5 rounded-sm text-center"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -137,7 +137,7 @@
 
                                 <button
                                     type="button"
-                                    class="secondary-button items-center rounded-2xl px-8 py-2.5 max-md:w-full max-md:max-w-full max-md:rounded-lg max-md:py-1.5"
+                                    class="bg-white border border-black text-black w-full max-w-[374px] px-6 py-2.5 rounded-sm text-center"
                                     @click="canReview = false"
                                 >
                                     @lang('shop::app.products.view.reviews.cancel')
@@ -158,13 +158,13 @@
                 <!-- Reviews Cards Container -->
                 <template v-else>
                     <template v-if="reviews.length">
-                        <h3 class="mb-8 font-dmserif text-3xl max-md:mb-2.5 max-md:text-2xl max-sm:text-xl">
+                        <h3 class="mb-8 text-2xl max-md:mb-2.5 max-md:text-xl max-sm:text-lg font-secondary">
                             @lang('shop::app.products.view.reviews.customer-review')
 
                             ({{ $reviewHelper->getTotalReviews($product) }})
                         </h3>
 
-                        <div class="flex gap-16 max-lg:flex-wrap max-sm:gap-5 max-sm:gap-x-0">
+                        <div class="flex flex-wrap gap-16">
                             <!-- Left Section -->
                             <div class="sticky top-24 flex h-max flex-col gap-6 max-lg:relative max-lg:top-auto max-md:w-full">
 
@@ -241,15 +241,15 @@
 
                     <!-- Empty Review Section -->
                     <template v-else>
-                        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center max-md:h-60">
+                        <div class="m-auto grid w-full place-content-center items-center justify-items-center text-center">
                             <img
-                                class="max-md:h-32 max-md:w-32 max-sm:h-[100px] max-sm:w-[100px]"
+                                class="h-10 w-10"
                                 src="{{ bagisto_asset('images/review.png') }}"
                                 alt=""
                                 title=""
                             >
 
-                            <p class="text-xl max-md:text-sm max-sm:text-xs">
+                            <p class="text-sm">
                                 @lang('shop::app.products.view.reviews.empty-review')
                             </p>
 
@@ -259,7 +259,7 @@
                                         || auth()->guard('customer')->user()
                                     )
                                         <div
-                                            class="mt-8 flex cursor-pointer items-center gap-x-4 rounded-xl border border-navyBlue px-4 py-2.5 max-sm:mt-5 max-sm:gap-x-1.5 max-sm:rounded-lg max-sm:py-1.5 max-sm:text-sm"
+                                            class="mt-8 flex cursor-pointer items-center gap-x-2 border border-black px-4 py-2"
                                             @click="canReview = true"
                                         >
                                             <span class="icon-pen text-2xl max-sm:text-lg"></span>

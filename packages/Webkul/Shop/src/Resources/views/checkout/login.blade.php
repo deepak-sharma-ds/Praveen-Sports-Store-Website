@@ -18,7 +18,7 @@
         <div>
             <div class="flex items-center">
                 <span
-                    class="cursor-pointer text-base font-medium text-blue-700"
+                    class="cursor-pointer text-base font-medium text-black"
                     role="button"
                     @click="$refs.loginModel.open()"
                 >

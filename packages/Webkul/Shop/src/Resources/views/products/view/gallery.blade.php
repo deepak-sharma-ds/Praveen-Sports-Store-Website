@@ -7,7 +7,7 @@
         type="text/x-template"
         id="v-product-gallery-template"
     >
-        <div>
+        <div class="w-full md:w-1/2">
             <!-- Desktop Gallery -->
             @include('shop::products.view.gallery.desktop')
 

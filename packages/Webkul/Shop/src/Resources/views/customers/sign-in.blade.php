@@ -15,11 +15,11 @@
         @lang('shop::app.customers.login-form.page-title')
     </x-slot>
 
-    <div class="container mt-20 max-1180:px-5 max-md:mt-12">
+    <div class="container mt-3 max-1239:px-5">
         {!! view_render_event('bagisto.shop.customers.login.logo.before') !!}
 
         <!-- Company Logo -->
-        <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
+        <div class="flex items-center gap-x-14 max-[1239px]:gap-x-9">
             <a
                 href="{{ route('shop.home.index') }}"
                 class="m-[0_auto_20px_auto]"
@@ -38,7 +38,7 @@
 
         <!-- Form Container -->
         <div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
-            <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
+            <h1 class="font-secondary text-4xl max-md:text-3xl max-sm:text-xl">
                 @lang('shop::app.customers.login-form.page-title')
             </h1>
 

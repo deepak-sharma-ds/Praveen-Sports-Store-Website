@@ -1,6 +1,6 @@
 @props(['count' => 0])
 
-<div class="mt-8 flex flex-wrap gap-20 max-1060:flex-col max-sm:mt-0 max-sm:gap-[30px]">
+<div class="mt-8 flex flex-wrap gap-20 max-1023:flex-col max-sm:mt-0 max-sm:gap-[30px]">
     <div class="grid flex-1 gap-y-6">
         <!-- Cart Action -->
         <div class="flex items-center justify-between border-b border-zinc-200 pb-2.5 max-sm:justify-normal max-sm:gap-5 max-sm:py-2.5">

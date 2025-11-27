@@ -19,8 +19,8 @@
 
     <!-- Page Header -->
     <div class="flex flex-wrap">
-        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-md:px-4">
-            <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
+        <div class="flex w-full items-center justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-md:px-4">
+            <div class="flex items-center gap-x-14 max-[1239px]:gap-x-9">
                 {!! view_render_event('bagisto.shop.checkout.cart.logo.before') !!}
 
                 <a
@@ -103,7 +103,7 @@
                 <!-- Cart Information -->
                 <template v-else>
                     <div
-                        class="mt-8 flex flex-wrap gap-20 pb-8 max-1060:flex-col max-md:mt-0 max-md:gap-[30px] max-md:pb-0"
+                        class="mt-8 flex flex-wrap gap-20 pb-8 max-1023:flex-col max-md:mt-0 max-md:gap-[30px] max-md:pb-0"
                         v-if="cart?.items?.length"
                     >
                         <div class="flex flex-1 flex-col gap-6 max-md:gap-5">
@@ -141,7 +141,7 @@
 
                                 <div v-if="selectedItemsCount">
                                     <span
-                                        class="cursor-pointer text-base text-blue-700 max-sm:text-xs"
+                                        class="cursor-pointer text-base text-red-800 max-sm:text-xs"
                                         role="button"
                                         tabindex="0"
                                         @click="removeSelectedItems"
@@ -153,7 +153,7 @@
                                         <span class="mx-2.5 border-r-2 border-zinc-200"></span>
 
                                         <span
-                                            class="cursor-pointer text-base text-blue-700 max-sm:text-xs"
+                                            class="cursor-pointer text-base text-black max-sm:text-xs"
                                             role="button"
                                             tabindex="0"
                                             @click="moveToWishlistSelectedItems"
@@ -372,7 +372,7 @@
 
                                         <!-- Cart Item Remove Button -->
                                         <span
-                                            class="cursor-pointer text-base text-blue-700"
+                                            class="cursor-pointer text-base text-red-800"
                                             role="button"
                                             tabindex="0"
                                             @click="removeItem(item.id)"

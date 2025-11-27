@@ -21,15 +21,15 @@
     ]);
 @endphp
 @if (request()->routeIs('shop.home.index'))
-    <section class="grid grid-cols-2 gap-2.5 text-lg">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-lg">
         <div class="relative text-center z-0">
             <img src="/storage/theme/13/banner-left.png" alt=""
-                class="w-full h-full object-cover" />
+                class="w-full h-full object-cover aspect-square" />
             <div class="absolute top-0 left-0 bottom-0 right-0 z-[1] bg-gradient-to-t from-black to-black opacity-10">
             </div>
             <div
-                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full p-10 text-white font-medium max-w-[540px] z-[2]">
-                <h2 class="font-secondary text-4xl font-normal uppercase">Swing Smarter, Save Bigger</h2>
+                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full p-4 md:p-10 text-white font-medium max-w-[540px] z-[2]">
+                <h2 class="font-secondary text-2xl xl:text-4xl font-normal uppercase">Swing Smarter, Save Bigger</h2>
                 <p class="mt-4">Get 15% off on all premium cricket bats. Perfect balance, powerful shots</p>
                 <div class="text-center mt-5">
                     <a href="15-off-deals"
@@ -41,12 +41,12 @@
         </div>
         <div class="relative text-center z-0">
             <img src="/storage/theme/13/banner-right.png" alt=""
-                class="w-full h-full object-cover" />
+                class="w-full h-full object-cover aspect-square" />
             <div class="absolute top-0 left-0 bottom-0 right-0 z-[1] bg-gradient-to-t from-black to-black opacity-10">
             </div>
             <div
-                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full p-10 text-white font-medium max-w-[540px] z-[2]">
-                <h2 class="font-secondary text-4xl font-normal uppercase">Power. Precision. Price Drop.</h2>
+                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full p-4 md:p-10 text-white font-medium max-w-[540px] z-[2]">
+                <h2 class="font-secondary text-2xl xl:text-4xl font-normal uppercase">Power. Precision. Price Drop.</h2>
                 <p class="mt-4">Enjoy 20% off on select professional cricket bats. Limited-time offer — gear up before
                     it's gone!</p>
                 <div class="text-center mt-5">
@@ -98,9 +98,9 @@
     </div>
 </section>
 
-<footer class="bg-black text-white max-sm:mt-10">
+<footer class="bg-black text-white">
     <div
-        class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-md:gap-5 max-md:p-8 max-sm:px-4 max-sm:py-5">
+        class="flex justify-between gap-y-4 lg:gap-x-6 lg:gap-y-8 py-10 px-4 lg:py-[60px] lg:px-[60px] max-1023:flex-col-reverse">
         <!-- For Desktop View -->
         <div>
             <h2 class="text-sm font-secondary" role="heading" aria-level="2">
@@ -127,7 +127,7 @@
                             </svg></span>9311048371</a></p>
             </div>
         </div>
-        <div class="flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:hidden">
+        <div class="hidden flex-wrap items-start gap-5 lg:flex">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
                     <ul class="grid gap-5 text-sm">
@@ -151,16 +151,16 @@
 
         <!-- For Mobile view -->
         <x-shop::accordion :is-active="false"
-            class="hidden !w-full rounded-xl !border-2 !border-[#e9decc] max-1060:block max-sm:rounded-lg">
+            class="block !w-full !border-b !border-b-white lg:hidden">
             <x-slot:header
-                class="rounded-t-lg bg-[#F1EADF] font-medium max-md:p-2.5 max-sm:px-3 max-sm:py-2 max-sm:text-sm">
+                class="font-medium">
                 @lang('shop::app.components.layouts.footer.footer-content')
             </x-slot>
 
-            <x-slot:content class="flex justify-between !bg-transparent !p-4">
+            <x-slot:content class="grid gap-2.5 grid-cols-2 !bg-transparent !pb-3 !p-0">
                 @if ($customization?->options)
                     @foreach ($customization->options as $footerLinkSection)
-                        <ul class="grid gap-5 text-sm">
+                        <ul class="flex flex-col justify-start gap-5 text-sm">
                             @php
                                 usort($footerLinkSection, function ($a, $b) {
                                     return $a['sort_order'] - $b['sort_order'];
@@ -184,7 +184,7 @@
 
         <!-- News Letter subscription -->
         @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-            <div class="grid gap-2.5 max-w-[500px]">
+            <div class="grid gap-2.5 max-w-full lg:max-w-[360px] xl:max-w-[500px]">
                 <p class="text-sm font-secondary" role="heading" aria-level="2">
                     @lang('shop::app.components.layouts.footer.newsletter-text')
                 </p>
@@ -208,7 +208,7 @@
 
                             <button
                                 type="submit"
-                                class="inline-flex w-max items-center py-3 px-4 leading-6 !rounded bg-[#902129] h-[50px]"
+                                class="inline-flex w-max items-center py-1 md:py-3 px-4 leading-6 !rounded bg-[#902129] h-[38px] md:h-[50px]"
                             >
                                 <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10.7633 0.254972C10.6204 0.426158 10.5395 0.658181 10.5384 0.900532C10.5374 1.14288 10.6161 1.37594 10.7575 1.54897L14.32 5.83097H0.761666C0.559659 5.83097 0.365927 5.92727 0.223086 6.09868C0.0802464 6.27008 0 6.50256 0 6.74497C0 6.98738 0.0802464 7.21986 0.223086 7.39127C0.365927 7.56268 0.559659 7.65897 0.761666 7.65897H14.3142L10.7517 11.945C10.6114 12.1188 10.5335 12.3515 10.5346 12.5934C10.5357 12.8353 10.6157 13.067 10.7575 13.239C10.8283 13.323 10.9122 13.3895 11.0044 13.4347C11.0966 13.4798 11.1954 13.5027 11.2949 13.502C11.3945 13.5014 11.4931 13.4772 11.5849 13.4309C11.6767 13.3845 11.76 13.3169 11.83 13.232L16.6583 7.39597C16.7243 7.31139 16.7778 7.21401 16.8167 7.10797C16.8562 6.99676 16.8761 6.87689 16.875 6.75597C16.8751 6.51688 16.7974 6.2872 16.6583 6.11597L11.83 0.279972C11.7616 0.193659 11.6797 0.124483 11.5889 0.0764541C11.4981 0.0284248 11.4002 0.00249695 11.301 0.000171626C11.2018 -0.00215369 11.1032 0.0191702 11.0109 0.0629081C10.9186 0.106646 10.8344 0.171929 10.7633 0.254972Z" fill="#FFD0DE"/>
@@ -220,7 +220,7 @@
                         <h2 class="text-sm font-secondary mt-6 mb-3" role="heading" aria-level="2">
                             We Accept
                         </h2>
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-4 max-w-[300px] lg:max-w-full">
                             <img src="{{ asset('storage/theme/13/allCard.png') }}" alt="card"
                                 class="object-contain w-full" width="150" height="75" />
                         </div>
@@ -232,7 +232,7 @@
         {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
     </div>
 
-    <div class="flex justify-between bg-black text-white px-[60px] py-3.5 max-md:justify-center max-sm:px-5">
+    <div class="flex justify-between bg-black text-white text-xs md:text-sm px-[60px] py-3.5 max-md:justify-center max-sm:px-5">
         {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
 
         <p class="">

@@ -6,7 +6,7 @@
     </div>
 
     <!-- Address Cards -->
-    <div class="grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:mt-4 max-sm:grid-cols-1">
+    <div class="grid grid-cols-2 gap-5 max-1023:grid-cols-[1fr] max-lg:grid-cols-2 max-sm:mt-4 max-sm:grid-cols-1">
         <!-- Single card addredd -->
         <div class="relative max-w-[414px] rounded-xl border border-zinc-200 p-0">
             <div class="absolute top-5 flex gap-2 ltr:right-5 rtl:left-5">

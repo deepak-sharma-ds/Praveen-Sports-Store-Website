@@ -38,7 +38,7 @@
                         </div>
 
                         <!-- Saved Customer Addresses Cards -->
-                        <div class="mb-2 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-md:mt-2 max-md:grid-cols-1">
+                        <div class="mb-2 grid grid-cols-2 gap-5 max-1023:grid-cols-[1fr] max-lg:grid-cols-2 max-md:mt-2 max-md:grid-cols-1">
                             <div
                                 class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap max-md:rounded-lg"
                                 v-for="address in customerSavedAddresses.billing"
@@ -158,7 +158,7 @@
                                 </div>
 
                                 <!-- Saved Customer Addresses Cards -->
-                                <div class="mb-2 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-md:mt-4 max-md:grid-cols-1">
+                                <div class="mb-2 grid grid-cols-2 gap-5 max-1023:grid-cols-[1fr] max-lg:grid-cols-2 max-md:mt-4 max-md:grid-cols-1">
                                     <div
                                         class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap max-md:rounded-lg"
                                         v-for="address in customerSavedAddresses.shipping"

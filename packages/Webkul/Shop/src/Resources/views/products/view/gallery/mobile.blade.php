@@ -1,12 +1,12 @@
 <div
-    class="overflow-hidden 1180:hidden"
+    class="overflow-hidden 1239:hidden"
     v-if="isMediaLoading"
 >
     <div class="shimmer aspect-square max-h-screen w-screen bg-zinc-200"></div>
 </div>
 
 <div
-    class="scrollbar-hide flex w-screen gap-8 overflow-auto max-sm:gap-5 1180:hidden"
+    class="scrollbar-hide flex w-full gap-8 overflow-auto max-sm:gap-5 lg:hidden"
     v-else
 >
     <v-product-carousel
@@ -32,7 +32,7 @@
                 ref="sliderContainer"
             >
                 <div
-                    class="grid w-full content-center bg-cover bg-no-repeat"
+                    class="grid min-w-[300px] w-full content-center bg-cover bg-no-repeat"
                     v-for="(media, index) in options"
                     ref="slide"
                 >

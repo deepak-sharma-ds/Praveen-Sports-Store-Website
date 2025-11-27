@@ -5,7 +5,7 @@
 ])
 
 <v-quantity-changer
-    {{ $attributes->merge(['class' => 'flex items-center border border-navyBlue']) }}
+    {{ $attributes->merge(['class' => 'flex items-center justify-between border border-[#AEAEAE]']) }}
     name="{{ $name }}"
     value="{{ $value }}"
     min-value="{{ $minValue }}"

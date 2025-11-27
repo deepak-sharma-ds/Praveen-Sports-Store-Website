@@ -3,8 +3,8 @@
 
 @pushOnce('scripts')
     {{-- <script type="text/x-template" id="v-reviews-carousel-template">
-        <section class="bg-white py-14">
-            <div v-if="!isLoading && reviews.length" class="container max-lg:px-8">
+        <section class="bg-white py-10 md:py-14">
+            <div v-if="!isLoading && reviews.length" class="px-4 lg:px-[60px]">
                 <div class="relative">
                     <div
                         ref="swiperContainer"
@@ -53,8 +53,8 @@
         </template>
     </script> --}}
     <script type="text/x-template" id="v-reviews-carousel-template">
-    <section class="bg-white py-14">
-        <div v-if="!isLoading && reviews.length" class="container max-lg:px-8">
+    <section class="bg-white py-10 md:py-14">
+        <div v-if="!isLoading && reviews.length" class="px-4 lg:px-[60px]">
             <div class="flex flex-wrap items-center gap-10">
 
                 <!-- LEFT SIDE: Reviews Carousel -->

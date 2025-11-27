@@ -8,10 +8,10 @@
     $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
-<div class="flex flex-wrap gap-4 px-4 pb-4 pt-6 shadow-sm lg:hidden">
+<div class="flex flex-wrap gap-3 px-4 pb-4 pt-2 shadow-sm lg:hidden">
     <div class="flex w-full items-center justify-between">
         <!-- Left Navigation -->
-        <div class="flex items-center gap-x-1.5">
+        <div class="flex flex-1 items-center gap-x-1.5 [&>div:first-child]:min-w-[92px]">
             {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.before') !!}
 
             <!-- Drawer -->
@@ -23,7 +23,7 @@
 
             <a
                 href="{{ route('shop.home.index') }}"
-                class="max-h-[30px]"
+                class="mx-auto"
                 aria-label="@lang('shop::app.components.layouts.header.mobile.bagisto')"
             >
                 <img
@@ -39,7 +39,7 @@
 
         <!-- Right Navigation -->
         <div>
-            <div class="flex items-center gap-x-5 max-md:gap-x-4">
+            <div class="flex items-center gap-x-5 max-md:gap-x-2">
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.compare.before') !!}
 
                 @if($showCompare)
@@ -65,14 +65,14 @@
                 <div class="max-md:hidden">
                     <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                         <x-slot:toggle>
-                            <span class="icon-users cursor-pointer text-2xl"></span>
+                            <span class="icon-users cursor-pointer text-2xl inline-flex items-center justify-center w-9 h-9 rounded-full bg-white"></span>
                         </x-slot>
 
                         <!-- Guest Dropdown -->
                         @guest('customer')
                             <x-slot:content>
                                 <div class="grid gap-2.5">
-                                    <p class="font-dmserif text-xl">
+                                    <p class="font-secondary text-sm">
                                         @lang('shop::app.components.layouts.header.mobile.welcome-guest')
                                     </p>
 
@@ -113,7 +113,7 @@
                         @auth('customer')
                             <x-slot:content class="!p-0">
                                 <div class="grid gap-2.5 p-5 pb-0">
-                                    <p class="font-dmserif text-xl">
+                                    <p class="font-secondary text-sm">
                                         @lang('shop::app.components.layouts.header.mobile.welcome')’
                                         {{ auth()->guard('customer')->user()->first_name }}
                                     </p>
@@ -182,7 +182,7 @@
                             href="{{ route('shop.customer.session.create') }}"
                             aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
                         >
-                            <span class="icon-users cursor-pointer text-2xl"></span>
+                            <span class="icon-users cursor-pointer text-2xl inline-flex items-center justify-center w-9 h-9 rounded-full bg-white"></span>
                         </a>
                     @endguest
 
@@ -192,7 +192,7 @@
                             href="{{ route('shop.customers.account.index') }}"
                             aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
                         >
-                            <span class="icon-users cursor-pointer text-2xl"></span>
+                            <span class="icon-users cursor-pointer text-2xl inline-flex items-center justify-center w-9 h-9 rounded-full bg-white"></span>
                         </a>
                     @endauth
                 </div>

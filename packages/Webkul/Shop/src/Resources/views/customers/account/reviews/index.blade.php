@@ -55,7 +55,7 @@
                 <template v-else>
                     @if (! $reviews->isEmpty())
                         <!-- Review Information -->
-                        <div class="mt-14 grid gap-5 max-1060:grid-cols-[1fr] max-md:mt-5">
+                        <div class="mt-14 grid gap-5 max-1023:grid-cols-[1fr] max-md:mt-5">
                             @foreach($reviews as $review)
                                 <a
                                     href="{{ route('shop.product_or_category.index', $review->product->url_key) }}"

@@ -14,27 +14,27 @@
 
             <!-- Countdown Box -->
             <div
-                class="absolute top-1/2 right-[10%] -translate-y-1/2 z-10 w-[440px] py-6 px-12 rounded-xl text-white text-center shadow-lg bg-gradient-to-tr from-[#0F1D71] to-[#902129]">
-                <h2 class="text-4xl font-secondary font-bold uppercase mb-2" v-text="title"></h2>
-                <p class="text-base font-medium uppercase" v-text="subtitle"></p>
+                class="absolute top-1/2 right-[10%] -translate-y-1/2 z-10 w-4/5 md:w-[440px] py-6 px-6 lg:px-12 rounded-xl text-white text-center shadow-lg bg-gradient-to-tr from-[#0F1D71] to-[#902129]">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-secondary font-bold uppercase mb-2" v-text="title"></h2>
+                <p class="text-sm md:text-base font-medium uppercase mb-2 md:mb-5" v-text="subtitle"></p>
 
                 <!-- Countdown Timer -->
-                <div class="grid grid-cols-4 gap-1 text-center mb-4 text-[44px] font-semibold">
+                <div class="grid grid-cols-4 gap-1 text-center mb-4 text-3xl md:text-[44px] font-semibold">
                     <div>
                         <p v-text="time.days"></p>
-                        <p class="text-base font-normal">Days</p>
+                        <p class="text-sm md:text-base font-normal">Days</p>
                     </div>
                     <div>
                         <p v-text="time.hours"></p>
-                        <p class="text-base font-normal">Hours</p>
+                        <p class="text-sm md:text-base font-normal">Hours</p>
                     </div>
                     <div>
                         <p v-text="time.minutes"></p>
-                        <p class="text-base font-normal">Mins</p>
+                        <p class="text-sm md:text-base font-normal">Mins</p>
                     </div>
                     <div>
                         <p v-text="time.seconds"></p>
-                        <p class="text-base font-normal">Secs</p>
+                        <p class="text-sm md:text-base font-normal">Secs</p>
                     </div>
                 </div>
 

@@ -10,9 +10,9 @@
     <v-header-switcher>
         <!-- Desktop Header Shimmer -->
         <div class="flex flex-wrap max-lg:hidden">
-            <div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1180:px-8">
+            <div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1239:px-8">
                 <!-- Left Navigation Section -->
-                <div class="flex items-center gap-x-10 max-[1180px]:gap-x-5">
+                <div class="flex items-center gap-x-10 max-[1239px]:gap-x-5">
                     <!-- Categories Shimmer -->
                     <div class="flex items-center gap-5">
                         <span

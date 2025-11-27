@@ -8,13 +8,13 @@
         <div class="">
             <img
                 src="{{ $customer->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
-                class="h-[60px] w-[60px] rounded-full"
+                class="h-[60px] w-[60px] min-w-[60px] rounded-full"
                 alt="Profile Image"
             >
         </div>
 
         <div class="flex flex-col justify-between">
-            <p class="font-mediums break-all text-2xl max-md:text-xl">Hello! {{ $customer->first_name }}</p>
+            <p class="font-mediums break-all text-xl max-md:text-lg">Hello! {{ $customer->first_name }}</p>
 
             <p class="max-md:text-md: text-zinc-500 no-underline">{{ $customer->email }}</p>
         </div>

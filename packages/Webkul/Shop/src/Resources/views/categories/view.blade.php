@@ -27,7 +27,7 @@
 
     <!-- Hero Image -->
     @if ($category->banner_path)
-        <div class="bg-[#EDEDED] container px-[60px] max-lg:px-8 max-sm:px-4 py-[150px] text-white text-center relative z-0 before:absolute before:inset-0 before:z-[1] before:bg-black/50 before:content-['']">
+        <div class="bg-[#EDEDED] container px-[60px] max-lg:px-8 max-sm:px-4 py-20 lg:py-[150px] text-white text-center relative z-0 before:absolute before:inset-0 before:z-[1] before:bg-black/50 before:content-['']">
             <x-shop::media.images.lazy
                 class="absolute inset-0 h-full w-full object-cover object-center"
                 src="{{ $category->banner_url }}"
@@ -36,7 +36,7 @@
                 height="500"
             />
             <div class="flex items-center text-center justify-center relative z-[2]">
-                <h2 class="text-5xl font-normal font-secondary">{!! $category->name !!}</h2>
+                <h2 class="text-2xl md:text-[40px] xl:text-5xl font-normal font-secondary">{!! $category->name !!}</h2>
             </div>
         </div>
     @endif
@@ -129,7 +129,7 @@
                         <div v-else class="mt-8 max-md:mt-5">
                             <!-- Product Card Shimmer Effect -->
                             <template v-if="isLoading">
-                                <div class="grid grid-cols-4 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
+                                <div class="grid grid-cols-2 xl:grid-cols-3 gap-8 2xl:grid-cols-4 max-md:justify-items-center max-md:gap-x-4">
                                     <x-shop::shimmer.products.cards.grid count="12" />
                                 </div>
                             </template>
@@ -139,7 +139,7 @@
                             <!-- Product Card Listing -->
                             <template v-else>
                                 <template v-if="products.length">
-                                    <div class="grid grid-cols-4 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
+                                    <div class="grid grid-cols-2 xl:grid-cols-3 gap-8 2xl:grid-cols-4 max-md:justify-items-center max-md:gap-x-4">
                                         <x-shop::products.card
                                             ::mode="'grid'"
                                             v-for="product in products"

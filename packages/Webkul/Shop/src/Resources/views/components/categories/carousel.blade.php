@@ -7,21 +7,21 @@
         type="text/x-template"
         id="v-categories-carousel-template"
     >
-    <section class="bg-[#EDEDED] py-14">
-        <div class="text-center mb-10 font-secondary text-[32px] uppercase">
+    <section class="bg-[#EDEDED] py-10 md:py-14">
+        <div class="text-center mb-5 lg:mb-10 font-secondary text-[32px] uppercase px-5">
             <h2>Made for Match Winners</h2>
         </div>
         <div
-            class="container max-lg:px-8 max-md:!px-0"
+            class="px-4 lg:px-[60px]"
             v-if="! isLoading && categories?.length"
         >
             <div class="relative">
                 <div
                     ref="swiperContainer"
-                    class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-lg:gap-4"
+                    class="scrollbar-hide flex max-md:flex-wrap gap-10 overflow-auto scroll-smooth max-lg:gap-4"
                 >
                     <div
-                        class="w-1/3 grid grid-cols-1 justify-items-center text-center gap-4 font-medium max-md:gap-2.5 max-md:first:ml-4 max-sm:gap-1.5"
+                        class="w-full md:w-1/3 grid grid-cols-1 justify-items-center text-center gap-4 font-medium max-md:gap-2.5 max-md:first:ml-4 max-sm:gap-1.5"
                         v-for="category in categories"
                     >
                         <a

@@ -14,7 +14,7 @@
         <div class="relative m-auto flex w-full overflow-hidden">
             <!-- Slider -->
             <div
-                class="inline-flex translate-x-0 cursor-pointer transition-transform duration-700 ease-out will-change-transform"
+                class="inline-flex w-full translate-x-0 cursor-pointer transition-transform duration-700 ease-out will-change-transform"
                 ref="sliderContainer"
             >
                 <div

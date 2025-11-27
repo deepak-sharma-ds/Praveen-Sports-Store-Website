@@ -11,13 +11,13 @@
         type="text/x-template"
         id="v-products-carousel-template"
     >
-    <section class="bg-[#EDEDED] py-14">
+    <section class="bg-[#EDEDED] py-10 md:py-14">
         <div
-            class="container max-lg:px-8 max-sm:!px-4"
+            class="px-4 lg:px-[60px]"
             v-if="! isLoading && products.length"
         >
-            <div class="flex justify-between">
-                <h2 class="text-center mb-6 font-secondary text-[32px] uppercase">
+            <div class="flex justify-between mb-3 md:mb-0">
+                <h2 class="text-center mb-0 md:mb-6 font-secondary text-xl md:text-2xl xl:text-[32px] uppercase">
                     @{{ title }}
                 </h2>
 
