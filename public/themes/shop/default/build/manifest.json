@@ -15,9 +15,25 @@
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-DeSdoA5k.css",
+    "file": "assets/app-C3F3Nrw0.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
+  },
+  "src/Resources/assets/fonts/MonumentExtended-Regular.woff": {
+    "file": "assets/MonumentExtended-Regular-CG54V6Si.woff",
+    "src": "src/Resources/assets/fonts/MonumentExtended-Regular.woff"
+  },
+  "src/Resources/assets/fonts/MonumentExtended-Regular.woff2": {
+    "file": "assets/MonumentExtended-Regular-CGjoA4D_.woff2",
+    "src": "src/Resources/assets/fonts/MonumentExtended-Regular.woff2"
+  },
+  "src/Resources/assets/fonts/MonumentExtended-Ultrabold.woff": {
+    "file": "assets/MonumentExtended-Ultrabold-mhZsbp2k.woff",
+    "src": "src/Resources/assets/fonts/MonumentExtended-Ultrabold.woff"
+  },
+  "src/Resources/assets/fonts/MonumentExtended-Ultrabold.woff2": {
+    "file": "assets/MonumentExtended-Ultrabold-k_y3BySP.woff2",
+    "src": "src/Resources/assets/fonts/MonumentExtended-Ultrabold.woff2"
   },
   "src/Resources/assets/fonts/Poppins-Regular.ttf": {
     "file": "assets/Poppins-Regular-CTKNfV9P.ttf",
