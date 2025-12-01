@@ -1089,7 +1089,7 @@ return [
 
     'home' => [
         'contact' => [
-            'about'         => 'Jot us a note, and we’ll get back to you as quickly as possible',
+            'about'         => 'Have a question or need help choosing the perfect bat? Our team at AnaSports is here to assist you every step of the way. Whether it’s product details, order support, or partnership inquiries — we’d love to hear from you.',
             'desc'          => ' What’s on your mind?',
             'describe-here' => 'Describe Here',
             'email'         => 'Email',
@@ -1098,7 +1098,7 @@ return [
             'phone-number'  => 'Phone Number',
             'location'  => 'Location',
             'submit'        => 'Submit',
-            'title'         => 'Contact Us',
+            'title'         => 'Ready to Step Up Your Game? Contact Us!',
         ],
 
         'index' => [
