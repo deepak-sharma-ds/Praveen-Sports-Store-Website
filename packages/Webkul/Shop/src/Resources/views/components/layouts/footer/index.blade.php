@@ -112,12 +112,12 @@
             </div>
             <div>
                 <p class="mt-3"><a class="text-white inline-flex items-center gap-2"
-                        href="mailto:support@anasports.com"><span class="icon-telephone"><svg width="26"
+                        href="mailto:support@ana-sports.com"><span class="icon-telephone"><svg width="26"
                                 height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M25.1663 8.12611L13.1663 0.126112C13.043 0.043883 12.8982 0 12.75 0C12.6018 0 12.457 0.043883 12.3338 0.126112L0.333751 8.12611C0.230923 8.19472 0.146646 8.28768 0.0884186 8.39672C0.0301909 8.50576 -0.000182402 8.6275 8.24085e-07 8.75111V21.7511C8.24085e-07 22.2152 0.184375 22.6604 0.512564 22.9885C0.840753 23.3167 1.28587 23.5011 1.75 23.5011H23.75C24.2141 23.5011 24.6592 23.3167 24.9874 22.9885C25.3156 22.6604 25.5 22.2152 25.5 21.7511V8.75111C25.5002 8.6275 25.4698 8.50576 25.4116 8.39672C25.3534 8.28768 25.2691 8.19472 25.1663 8.12611ZM9.2725 15.7511L1.5 21.2386V10.2074L9.2725 15.7511ZM10.8063 16.5011H14.6938L22.48 22.0011H3.02L10.8063 16.5011ZM16.2275 15.7511L24 10.2074V21.2386L16.2275 15.7511ZM12.75 1.65236L23.4287 8.77736L14.6913 15.0011H10.8088L2.07125 8.77236L12.75 1.65236Z"
                                     fill="#DE3638" />
-                            </svg></span>support@anasports.com</a></p>
+                            </svg></span>support@ana-sports.com</a></p>
                 <p class="mt-3"><a class="text-white inline-flex items-center gap-2" href="tel:9311048371"><span
                             class="icon-telephone"><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">

@@ -119,8 +119,8 @@
                             <svg width="26" height="24" fill="#000">
                                 <path d="M12 12L24 4v16H0V4l12 8z" />
                             </svg>
-                            <a href="mailto:support@anasports.com" class="text-lg">
-                                support@anasports.com
+                            <a href="mailto:support@ana-sports.com" class="text-lg">
+                                support@ana-sports.com
                             </a>
                         </p>
 
