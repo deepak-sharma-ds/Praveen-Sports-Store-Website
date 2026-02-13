@@ -1,6 +1,6 @@
 <v-deal-countdown image="{{ bagisto_asset('images/deal-banner.png') }}" title="Don't Miss the Deal"
-    subtitle="Score big savings on all your favorites" button-url="/collections/sale" button-text="Shop Deals"
-    note="Cannot be combined with any other offer" end-date="2025-12-31T00:00:00"></v-deal-countdown>
+    subtitle="Score big savings on all your favorites" button-url="{{ route('shop.search.index', ['sort' => 'name-desc']) }}" button-text="Shop Deals"
+    note="Cannot be combined with any other offer" end-date="2026-12-31T00:00:00"></v-deal-countdown>
 
 @pushOnce('scripts')
     <script type="text/x-template" id="v-deal-countdown-template">

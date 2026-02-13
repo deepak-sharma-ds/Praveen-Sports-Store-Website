@@ -15,7 +15,7 @@
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-C3F3Nrw0.css",
+    "file": "assets/app-B6AmjFKZ.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -48,8 +48,12 @@
     "src": "src/Resources/assets/images/cash-on-delivery.png"
   },
   "src/Resources/assets/images/deal-banner.png": {
-    "file": "assets/deal-banner-Cqd1Ca8Q.png",
+    "file": "assets/deal-banner-B-ICn4uu.png",
     "src": "src/Resources/assets/images/deal-banner.png"
+  },
+  "src/Resources/assets/images/deal-banner1.png": {
+    "file": "assets/deal-banner1-Cqd1Ca8Q.png",
+    "src": "src/Resources/assets/images/deal-banner1.png"
   },
   "src/Resources/assets/images/default-language.svg": {
     "file": "assets/default-language-BxH8WlkY.svg",
@@ -96,12 +100,20 @@
     "src": "src/Resources/assets/images/paypal.png"
   },
   "src/Resources/assets/images/review-banner.png": {
-    "file": "assets/review-banner-Dt7OHHA8.png",
+    "file": "assets/review-banner-C8bU-zIl.png",
     "src": "src/Resources/assets/images/review-banner.png"
+  },
+  "src/Resources/assets/images/review-banner1.png": {
+    "file": "assets/review-banner1-Dt7OHHA8.png",
+    "src": "src/Resources/assets/images/review-banner1.png"
   },
   "src/Resources/assets/images/review.png": {
     "file": "assets/review-ZWqERyaT.png",
     "src": "src/Resources/assets/images/review.png"
+  },
+  "src/Resources/assets/images/search-page-banner.jpg": {
+    "file": "assets/search-page-banner-zgV0HAiC.jpg",
+    "src": "src/Resources/assets/images/search-page-banner.jpg"
   },
   "src/Resources/assets/images/small-product-placeholder.webp": {
     "file": "assets/small-product-placeholder-CMT26fOX.webp",
