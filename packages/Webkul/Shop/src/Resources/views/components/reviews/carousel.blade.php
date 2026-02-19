@@ -8,10 +8,10 @@
                 <div class="relative">
                     <div
                         ref="swiperContainer"
-                        class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth mb-5"
+                        class="scrollbar-hide flex overflow-auto scroll-smooth mb-5"
                     >
                         <div
-                            class="w-full"
+                            class="review-item flex-shrink-0 w-full md:w-1/2 md:pr-4" style="padding-right: 16px;"
                             v-for="review in reviews"
                             :key="review.id"
                         >
@@ -61,10 +61,10 @@
                 <div class="relative flex-1 min-w-[60%]">
                     <div
                         ref="swiperContainer"
-                        class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth mb-5"
+                        class="scrollbar-hide flex overflow-auto scroll-smooth mb-5"
                     >
                         <div
-                            class="w-full"
+                            class="review-item flex-shrink-0 w-full md:w-1/2 md:pr-4" style="padding-right: 16px;"
                             v-for="review in reviews"
                             :key="review.id"
                         >
@@ -149,11 +149,11 @@
                 },
 
                 swipeLeft() {
-                    this.$refs.swiperContainer.scrollLeft -= this.offset;
+                    this.$refs.swiperContainer.scrollLeft -= this.$refs.swiperContainer.clientWidth;
                 },
 
                 swipeRight() {
-                    this.$refs.swiperContainer.scrollLeft += this.offset;
+                    this.$refs.swiperContainer.scrollLeft += this.$refs.swiperContainer.clientWidth;
                 },
             },
         });

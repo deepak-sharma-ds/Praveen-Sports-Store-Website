@@ -70,7 +70,7 @@
         v-show="! isMediaLoading"
     >
         <img
-            class="w-full cursor-pointer rounded-xl"
+            class="w-full aspect-square object-contain bg-white cursor-pointer rounded-xl"
             :src="baseFile.path"
             v-if="baseFile.type == 'image'"
             alt="{{ $product->name }}"
