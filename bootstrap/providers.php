@@ -31,7 +31,7 @@ return [
     Webkul\Marketing\Providers\MarketingServiceProvider::class,
     Webkul\Notification\Providers\NotificationServiceProvider::class,
     Webkul\Payment\Providers\PaymentServiceProvider::class,
-    Webkul\Paypal\Providers\PaypalServiceProvider::class,
+    // Webkul\Paypal\Providers\PaypalServiceProvider::class,
     Webkul\Product\Providers\ProductServiceProvider::class,
     Webkul\Rule\Providers\RuleServiceProvider::class,
     Webkul\Sales\Providers\SalesServiceProvider::class,
@@ -43,8 +43,8 @@ return [
     Webkul\Tax\Providers\TaxServiceProvider::class,
     Webkul\Theme\Providers\ThemeServiceProvider::class,
     Webkul\User\Providers\UserServiceProvider::class,
-    Webkul\CustomStripePayment\Providers\CustomStripePaymentServiceProvider::class,
-    Webkul\StripePayment\Providers\StripePaymentServiceProvider::class,
+    // Webkul\CustomStripePayment\Providers\CustomStripePaymentServiceProvider::class,
+    // Webkul\StripePayment\Providers\StripePaymentServiceProvider::class,
     // Razorpay provider
     Wontonee\Razorpay\Providers\RazorpayServiceProvider::class,
 ];

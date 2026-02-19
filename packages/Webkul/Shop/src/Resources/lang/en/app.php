@@ -874,7 +874,7 @@ return [
         ],
 
         'view' => [
-            'empty'     => 'No products available in this category',
+            'empty'     => 'Comming Soon!',
             'load-more' => 'Load More',
         ],
     ],
