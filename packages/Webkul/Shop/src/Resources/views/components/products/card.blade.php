@@ -194,13 +194,13 @@
             class="relative flex max-w-max grid-cols-2 gap-4 overflow-hidden rounded max-sm:flex-wrap"
             v-else
         >
-            <div class="group relative max-h-[258px] max-w-[250px] overflow-hidden">
+            <div class="group relative aspect-square max-w-[250px] overflow-hidden">
 
                 {!! view_render_event('bagisto.shop.components.products.card.image.before') !!}
 
                 <a :href="`{{ route('shop.product_or_category.index', '') }}/${product.url_key}`">
                     <x-shop::media.images.lazy
-                        class="after:content-[' '] relative min-w-[250px] bg-zinc-100 transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
+                        class="after:content-[' '] aspect-square object-contain relative min-w-[250px] bg-white transition-all duration-300 after:block after:pb-[calc(100%+9px)] group-hover:scale-105"
                         ::src="product.base_image.medium_image_url"
                         ::key="product.id"
                         ::index="product.id"

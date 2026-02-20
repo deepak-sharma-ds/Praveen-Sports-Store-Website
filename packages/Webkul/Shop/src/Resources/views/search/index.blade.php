@@ -22,13 +22,13 @@
         {{ $title }}
     </x-slot>
 
-    <div class="bg-[#EDEDED] container px-[60px] max-lg:px-8 max-sm:px-4 py-[150px] text-white text-center relative z-0 before:absolute before:inset-0 before:z-[1] before:bg-black/50 before:content-['']">
+    <div class="bg-[#EDEDED] container px-[60px] max-lg:px-8 max-sm:px-4 py-[80px] py-md-[150px] text-white text-center relative z-0 before:absolute before:inset-0 before:z-[1] before:bg-black/50 before:content-['']">
         <img src="{{ bagisto_asset('images/search-page-banner.jpg') }}" alt="Search Icon" class="absolute inset-0 h-full w-full object-cover object-center" />
         @if (request()->has('image-search'))
             @include('shop::search.images.results')
         @endif
         <div class="flex items-center text-center justify-center relative z-[2]">
-            <h2 class="text-[40px] xl:text-5xl font-normal font-secondary">
+            <h2 class="text-[24px] xl:text-5xl font-normal font-secondary">
                 <span v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'" ></span>
             </h2>
         </div>
