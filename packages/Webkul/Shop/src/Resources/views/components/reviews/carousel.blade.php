@@ -105,7 +105,7 @@
                         alt="Customer Reviews"
                         class="rounded-md max-w-full w-full h-auto object-cover"
                     />
-                    <p class="mt-2.5">Stratos 1.1 5 Star Lite Cricket Bat</p>
+                    <!-- <p class="mt-2.5">Stratos 1.1 5 Star Lite Cricket Bat</p> -->
                 </div>
             </div>
         </div>

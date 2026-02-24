@@ -36,7 +36,7 @@
                 height="500"
             />
             <div class="flex items-center text-center justify-center relative z-[2]">
-                <h2 class="text-2xl md:text-[40px] xl:text-5xl font-normal font-secondary">{!! $category->name !!}</h2>
+                <h1 class="text-2xl md:text-[40px] xl:text-5xl font-normal font-secondary leading-[initial]">{!! $category->name !!}</h1>
             </div>
         </div>
     @endif

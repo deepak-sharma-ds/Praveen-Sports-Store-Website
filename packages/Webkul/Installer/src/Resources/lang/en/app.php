@@ -77,7 +77,7 @@ return [
 
                 'contact-us' => [
                     'content' => 'Contact Us Page Content',
-                    'title'   => 'Contact Us',
+                    'title'   => 'Contact ANA Sports | Get Support & Product Information',
                 ],
 
                 'customer-service' => [

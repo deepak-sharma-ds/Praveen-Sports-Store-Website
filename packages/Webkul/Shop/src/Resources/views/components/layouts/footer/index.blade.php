@@ -60,12 +60,12 @@
 @endif
 <section>
     <div class="text-center mb-10 px-10 pt-8">
-        <h2 class="font-secondary text-2xl uppercase">JOIN THE ana sports</h2>
+        <h2 class="font-secondary text-2xl uppercase">Explore the Exclusive Collection of ANA Sports</h2>
         <p>Get exclusive 10% discount on your first purchase.</p>
         <div class="text-center mt-5">
             <a href="{{ route('shop.search.index', ['sort' => 'name-desc']) }}"
                 class="uppercase inline-flex items-center gap-2.5 text-[15px]">
-                View All
+                Shop Now
                 <svg width="8" height="16" viewBox="0 0 8 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M4.93357 7.50609L4.95302 7.56225L4.95719 7.5605L4.93774 7.61665C4.92801 7.64649 3.94391 10.5369 1.37662 13.6694C0.949575 14.1883 0.490781 14.6733 0.00558099 15.1207C1.53715 14.4552 2.94075 13.5317 4.10738 12.407C6.67467 9.92157 7.65876 7.62833 7.66849 7.60466L7.68795 7.5601L7.68378 7.56149L7.66432 7.51694C7.64112 7.46341 6.65257 5.18264 4.1032 2.71464C2.9363 1.58874 1.53231 0.66524 0 4.00543e-05C0.485731 0.44794 0.944995 0.933538 1.37244 1.45334C3.9218 4.56404 4.91001 7.43761 4.93322 7.50509L4.93357 7.50609Z"

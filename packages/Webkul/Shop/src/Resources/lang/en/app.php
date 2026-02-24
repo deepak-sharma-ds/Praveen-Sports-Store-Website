@@ -14,7 +14,7 @@ return [
             'reset-link-sent'      => 'We have e-mailed your reset password link.',
             'sign-in-button'       => 'Sign In',
             'submit'               => 'Reset Password',
-            'title'                => 'Recover Password',
+            'title'                => 'Recover Password - ANA Sports',
         ],
 
         'reset-password' => [
@@ -39,7 +39,7 @@ return [
             'invalid-credentials' => 'Please check your credentials and try again.',
             'new-customer'        => 'New customer?',
             'not-activated'       => 'Your activation seeks admin approval',
-            'page-title'          => 'Customer Login',
+            'page-title'          => 'Customer Login - ANA Sports',
             'password'            => 'Password',
             'show-password'       => 'Show Password',
             'title'               => 'Sign In',
@@ -57,7 +57,7 @@ return [
             'footer'                      => '© Copyright 2025 - :current_year, ANA Sports. All rights reserved.',
             'form-signup-text'            => 'If you are new to our store, we glad to have you as member.',
             'last-name'                   => 'Last Name',
-            'page-title'                  => 'Become User',
+            'page-title'                  => 'Create an Account | Join ANA Sports Today',
             'password'                    => 'Password',
             'sign-in-button'              => 'Sign In',
             'subscribe-to-newsletter'     => 'Subscribe to newsletter',
