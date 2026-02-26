@@ -23,7 +23,66 @@
     <meta name="base-url" content="{{ url()->to('/') }}">
     <meta name="currency" content="{{ core()->getCurrentCurrency()->toJson() }}">
 
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="{{ request()->url() }}">
+
     @stack('meta')
+
+    <!-- Website Schema -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "WebSite",
+            "name": "{{ config('app.name') }}",
+            "url": "{{ url('/') }}",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "{{ url('/search') }}?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+    </script>
+
+    <!-- Store Schema -->
+    @if (request()->is('/') || request()->routeIs('shop.home.index'))
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Store",
+                "name": "{{ config('app.name') }}",
+                "image": "{{ core()->getCurrentChannel()->logo_url }}",
+                "url": "{{ url('/') }}",
+                "telephone": "9311048371",
+                "priceRange": "₹2000-₹60000",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "AARYA ADRIJA SPORTS PVT. LTD. Kila Parikshit Garh Rd, Makshoodpur ganvadi, Abdullapur",
+                    "addressLocality": "Meerut, Uttar Pradesh",
+                    "postalCode": "250004",
+                    "addressCountry": "IN"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 28.9884023,
+                    "longitude": 77.77076
+                },
+                "openingHoursSpecification": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                    ],
+                    "opens": "09:30",
+                    "closes": "19:00"
+                }
+            }
+        </script>
+    @endif
 
     <link rel="icon" sizes="16x16"
         href="{{ core()->getCurrentChannel()->favicon_url ?? bagisto_asset('images/favicon.ico') }}" />

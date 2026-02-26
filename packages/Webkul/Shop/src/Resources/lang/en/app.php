@@ -882,7 +882,7 @@ return [
     'search' => [
         'title'   => 'These are results for : :query',
         'suggest' => 'Search instead for',
-        'results' => 'Search results',
+        'results' => 'Exclusive ANA Sports Collection',
 
         'images' => [
             'index' => [

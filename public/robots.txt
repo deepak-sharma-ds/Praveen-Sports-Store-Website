@@ -1,2 +1,24 @@
 User-agent: *
-Disallow:
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /my-account/
+Disallow: /account/
+Disallow: /login/
+Disallow: /register/
+Disallow: /cgi-bin/
+Disallow: /?s=
+Disallow: /*?add-to-cart=
+Disallow: /*?orderby=
+Disallow: /*?filter=
+Disallow: /*?rating=
+Disallow: /*?replytocom=
+Disallow: /trackback/
+Disallow: */feed/
+Disallow: */comments/
+Disallow: /xmlrpc.php
+
+Allow: /wp-admin/admin-ajax.php
+
+Sitemap: https://ana-sports.com/storage/sitemap-2-1.xml

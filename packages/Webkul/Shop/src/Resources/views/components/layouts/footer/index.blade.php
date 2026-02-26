@@ -74,27 +74,129 @@
             </a>
         </div>
     </div>
-    <div class="grid grid-cols-5 gap-[1px]">
-        <div class="relative pt-[120%]">
-            <img src="/storage/theme/13/zNfOkoGp2Wc1ZjOKgxgXGxLCZirn47STlMoFzxpa.webp" alt=""
-                class="w-full h-full object-cover absolute top-0 left-0" />
+
+    <div class="features-box">
+        <div class="feature-item">
+            <div class="feature-icon">
+                <img src="https://ana-sports.com/storage/tinymce/iaSi5NxXC3xBm3UO0o7OSA37tMYFpmhfdz0FoWxV.png"
+                    alt="Cricket Bats online" width="110" height="110" />
+            </div>
+            <h4>Trusted Products</h4>
+            <p>Engineered for excellence, trusted by athletes worldwide</p>
         </div>
-        <div class="relative pt-[120%]">
-            <img src="/storage/theme/13/oMsyjpkx8GralhZGI6azqN4dWswDluSy1FFu4ISP.webp" alt=""
-                class="w-full h-full object-cover absolute top-0 left-0" />
+        <div class="feature-item">
+            <div class="feature-icon">
+                <img src="https://ana-sports.com/storage/tinymce/DfjvpWVdukWUwx0WDz62zZRDpaGQ5Ibl4WwbCXop.png"
+                    alt="Cricket Bats India" width="110" height="108" />
+            </div>
+            <h4>After sales support</h4>
+            <p>We stand by our gear - support that goes beyond the purchase</p>
         </div>
-        <div class="relative pt-[120%]">
-            <img src="/storage/theme/13/FOVZJqJ5qWByjIDFmdyn33KLJLrhXMk3o6QhDKwN.webp" alt=""
-                class="w-full h-full object-cover absolute top-0 left-0" />
+        <div class="feature-item">
+            <div class="feature-icon">
+                <img src="https://ana-sports.com/storage/tinymce/ELnCpVXIAGcor5c5h4gBhMrCvZh9BZicfuPuofm1.png"
+                    alt="Cheap Cricket Bats" width="110" height="100" />
+            </div>
+            <h4>Delivery across globe</h4>
+            <p>
+                From our shelves to your game - worldwide delivery, seamless service
+            </p>
         </div>
-        <div class="relative pt-[120%]">
-            <img src="/storage/theme/13/jSFtwgau6b1pb45lVY2BTvrVWFnZBsB289UtElWI.webp" alt=""
-                class="w-full h-full object-cover absolute top-0 left-0" />
+        <div class="feature-item">
+            <div class="feature-icon">
+                <img src="https://ana-sports.com/storage/tinymce/M3Xt2bnNqqHEdNEFu23Kw01WHblanyYRLGRq3G58.png"
+                    alt="Best Cricket Bats" width="108" height="110" />
+            </div>
+            <h4>Quality home goods</h4>
+            <p>Uncompromising quality for peak performance, every time</p>
         </div>
-        <div class="relative pt-[120%]">
-            <img src="/storage/theme/13/SxcL9eRC6BE9M8jWtuWfNWtBQfLXz6kCByBi3VMF.webp" alt=""
-                class="w-full h-full object-cover absolute top-0 left-0" />
+    </div>
+
+    <div class="relative m-auto px-1" data-footer-slider>
+        <button type="button"
+            class="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2 text-black shadow"
+            data-footer-slider-prev aria-label="Previous footer image">
+            <span class="icon-arrow-left text-lg"></span>
+        </button>
+
+        <div class="flex snap-x snap-mandatory gap-[1px] overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            data-footer-slider-track>
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/zNfOkoGp2Wc1ZjOKgxgXGxLCZirn47STlMoFzxpa.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/oMsyjpkx8GralhZGI6azqN4dWswDluSy1FFu4ISP.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/FOVZJqJ5qWByjIDFmdyn33KLJLrhXMk3o6QhDKwN.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/jSFtwgau6b1pb45lVY2BTvrVWFnZBsB289UtElWI.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/SxcL9eRC6BE9M8jWtuWfNWtBQfLXz6kCByBi3VMF.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/zNfOkoGp2Wc1ZjOKgxgXGxLCZirn47STlMoFzxpa.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/oMsyjpkx8GralhZGI6azqN4dWswDluSy1FFu4ISP.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/FOVZJqJ5qWByjIDFmdyn33KLJLrhXMk3o6QhDKwN.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/jSFtwgau6b1pb45lVY2BTvrVWFnZBsB289UtElWI.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
+
+            <div class="w-full flex-none snap-start sm:w-1/2 md:w-1/3 lg:w-1/5" data-footer-slide>
+                <div class="relative pt-[120%]">
+                    <img src="/storage/theme/13/SxcL9eRC6BE9M8jWtuWfNWtBQfLXz6kCByBi3VMF.webp" alt=""
+                        class="absolute left-0 top-0 h-full w-full object-cover" />
+                </div>
+            </div>
         </div>
+
+        <button type="button"
+            class="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2 text-black shadow"
+            data-footer-slider-next aria-label="Next footer image">
+            <span class="icon-arrow-right text-lg"></span>
+        </button>
     </div>
 </section>
 
@@ -103,9 +205,9 @@
         class="flex justify-between gap-y-4 lg:gap-x-6 lg:gap-y-8 py-10 px-4 lg:py-[60px] lg:px-[60px] max-1023:flex-col-reverse">
         <!-- For Desktop View -->
         <div>
-            <h2 class="text-sm font-secondary" role="heading" aria-level="2">
+            {{-- <h2 class="text-sm font-secondary" role="heading" aria-level="2">
                 About Us
-            </h2>
+            </h2> --}}
             {{-- <div class="mt-4 max-w-[400px]">
                 Your one-stop destination for premium sports gear and accessories. Established with a passion for
                 excellence, we are committed to delivering high-quality products...
@@ -116,18 +218,20 @@
                             stroke="#DE3638" stroke-width="2" viewBox="0 0 24 24">
                             <path d="M12 2C8.1 2 5 5.1 5 9c0 4.9 6 12 6 12s6-7.1 6-12c0-3.9-3.1-7-7-7z" />
                             <circle cx="12" cy="9" r="2.5" />
-                        </svg></span>AARYA ADRIJA SPORTS PVT. LTD. Kila Parikshit Garh Rd, Makshoodpur ganvadi,
-                    Abdullapur, Meerut, Rali Chauhan, Uttar Pradesh 250004</p>
+                        </svg></span>Aarya Adrija Sports Private Limited<br>
+                    Khasra No-115, Jalaluddin Maksoodpur, Gaavandi, Meerut, Uttar Pradesh - 250002 <br>
+                    CIN - U32300UP2025PTC234915</p>
                 <p class="mt-3"><a class="text-white inline-flex items-center gap-2"
                         href="mailto:support@ana-sports.com"><span class="icon-telephone"><svg width="26"
-                                height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                height="24" viewBox="0 0 26 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M25.1663 8.12611L13.1663 0.126112C13.043 0.043883 12.8982 0 12.75 0C12.6018 0 12.457 0.043883 12.3338 0.126112L0.333751 8.12611C0.230923 8.19472 0.146646 8.28768 0.0884186 8.39672C0.0301909 8.50576 -0.000182402 8.6275 8.24085e-07 8.75111V21.7511C8.24085e-07 22.2152 0.184375 22.6604 0.512564 22.9885C0.840753 23.3167 1.28587 23.5011 1.75 23.5011H23.75C24.2141 23.5011 24.6592 23.3167 24.9874 22.9885C25.3156 22.6604 25.5 22.2152 25.5 21.7511V8.75111C25.5002 8.6275 25.4698 8.50576 25.4116 8.39672C25.3534 8.28768 25.2691 8.19472 25.1663 8.12611ZM9.2725 15.7511L1.5 21.2386V10.2074L9.2725 15.7511ZM10.8063 16.5011H14.6938L22.48 22.0011H3.02L10.8063 16.5011ZM16.2275 15.7511L24 10.2074V21.2386L16.2275 15.7511ZM12.75 1.65236L23.4287 8.77736L14.6913 15.0011H10.8088L2.07125 8.77236L12.75 1.65236Z"
                                     fill="#DE3638" />
                             </svg></span>support@ana-sports.com</a></p>
                 <p class="mt-3"><a class="text-white inline-flex items-center gap-2" href="tel:9311048371"><span
-                            class="icon-telephone"><svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                            class="icon-telephone"><svg width="25" height="25" viewBox="0 0 25 25"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M15.025 1.55528C15.0504 1.46004 15.0943 1.37074 15.1542 1.29249C15.2142 1.21423 15.2889 1.14856 15.3743 1.09922C15.4596 1.04988 15.5538 1.01784 15.6515 1.00494C15.7493 0.992042 15.8486 0.998529 15.9438 1.02403C17.7552 1.49656 19.408 2.44348 20.7318 3.76726C22.0556 5.09103 23.0025 6.7438 23.475 8.55528C23.5005 8.65049 23.507 8.74979 23.4941 8.84751C23.4812 8.94523 23.4492 9.03945 23.3998 9.12477C23.3505 9.2101 23.2848 9.28487 23.2066 9.3448C23.1283 9.40473 23.039 9.44864 22.9438 9.47403C22.8806 9.49086 22.8154 9.49927 22.75 9.49903C22.5848 9.49913 22.4241 9.44466 22.293 9.34407C22.1619 9.24349 22.0677 9.10242 22.025 8.94278C21.6193 7.38677 20.8061 5.96708 19.669 4.83003C18.532 3.69298 17.1123 2.87971 15.5563 2.47403C15.461 2.44864 15.3717 2.40473 15.2935 2.3448C15.2152 2.28487 15.1495 2.2101 15.1002 2.12478C15.0509 2.03945 15.0188 1.94523 15.0059 1.84751C14.993 1.74979 14.9995 1.65049 15.025 1.55528ZM14.5563 6.47403C16.375 6.95903 17.54 8.12403 18.025 9.94278C18.0677 10.1024 18.1619 10.2435 18.293 10.3441C18.4241 10.4447 18.5848 10.4991 18.75 10.499C18.8154 10.4993 18.8806 10.4909 18.9438 10.474C19.039 10.4486 19.1283 10.4047 19.2066 10.3448C19.2848 10.2849 19.3505 10.2101 19.3998 10.1248C19.4492 10.0394 19.4812 9.94523 19.4941 9.84751C19.507 9.74979 19.5005 9.65049 19.475 9.55528C18.85 7.21653 17.2825 5.64903 14.9438 5.02403C14.8486 4.99859 14.7493 4.99215 14.6516 5.00508C14.5539 5.018 14.4597 5.05005 14.3744 5.09938C14.289 5.14871 14.2143 5.21436 14.1543 5.29259C14.0944 5.37081 14.0505 5.46007 14.025 5.55528C13.9996 5.65049 13.9931 5.74978 14.0061 5.84748C14.019 5.94517 14.051 6.03937 14.1004 6.12468C14.1497 6.21 14.2153 6.28476 14.2936 6.3447C14.3718 6.40464 14.4611 6.44859 14.5563 6.47403ZM24.4863 18.599C24.2721 20.2331 23.4702 21.7332 22.2305 22.819C20.9907 23.9049 19.398 24.5021 17.75 24.499C7.96251 24.499 1.24652e-05 16.5365 1.24652e-05 6.74903C-0.00314473 5.10159 0.593537 3.50933 1.6786 2.26968C2.76367 1.03003 4.2629 0.227784 5.89626 0.012783C6.27226 -0.03291 6.65293 0.0446194 6.98111 0.233727C7.30929 0.422835 7.56725 0.713312 7.71626 1.06153L10.3538 6.94903C10.4702 7.21557 10.5184 7.50693 10.494 7.79676C10.4695 8.0866 10.3732 8.36577 10.2138 8.60903C10.1977 8.6338 10.1802 8.65759 10.1613 8.68028L7.52751 11.8128C7.51152 11.8453 7.50321 11.881 7.50321 11.9172C7.50321 11.9534 7.51152 11.9891 7.52751 12.0215C8.48501 13.9815 10.54 16.0215 12.5275 16.9778C12.5607 16.9929 12.5969 17.0001 12.6334 16.9988C12.6698 16.9975 12.7055 16.9877 12.7375 16.9703L15.8238 14.3453C15.8458 14.3261 15.8692 14.3086 15.8938 14.2928C16.1359 14.1313 16.4146 14.0328 16.7044 14.0062C16.9943 13.9796 17.2862 14.0256 17.5538 14.1403L23.4588 16.7865C23.8024 16.9388 24.0878 17.1977 24.2728 17.5248C24.4579 17.8519 24.5327 18.2298 24.4863 18.6028V18.599ZM23 18.414C23.0042 18.3618 22.9919 18.3095 22.9647 18.2646C22.9376 18.2198 22.897 18.1846 22.8488 18.164L16.9425 15.5178C16.9102 15.5053 16.8757 15.5 16.8411 15.5022C16.8066 15.5043 16.773 15.5139 16.7425 15.5303L13.6575 18.1553C13.635 18.174 13.6113 18.1915 13.5875 18.2078C13.3359 18.3756 13.045 18.4753 12.7434 18.4972C12.4417 18.5191 12.1395 18.4625 11.8663 18.3328C9.57126 17.224 7.28376 14.9578 6.17501 12.684C6.04461 12.4124 5.98656 12.1116 6.00648 11.811C6.02641 11.5103 6.12364 11.2199 6.28876 10.9678C6.30486 10.9427 6.32283 10.9189 6.34251 10.8965L8.97376 7.76028C8.9888 7.72754 8.99659 7.69194 8.99659 7.65591C8.99659 7.61988 8.9888 7.58427 8.97376 7.55153L6.34251 1.66278C6.32514 1.61549 6.29388 1.57455 6.25284 1.54533C6.2118 1.51611 6.16289 1.49997 6.11251 1.49903H6.08376C4.81244 1.66815 3.64613 2.29421 2.80263 3.26032C1.95913 4.22642 1.4961 5.46652 1.50001 6.74903C1.50001 15.709 8.79001 22.999 17.75 22.999C19.0327 23.0029 20.273 22.5397 21.2391 21.6959C22.2052 20.8522 22.8312 19.6856 23 18.414Z"
                                     fill="#DE3638" />
@@ -253,3 +357,101 @@
 </footer>
 
 {!! view_render_event('bagisto.shop.layout.footer.after') !!}
+
+@pushOnce('scripts')
+    <script>
+        (() => {
+            const initFooterSlider = () => {
+                const sliders = document.querySelectorAll('[data-footer-slider]');
+
+                if (!sliders.length) {
+                    return;
+                }
+
+                sliders.forEach((slider) => {
+                    const track = slider.querySelector('[data-footer-slider-track]');
+                    const prev = slider.querySelector('[data-footer-slider-prev]');
+                    const next = slider.querySelector('[data-footer-slider-next]');
+                    const slides = track ? track.querySelectorAll('[data-footer-slide]') : [];
+
+                    if (!track || !prev || !next || !slides.length) {
+                        return;
+                    }
+
+                    const uniqueSlidesCount = Math.floor(slides.length / 2);
+                    let autoSlideInterval = null;
+
+                    const getSlideWidth = () => {
+                        const firstSlide = slides[0];
+
+                        return firstSlide ? firstSlide.getBoundingClientRect().width + 1 : track.clientWidth;
+                    };
+
+                    const normalizeLoopPosition = () => {
+                        if (!uniqueSlidesCount) {
+                            return;
+                        }
+
+                        const maxUniqueScroll = getSlideWidth() * uniqueSlidesCount;
+
+                        if (track.scrollLeft >= maxUniqueScroll) {
+                            track.scrollLeft -= maxUniqueScroll;
+                        }
+
+                        if (track.scrollLeft < 0) {
+                            track.scrollLeft += maxUniqueScroll;
+                        }
+                    };
+
+                    const scrollBySlide = (direction) => {
+                        const slideWidth = getSlideWidth();
+
+                        track.scrollBy({
+                            left: slideWidth * direction,
+                            behavior: 'smooth',
+                        });
+
+                        window.setTimeout(normalizeLoopPosition, 450);
+                    };
+
+                    prev.addEventListener('click', () => scrollBySlide(-1));
+                    next.addEventListener('click', () => scrollBySlide(1));
+
+                    const startAutoSlide = () => {
+                        stopAutoSlide();
+
+                        autoSlideInterval = window.setInterval(() => {
+                            scrollBySlide(1);
+                        }, 3000);
+                    };
+
+                    const stopAutoSlide = () => {
+                        if (autoSlideInterval) {
+                            window.clearInterval(autoSlideInterval);
+                            autoSlideInterval = null;
+                        }
+                    };
+
+                    slider.addEventListener('mouseenter', stopAutoSlide);
+                    slider.addEventListener('mouseleave', startAutoSlide);
+                    slider.addEventListener('touchstart', stopAutoSlide, { passive: true });
+                    slider.addEventListener('touchend', startAutoSlide, { passive: true });
+                    track.addEventListener('scroll', normalizeLoopPosition, { passive: true });
+                    window.addEventListener('resize', normalizeLoopPosition, { passive: true });
+
+                    startAutoSlide();
+                });
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initFooterSlider, {
+                    once: true
+                });
+                return;
+            }
+
+            initFooterSlider();
+        })
+        ();
+    </script>
+@endPushOnce

@@ -109,8 +109,9 @@
                                 <path d="M12 2C8.1 2 5 5.1 5 9c0 4.9 6 12 6 12s6-7.1 6-12c0-3.9-3.1-7-7-7z" />
                                 <circle cx="12" cy="9" r="2.5" />
                             </svg>
-                            AARYA ADRIJA SPORTS PVT. LTD. Kila Parikshit Garh Rd, Makshoodpur ganvadi, Abdullapur,
-                            Meerut, Rali Chauhan, Uttar Pradesh 250004
+                            Aarya Adrija Sports Private Limited
+                            Khasra No-115, Jalaluddin Maksoodpur, Gaavandi, Meerut, Uttar Pradesh - 250002
+                            CIN - U32300UP2025PTC234915
                         </p>
 
                         <p class="flex items-center gap-3 mt-4">

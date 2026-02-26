@@ -273,7 +273,7 @@
                                 </div>
 
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.after', ['product' => $product]) !!}
-                                
+
                                 <div class="mt-6 grid w-full overflow-hidden">
                                     <!-- Description Accordion -->
                                     <x-shop::accordion class="max-md:border-none" :is-active="false">

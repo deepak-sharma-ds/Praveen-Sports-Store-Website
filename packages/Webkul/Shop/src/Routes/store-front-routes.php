@@ -52,6 +52,10 @@ Route::get('search', [SearchController::class, 'index'])
 
 Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
 
+Route::get('all-products', [SearchController::class, 'index'])
+    ->name('shop.all.product.index')
+    ->middleware('cache.response');
+
 /**
  * Subscription routes.
  */

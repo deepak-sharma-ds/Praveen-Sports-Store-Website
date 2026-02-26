@@ -1,5 +1,5 @@
-<v-deal-countdown image="{{ bagisto_asset('images/deal-banner.png') }}" title="Don't Miss the Deal"
-    subtitle="Score big savings on all your favorites" button-url="{{ route('shop.search.index', ['sort' => 'name-desc']) }}" button-text="Shop Deals"
+<v-deal-countdown image="{{ bagisto_asset('images/deal-banner.png') }}" title="Hurry! The Deals Won’t Last" subtitle=""
+    button-url="{{ route('shop.search.index', ['sort' => 'name-desc']) }}" button-text="Shop Deals"
     note="Cannot be combined with any other offer" end-date="2026-12-31T00:00:00"></v-deal-countdown>
 
 @pushOnce('scripts')
@@ -19,7 +19,7 @@
                 <p class="text-sm md:text-base font-medium uppercase mb-2 md:mb-5" v-text="subtitle"></p>
 
                 <!-- Countdown Timer -->
-                <div class="grid grid-cols-4 gap-1 text-center mb-4 text-3xl md:text-[44px] font-semibold">
+                <!-- <div class="grid grid-cols-4 gap-1 text-center mb-4 text-3xl md:text-[44px] font-semibold">
                     <div>
                         <p v-text="time.days"></p>
                         <p class="text-sm md:text-base font-normal">Days</p>
@@ -36,6 +36,12 @@
                         <p v-text="time.seconds"></p>
                         <p class="text-sm md:text-base font-normal">Secs</p>
                     </div>
+                </div> -->
+
+                <div class="pd-5">
+                    <p class="text-base mt-2 font-medium">
+                        Shop Deals Before Time Runs Out!
+                    </p>
                 </div>
 
                 <!-- CTA Button -->
@@ -44,10 +50,6 @@
                     class="inline-flex bg-white text-[#902129] rounded py-2.5 px-4 border border-[#AC153A] font-medium text-base uppercase transition-all hover:bg-[#AC153A] hover:text-white"
                     v-text="buttonText"
                 ></a>
-
-                <p class="text-base mt-2 font-medium">
-                    *Cannot be combined with any other offer
-                </p>
             </div>
         </div>
     </script>
