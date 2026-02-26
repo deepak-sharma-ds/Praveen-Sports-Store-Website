@@ -243,6 +243,62 @@
                                     d="M476.9 161.1C435 119.1 379.2 96 319.9 96C197.5 96 97.9 195.6 97.9 318C97.9 357.1 108.1 395.3 127.5 429L96 544L213.7 513.1C246.1 530.8 282.6 540.1 319.8 540.1L319.9 540.1C442.2 540.1 544 440.5 544 318.1C544 258.8 518.8 203.1 476.9 161.1zM319.9 502.7C286.7 502.7 254.2 493.8 225.9 477L219.2 473L149.4 491.3L168 423.2L163.6 416.2C145.1 386.8 135.4 352.9 135.4 318C135.4 216.3 218.2 133.5 320 133.5C369.3 133.5 415.6 152.7 450.4 187.6C485.2 222.5 506.6 268.8 506.5 318.1C506.5 419.9 421.6 502.7 319.9 502.7zM421.1 364.5C415.6 361.7 388.3 348.3 383.2 346.5C378.1 344.6 374.4 343.7 370.7 349.3C367 354.9 356.4 367.3 353.1 371.1C349.9 374.8 346.6 375.3 341.1 372.5C308.5 356.2 287.1 343.4 265.6 306.5C259.9 296.7 271.3 297.4 281.9 276.2C283.7 272.5 282.8 269.3 281.4 266.5C280 263.7 268.9 236.4 264.3 225.3C259.8 214.5 255.2 216 251.8 215.8C248.6 215.6 244.9 215.6 241.2 215.6C237.5 215.6 231.5 217 226.4 222.5C221.3 228.1 207 241.5 207 268.8C207 296.1 226.9 322.5 229.6 326.2C232.4 329.9 268.7 385.9 324.4 410C359.6 425.2 373.4 426.5 391 423.9C401.7 422.3 423.8 410.5 428.4 397.5C433 384.5 433 373.4 431.6 371.1C430.3 368.6 426.6 367.2 421.1 364.5z"
                                     fill="#DE3638" />
                             </svg></span>7042426901</a></p>
+
+                <div class="mt-4">
+                    <p class="text-sm font-secondary uppercase tracking-wider text-white" role="heading">Follow us</p>
+
+                    <div class="mt-2 flex flex-wrap items-center gap-2.5">
+                        <a
+                            href="https://www.facebook.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
+                            aria-label="Facebook"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M13.5 8.5V6.8c0-.8.5-1.3 1.4-1.3H16V2.5h-2.1c-2.5 0-4 1.5-4 4v2H7.5v3h2.4v10h3.6v-10H16l.4-3h-2.9z"/>
+                            </svg>
+                        </a>
+
+                        <a
+                            href="https://www.instagram.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
+                            aria-label="Instagram"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <circle cx="17.5" cy="6.5" r="1"></circle>
+                            </svg>
+                        </a>
+
+                        <a
+                            href="https://www.youtube.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
+                            aria-label="YouTube"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M21.6 7.8c-.2-1.2-1.1-2.1-2.2-2.3C17.7 5.2 12 5.2 12 5.2s-5.7 0-7.4.3C3.5 5.7 2.6 6.6 2.4 7.8 2 9.5 2 12 2 12s0 2.5.4 4.2c.2 1.2 1.1 2.1 2.2 2.3 1.7.3 7.4.3 7.4.3s5.7 0 7.4-.3c1.1-.2 2-1.1 2.2-2.3.4-1.7.4-4.2.4-4.2s0-2.5-.4-4.2zM10 15.3V8.7l5.5 3.3L10 15.3z"/>
+                            </svg>
+                        </a>
+
+                        <a
+                            href="https://www.linkedin.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
+                            aria-label="LinkedIn"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M6.2 8.7H3.1V21h3.1V8.7zM4.6 7.3c1 0 1.8-.8 1.8-1.8S5.6 3.7 4.6 3.7s-1.8.8-1.8 1.8.8 1.8 1.8 1.8zM21 13.9c0-3.1-1.7-5.4-4.8-5.4-1.4 0-2.4.8-2.8 1.4V8.7h-3V21h3v-6.1c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21h3.1v-7.1z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="hidden flex-wrap items-start gap-5 lg:flex">
