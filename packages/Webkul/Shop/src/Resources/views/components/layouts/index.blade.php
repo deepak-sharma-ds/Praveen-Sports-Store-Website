@@ -19,6 +19,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
 
+    <meta name="author" content="{{ core()->getCurrentChannel()->name }}" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="base-url" content="{{ url()->to('/') }}">
     <meta name="currency" content="{{ core()->getCurrentCurrency()->toJson() }}">

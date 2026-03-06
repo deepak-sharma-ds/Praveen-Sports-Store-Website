@@ -6,7 +6,7 @@
 @push ('meta')
     <meta
         name="title"
-        content="{{ $channel->home_seo['meta_title'] ?? '' }}"
+        content="{{ $channel->home_seo['meta_title'] ?? 'Premium Cricket Bats, Professional Sports Gear' }}"
     />
 
     <meta

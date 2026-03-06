@@ -1,3 +1,21 @@
+<!-- SEO Meta Content -->
+@push ('meta')
+    <meta
+        name="title"
+        content="Contact ANA Sports | Get Support & Product Information"
+    />
+
+    <meta
+        name="description"
+        content="Contact ANA Sports | Get Support & Product Information. Reach out to us for inquiries, support, or product information. We're here to assist you with any questions or concerns you may have about our sports products and services."
+    />
+
+    <meta
+        name="keywords"
+        content="ANA Sports, Contact ANA Sports, Support ANA Sports, Product Information ANA Sports"
+    />
+@endPush
+
 <!-- Page Layout -->
 <x-shop::layouts>
     <!-- Page Title -->
@@ -109,8 +127,8 @@
                                 <path d="M12 2C8.1 2 5 5.1 5 9c0 4.9 6 12 6 12s6-7.1 6-12c0-3.9-3.1-7-7-7z" />
                                 <circle cx="12" cy="9" r="2.5" />
                             </svg>
-                            Aarya Adrija Sports Private Limited
-                            Khasra No-115, Jalaluddin Maksoodpur, Gaavandi, Meerut, Uttar Pradesh - 250002
+                            Aarya Adrija Sports Private Limited <br>
+                            Khasra No-115, Jalaluddin Maksoodpur, Gaavandi, Meerut, Uttar Pradesh - 250002 <br>
                             CIN - U32300UP2025PTC234915
                         </p>
 

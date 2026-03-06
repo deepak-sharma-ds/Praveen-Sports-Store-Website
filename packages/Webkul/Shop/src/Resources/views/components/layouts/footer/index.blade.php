@@ -249,7 +249,7 @@
 
                     <div class="mt-2 flex flex-wrap items-center gap-2.5">
                         <a
-                            href="https://www.facebook.com/"
+                            href="https://www.facebook.com/anasportsofficial"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
@@ -261,7 +261,7 @@
                         </a>
 
                         <a
-                            href="https://www.instagram.com/"
+                            href="https://www.instagram.com/anasports_official"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
@@ -275,6 +275,18 @@
                         </a>
 
                         <a
+                            href="https://x.com/ana_sportsofc"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
+                            aria-label="Twitter"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.9-6 6.9H2.9l7.3-8.4L.8 2h6.4l4.4 6.3L18.9 2zm-1.1 18h1.7L6.2 4h-1.8l13.4 16z"/>
+                            </svg>
+                        </a>
+
+                        {{-- <a
                             href="https://www.youtube.com/"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -296,7 +308,7 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M6.2 8.7H3.1V21h3.1V8.7zM4.6 7.3c1 0 1.8-.8 1.8-1.8S5.6 3.7 4.6 3.7s-1.8.8-1.8 1.8.8 1.8 1.8 1.8zM21 13.9c0-3.1-1.7-5.4-4.8-5.4-1.4 0-2.4.8-2.8 1.4V8.7h-3V21h3v-6.1c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21h3.1v-7.1z"/>
                             </svg>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>
