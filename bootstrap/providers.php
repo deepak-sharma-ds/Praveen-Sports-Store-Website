@@ -47,4 +47,5 @@ return [
     // Webkul\StripePayment\Providers\StripePaymentServiceProvider::class,
     // Razorpay provider
     Wontonee\Razorpay\Providers\RazorpayServiceProvider::class,
+    Webkul\GoogleMerchant\Providers\GoogleMerchantServiceProvider::class,
 ];

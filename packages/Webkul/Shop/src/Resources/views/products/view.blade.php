@@ -284,7 +284,8 @@
                                         </x-slot>
 
                                         <x-slot:content class="max-sm:px-0 content-accordion">
-                                            <div class="mb-5 text-base">
+                                            <!-- <div class="mb-5 prose prose-sm max-w-none"> -->
+                                            <div class="mb-5 product-description">
                                                 {!! $product->description !!}
                                             </div>
                                         </x-slot>

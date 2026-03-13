@@ -701,3 +701,35 @@ h4{
 .cms-content li {
     margin-bottom: 0.25rem;
 }
+
+
+.product-description h1,
+.product-description h2,
+.product-description h3,
+.product-description h4,
+.product-description h5,
+.product-description h6 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    font-family: inherit !important;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
+.product-description p {
+    font-size: 14px;
+    line-height: 1.6;
+    font-family: inherit;
+    margin-bottom: 10px;
+}
+
+.product-description ul {
+    padding-left: 18px;
+}
+
+.product-description li {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+.product-description * {
+    font-family: inherit;
+}

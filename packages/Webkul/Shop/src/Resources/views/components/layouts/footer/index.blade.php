@@ -296,10 +296,10 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M21.6 7.8c-.2-1.2-1.1-2.1-2.2-2.3C17.7 5.2 12 5.2 12 5.2s-5.7 0-7.4.3C3.5 5.7 2.6 6.6 2.4 7.8 2 9.5 2 12 2 12s0 2.5.4 4.2c.2 1.2 1.1 2.1 2.2 2.3 1.7.3 7.4.3 7.4.3s5.7 0 7.4-.3c1.1-.2 2-1.1 2.2-2.3.4-1.7.4-4.2.4-4.2s0-2.5-.4-4.2zM10 15.3V8.7l5.5 3.3L10 15.3z"/>
                             </svg>
-                        </a>
+                        </a> --}}
 
                         <a
-                            href="https://www.linkedin.com/"
+                            href="https://www.linkedin.com/company/aarya-adrija-sports-private-limited/about"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
@@ -308,7 +308,7 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M6.2 8.7H3.1V21h3.1V8.7zM4.6 7.3c1 0 1.8-.8 1.8-1.8S5.6 3.7 4.6 3.7s-1.8.8-1.8 1.8.8 1.8 1.8 1.8zM21 13.9c0-3.1-1.7-5.4-4.8-5.4-1.4 0-2.4.8-2.8 1.4V8.7h-3V21h3v-6.1c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21h3.1v-7.1z"/>
                             </svg>
-                        </a> --}}
+                        </a>
                     </div>
                 </div>
             </div>

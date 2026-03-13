@@ -28,9 +28,9 @@
             @include('shop::search.images.results')
         @endif
         <div class="flex items-center text-center justify-center relative z-[2]">
-            <h2 class="text-[24px] xl:text-5xl font-normal font-secondary">
+            <h1 class="text-[24px] xl:text-5xl font-normal font-secondary">
                 <span v-text="'{{ preg_replace('/[,\\"\\\']+/', '', $title) }}'" ></span>
-            </h2>
+            </h1>
         </div>
         @if ($searchInstead)
             <form
