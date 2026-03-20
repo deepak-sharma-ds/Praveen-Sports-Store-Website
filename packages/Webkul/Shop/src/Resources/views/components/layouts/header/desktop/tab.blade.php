@@ -100,10 +100,10 @@
                 </div>
             </div>
 
-            <a href="{{ route('shop.all.product.index', ['sort' => 'name-desc']) }}"
+            <a href="{{ route('shop.all.product.index') }}"
                class="hover:text-primary transition"
                :class="{ 'text-primary font-semibold': activeTab === 'products' }">
-                Our Products
+                Bats
             </a>
 
             <a href="/blog"
@@ -116,6 +116,12 @@
                class="hover:text-primary transition"
                :class="{ 'text-primary font-semibold': activeTab === 'about' }">
                 About Us
+            </a>
+
+            <a href="{{ url('/customize-your-bat') }}"
+               class="hover:text-primary transition"
+               :class="{ 'text-primary font-semibold': activeTab === 'customize-your-bat' }">
+                Customised Bat
             </a>
         </div>
     </script>
@@ -162,9 +168,10 @@
                     const path = window.location.pathname;
 
                     if (path === '/' || path === '/home') return 'home';
-                    if (path.startsWith('/search')) return 'products';
+                    if (path.startsWith('/all-products')) return 'products';
                     if (path.startsWith('/blog')) return 'blog';
-                    if (path.startsWith('/about-us')) return 'about';
+                    if (path.startsWith('/page/about-us')) return 'about';
+                    if (path === '/customize-your-bat' || path === '/customize-your-bat/') return 'customize-your-bat';
 
                     return '';
                 },
