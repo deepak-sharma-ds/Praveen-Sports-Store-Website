@@ -208,14 +208,109 @@
                                 @{{ option.label }}
                             </x-shop::form.control-group.label>
 
-                            <x-shop::form.control-group.control
-                                type="select"
-                                ::name="'customizable_options[' + option.id + '][]'"
-                                v-model="selectedItems"
-                                ::rules="{'required': Boolean(option.is_required)}"
-                                ::label="option.label"
+                            <div
+                                class="mt-4 flex flex-wrap items-center gap-3"
+                                role="radiogroup"
+                                :aria-label="option.label"
                             >
-                                <!-- "None" select option for cases where the option is not required. -->
+                                <label
+                                    v-if="! Boolean(option.is_required)"
+                                    class="group relative flex h-fit min-w-fit cursor-pointer items-center justify-center rounded-full border border-gray-300 bg-white px-5 py-3 font-medium text-gray-900 transition-all hover:bg-gray-50 max-sm:px-3.5 max-sm:py-2"
+                                    :class="{ 'border-transparent !bg-navyBlue text-white': isItemSelected('0') }"
+                                >
+                                    <input
+                                        type="radio"
+                                        class="peer sr-only"
+                                        :name="'customizable_option_swatch_' + option.id"
+                                        value="0"
+                                        :checked="isItemSelected('0')"
+                                        @change="selectSwatchOption('0')"
+                                    />
+
+                                    <span class="text-sm font-medium max-sm:text-xs">
+                                        @lang('shop::app.products.view.type.simple.customizable-options.none')
+                                    </span>
+                                </label>
+
+                                <template
+                                    v-for="(item, index) in optionItems"
+                                    :key="item.id"
+                                >
+                                    <label
+                                        v-if="isColorBasedOption()"
+                                        class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 transition-all focus-within:outline-none"
+                                        :class="{ 'ring-2 ring-gray-900 ring-offset-2': isItemSelected(item.id) }"
+                                        :for="'customizable_option_swatch_' + option.id + '_' + index"
+                                        :title="getSwatchAccessibleLabel(item)"
+                                    >
+                                        <input
+                                            type="radio"
+                                            class="peer sr-only"
+                                            :id="'customizable_option_swatch_' + option.id + '_' + index"
+                                            :name="'customizable_option_swatch_' + option.id"
+                                            :value="item.id"
+                                            :checked="isItemSelected(item.id)"
+                                            :aria-label="getSwatchAccessibleLabel(item)"
+                                            @change="selectSwatchOption(item.id)"
+                                        />
+
+                                        <span
+                                            class="h-8 w-8 rounded-full border border-gray-200 shadow-sm max-sm:h-[25px] max-sm:w-[25px]"
+                                            :style="getColorSwatchStyle(item)"
+                                            role="presentation"
+                                        ></span>
+                                    </label>
+
+                                    <label
+                                        v-else
+                                        class="group relative flex h-fit min-w-fit cursor-pointer items-center justify-center rounded-full border border-gray-300 bg-white px-5 py-3 font-medium text-gray-900 transition-all hover:bg-gray-50 max-sm:px-3.5 max-sm:py-2"
+                                        :class="{ 'border-transparent !bg-navyBlue text-white': isItemSelected(item.id) }"
+                                        :for="'customizable_option_swatch_' + option.id + '_' + index"
+                                        :title="item.display_label"
+                                    >
+                                        <input
+                                            type="radio"
+                                            class="peer sr-only"
+                                            :id="'customizable_option_swatch_' + option.id + '_' + index"
+                                            :name="'customizable_option_swatch_' + option.id"
+                                            :value="item.id"
+                                            :checked="isItemSelected(item.id)"
+                                            :aria-label="getSwatchAccessibleLabel(item)"
+                                            @change="selectSwatchOption(item.id)"
+                                        />
+
+                                        <span class="text-sm font-medium max-sm:text-xs">
+                                            @{{ item.display_label }}
+                                        </span>
+
+                                        <span
+                                            v-if="hasOptionPrice(item)"
+                                            class="ml-2 text-xs font-medium opacity-80 max-sm:ml-1"
+                                        >
+                                            + @{{ $shop.formatPrice(item.price) }}
+                                        </span>
+                                    </label>
+                                </template>
+                            </div>
+
+                            <v-field
+                                as="select"
+                                class="sr-only"
+                                :id="'customizable_option_select_' + option.id"
+                                :name="'customizable_options[' + option.id + '][]'"
+                                v-model="selectedItems"
+                                :rules="{'required': Boolean(option.is_required)}"
+                                :label="option.label"
+                                :aria-label="option.label"
+                            >
+                                <option
+                                    value=""
+                                    disabled
+                                    v-if="Boolean(option.is_required)"
+                                >
+                                    @lang('shop::app.products.view.type.configurable.select-options')
+                                </option>
+
                                 <option
                                     value="0"
                                     v-if="! Boolean(option.is_required)"
@@ -227,9 +322,9 @@
                                     v-for="item in optionItems"
                                     :value="item.id"
                                 >
-                                    @{{ item.label + ' + ' + $shop.formatPrice(item.price) }}
+                                    @{{ getSwatchOptionText(item) }}
                                 </option>
-                            </x-shop::form.control-group.control>
+                            </v-field>
                         </template>
 
                         <!-- Multiselect Options -->
@@ -445,7 +540,7 @@
                         return {
                             optionItems: [],
 
-                            selectedItems: this.canHaveMultiplePrices()  ? [] : null,
+                            selectedItems: this.canHaveMultiplePrices() ? [] : null,
                         };
                     },
 
@@ -455,19 +550,27 @@
                         }
 
                         this.optionItems = this.option.customizable_option_prices.map(optionItem => {
+                            const parsedLabel = this.parseSwatchLabel(optionItem.label);
+
                             return {
-                                id: optionItem.id,
+                                id: String(optionItem.id),
                                 label: optionItem.label,
+                                display_label: parsedLabel.displayLabel,
+                                accessible_label: parsedLabel.accessibleLabel,
+                                swatch_color: parsedLabel.hex,
                                 price: optionItem.price,
                             };
                         });
+
+                        this.initializeDefaultSelection();
                     },
 
                     watch: {
                         selectedItems: function (value) {
-                            let selectedItemValues = Array.isArray(value) ? value : [value];
-
                             let totalPrice = 0;
+                            let selectedItemValues = Array.isArray(value)
+                                ? value.map(item => String(item))
+                                : [value === null || value === undefined ? '' : String(value)];
 
                             for (let item of this.optionItems) {
                                 switch (this.option.type) {
@@ -486,12 +589,14 @@
                                     case 'radio':
                                     case 'select':
                                     case 'multiselect':
-                                        if (selectedItemValues.includes(item.id)) {
+                                        if (selectedItemValues.includes(String(item.id))) {
                                             totalPrice += parseFloat(item.price);
                                         }
 
+                                        break;
+
                                     case 'file':
-                                        if (selectedItemValues[0] instanceof File) {
+                                        if (value instanceof File) {
                                             totalPrice += parseFloat(item.price);
                                         }
 
@@ -512,8 +617,67 @@
                             return ['checkbox', 'multiselect'].includes(this.option.type);
                         },
 
+                        initializeDefaultSelection() {
+                            if (this.option.type !== 'select' || ! this.optionItems.length) {
+                                return;
+                            }
+
+                            this.selectedItems = this.optionItems[0].id;
+                        },
+
+                        isColorBasedOption() {
+                            return /colou?r/i.test(this.option.label || '');
+                        },
+
+                        isHexColor(value) {
+                            return /^#(?:[0-9a-fA-F]{3}){1,2}$/.test((value || '').trim());
+                        },
+
+                        parseSwatchLabel(label) {
+                            const rawLabel = (label || '').trim();
+                            const parts = rawLabel.split('|').map(part => part.trim()).filter(Boolean);
+                            const hex = parts.find(part => this.isHexColor(part)) || (this.isHexColor(rawLabel) ? rawLabel : null);
+                            const displayLabel = parts.find(part => ! this.isHexColor(part)) || rawLabel;
+
+                            return {
+                                displayLabel,
+                                accessibleLabel: displayLabel || rawLabel || hex || this.option.label,
+                                hex,
+                            };
+                        },
+
+                        isItemSelected(itemId) {
+                            return String(this.selectedItems) === String(itemId);
+                        },
+
+                        selectSwatchOption(itemId) {
+                            this.selectedItems = String(itemId);
+                        },
+
+                        getSwatchAccessibleLabel(item) {
+                            return item.accessible_label || item.display_label || item.label;
+                        },
+
+                        getColorSwatchStyle(item) {
+                            return {
+                                backgroundColor: item.swatch_color || '#e5e7eb',
+                            };
+                        },
+
+                        hasOptionPrice(item) {
+                            return parseFloat(item.price) > 0;
+                        },
+
+                        getSwatchOptionText(item) {
+                            const priceLabel = this.hasOptionPrice(item)
+                                ? ` + ${this.$shop.formatPrice(item.price)}`
+                                : '';
+
+                            return `${item.display_label}${priceLabel}`;
+                        },
+
                         handleFileChange($event) {
-                            const selectedFiles = event.target.files;
+                            const selectedFiles = $event.target.files;
 
                             this.selectedItems = selectedFiles[0];
                         },
