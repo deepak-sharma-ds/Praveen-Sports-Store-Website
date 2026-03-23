@@ -180,7 +180,7 @@
 
                                 {!! view_render_event('bagisto.shop.products.short_description.after', ['product' => $product]) !!}
 
-                                @include('shop::products.view.types.simple')
+                                @include('shop::products.view.types.custom-product-simple')
 
                                 @include('shop::products.view.types.configurable')
 
