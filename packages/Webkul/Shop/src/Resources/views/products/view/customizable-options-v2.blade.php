@@ -4,6 +4,18 @@
             'product',
             'customizable_option_prices',
         ])->get();
+
+        $optionCombinationImages = $product->option_combination_images;
+
+        if (is_string($optionCombinationImages)) {
+            $optionCombinationImages = json_decode($optionCombinationImages, true);
+        }
+
+        $optionCombinationImages = is_array($optionCombinationImages)
+            ? $optionCombinationImages
+            : [];
+
+        $defaultGalleryImages = product_image()->getGalleryImages($product);
     @endphp
 
     @if ($options->isNotEmpty())
@@ -27,6 +39,7 @@
                             :option="option"
                             :key="index"
                             @priceUpdated="priceUpdated"
+                            @optionSelectionUpdated="handleOptionSelectionUpdated"
                         >
                         </v-product-customizable-option-item>
                     </template>
@@ -451,6 +464,25 @@
             </script>
 
             <script type="module">
+                const combinationImageConfig = @json($optionCombinationImages);
+
+                const defaultGalleryImages = @json($defaultGalleryImages);
+
+                const appBaseUrl = @json(rtrim(url('/'), '/'));
+
+                const productStorageBaseUrl = @json(rtrim(url('/'), '/') . '/storage/product/' . $product->id);
+
+                const defaultSelectedOptions = (
+                    combinationImageConfig
+                    && Array.isArray(combinationImageConfig.image_attributes)
+                        ? combinationImageConfig.image_attributes
+                        : []
+                ).reduce((selectedOptions, attributeCode) => {
+                    selectedOptions[attributeCode] = null;
+
+                    return selectedOptions;
+                }, {});
+
                 app.component('v-product-customizable-options', {
                     template: '#v-product-customizable-options-template',
 
@@ -467,6 +499,16 @@
                             options: @json($options),
 
                             prices: [],
+
+                            combinationImageConfig,
+
+                            defaultGalleryImages,
+
+                            selectedOptions: {...defaultSelectedOptions},
+
+                            galleryUpdateTimer: null,
+
+                            lastAppliedGallerySignature: null,
                         }
                     },
 
@@ -502,6 +544,14 @@
                                 price: 0,
                             };
                         });
+
+                        this.scheduleGallerySync();
+                    },
+
+                    beforeUnmount() {
+                        if (this.galleryUpdateTimer) {
+                            clearTimeout(this.galleryUpdateTimer);
+                        }
                     },
 
                     computed: {
@@ -513,7 +563,84 @@
                             }
 
                             return this.$shop.formatPrice(totalPrice);
-                        }
+                        },
+
+                        imageAttributeOrder() {
+                            if (
+                                ! this.combinationImageConfig
+                                || ! Array.isArray(this.combinationImageConfig.image_attributes)
+                            ) {
+                                return [];
+                            }
+
+                            return this.combinationImageConfig.image_attributes;
+                        },
+
+                        imageCombinationMap() {
+                            if (
+                                ! this.combinationImageConfig
+                                || typeof this.combinationImageConfig.map !== 'object'
+                                || this.combinationImageConfig.map === null
+                            ) {
+                                return {};
+                            }
+
+                            return this.combinationImageConfig.map;
+                        },
+
+                        optionAttributeMap() {
+                            return this.options.reduce((attributeMap, option) => {
+                                const attributeCode = this.resolveImageAttributeCode(option);
+
+                                if (attributeCode) {
+                                    attributeMap[String(option.id)] = attributeCode;
+                                }
+
+                                return attributeMap;
+                            }, {});
+                        },
+
+                        matchedImagePath() {
+                            return this.findBestMatch();
+                        },
+
+                        resolvedGalleryImages() {
+                            if (! this.matchedImagePath) {
+                                return this.defaultGalleryImages;
+                            }
+
+                            const matchedImage = this.createGalleryImage(this.matchedImagePath);
+
+                            const remainingImages = this.defaultGalleryImages.filter((image) => {
+                                return (image.large_image_url || image.original_image_url) !== this.matchedImagePath;
+                            });
+
+                            return [matchedImage, ...remainingImages];
+                        },
+
+                        resolvedGallerySignature() {
+                            return JSON.stringify(this.resolvedGalleryImages.map((image) => {
+                                return image.large_image_url || image.original_image_url || image.video_url || '';
+                            }));
+                        },
+                    },
+
+                    watch: {
+                        selectedOptions: {
+                            deep: true,
+
+                            handler() {
+                                this.scheduleGallerySync();
+                            },
+                        },
+
+                        resolvedGallerySignature: {
+                            immediate: true,
+
+                            handler() {
+                                this.scheduleGallerySync();
+                            },
+                        },
                     },
 
                     methods: {
@@ -526,13 +653,216 @@
                         canHaveMultiplePriceOptions(type) {
                             return ['checkbox', 'radio', 'select', 'multiselect'].includes(type);
                         },
+
+                        handleOptionSelectionUpdated({ optionId, value }) {
+                            const attributeCode = this.optionAttributeMap[String(optionId)];
+
+                            if (
+                                ! attributeCode
+                                || ! Object.prototype.hasOwnProperty.call(this.selectedOptions, attributeCode)
+                            ) {
+                                return;
+                            }
+
+                            this.selectedOptions = {
+                                ...this.selectedOptions,
+                                [attributeCode]: value,
+                            };
+                        },
+
+                        normalize(value) {
+                            return String(value ?? '')
+                                .trim()
+                                .toLowerCase()
+                                .replace(/#/g, '')
+                                .replace(/\s+/g, '-');
+                        },
+
+                        normalizeAttributeIdentifier(value) {
+                            return String(value ?? '')
+                                .trim()
+                                .toLowerCase()
+                                .replace(/[#\s_-]+/g, '');
+                        },
+
+                        resolveImageAttributeCode(option) {
+                            const optionIdentifier = this.normalizeAttributeIdentifier(
+                                option && option.label ? option.label : ''
+                            );
+
+                            return this.imageAttributeOrder.find((attributeCode) => {
+                                return this.normalizeAttributeIdentifier(attributeCode) === optionIdentifier;
+                            }) || null;
+                        },
+
+                        getOrderedSelectedValues() {
+                            const orderedValues = [];
+
+                            for (const attributeCode of this.imageAttributeOrder) {
+                                const selectedValue = this.selectedOptions[attributeCode];
+
+                                if (
+                                    selectedValue === null
+                                    || selectedValue === undefined
+                                    || selectedValue === ''
+                                    || String(selectedValue) === '0'
+                                ) {
+                                    break;
+                                }
+
+                                const normalizedValue = this.normalize(selectedValue);
+
+                                if (! normalizedValue) {
+                                    break;
+                                }
+
+                                orderedValues.push(normalizedValue);
+                            }
+
+                            return orderedValues;
+                        },
+
+                        generateKey(values = this.getOrderedSelectedValues()) {
+                            return values.filter(Boolean).join('_');
+                        },
+
+                        findBestMatch() {
+                            const selectedValues = [...this.getOrderedSelectedValues()];
+
+                            if (! selectedValues.length) {
+                                return null;
+                            }
+
+                            while (selectedValues.length) {
+                                const candidateKey = this.generateKey(selectedValues);
+
+                                if (this.imageCombinationMap[candidateKey]) {
+                                    return this.resolveImageUrl(this.imageCombinationMap[candidateKey]);
+                                }
+
+                                selectedValues.pop();
+                            }
+
+                            return null;
+                        },
+
+                        resolveImageUrl(path) {
+                            const imagePath = String(path ?? '').trim();
+
+                            if (! imagePath) {
+                                return null;
+                            }
+
+                            if (
+                                /^(?:https?:)?\/\//.test(imagePath)
+                                || imagePath.startsWith('data:')
+                                || imagePath.startsWith('blob:')
+                            ) {
+                                return imagePath;
+                            }
+
+                            if (
+                                imagePath.startsWith('/storage/')
+                                || imagePath.startsWith('/cache/')
+                                || imagePath.startsWith('/product/')
+                            ) {
+                                return `${appBaseUrl}${imagePath}`;
+                            }
+
+                            if (
+                                imagePath.startsWith('storage/')
+                                || imagePath.startsWith('cache/')
+                                || imagePath.startsWith('product/')
+                            ) {
+                                return `${appBaseUrl}/${imagePath.replace(/^\/+/, '')}`;
+                            }
+
+                            return `${productStorageBaseUrl}/${imagePath.replace(/^\/+/, '')}`;
+                        },
+
+                        createGalleryImage(path) {
+                            return {
+                                type: 'image',
+                                small_image_url: path,
+                                medium_image_url: path,
+                                large_image_url: path,
+                                original_image_url: path,
+                            };
+                        },
+
+                        scheduleGallerySync() {
+                            if (this.galleryUpdateTimer) {
+                                clearTimeout(this.galleryUpdateTimer);
+                            }
+
+                            this.galleryUpdateTimer = window.setTimeout(() => {
+                                this.updateGalleryImages();
+                            }, 40);
+                        },
+
+                        updateGalleryImages() {
+                            const gallery = this.getGalleryComponent();
+                            const images = this.resolvedGalleryImages.map((image) => ({...image}));
+                            const nextBaseImagePath = images[0] ? images[0].large_image_url : null;
+                            const isAlreadySynced = (
+                                this.lastAppliedGallerySignature === this.resolvedGallerySignature
+                                && gallery
+                                && gallery.activeIndex === 0
+                                && (
+                                    ! nextBaseImagePath
+                                    || (
+                                        gallery.baseFile.type === 'image'
+                                        && gallery.baseFile.path === nextBaseImagePath
+                                    )
+                                )
+                            );
+
+                            if (
+                                ! gallery
+                                || isAlreadySynced
+                            ) {
+                                return;
+                            }
+
+                            this.lastAppliedGallerySignature = this.resolvedGallerySignature;
+
+                            gallery.activeIndex = 0;
+                            gallery.media.images = images;
+
+                            if (! images.length) {
+                                gallery.isMediaLoading = false;
+
+                                return;
+                            }
+
+                            const hasBaseImageChanged = (
+                                gallery.baseFile.type !== 'image'
+                                || gallery.baseFile.path !== nextBaseImagePath
+                            );
+
+                            gallery.baseFile.type = 'image';
+                            gallery.baseFile.path = nextBaseImagePath;
+                            gallery.isMediaLoading = hasBaseImageChanged;
+                        },
+
+                        getGalleryComponent() {
+                            if (
+                                ! this.$parent
+                                || ! this.$parent.$parent
+                                || ! this.$parent.$parent.$refs
+                            ) {
+                                return null;
+                            }
+
+                            return this.$parent.$parent.$refs.gallery || null;
+                        },
                     }
                 });
 
                 app.component('v-product-customizable-option-item', {
                     template: '#v-product-customizable-option-item-template',
 
-                    emits: ['priceUpdated'],
+                    emits: ['priceUpdated', 'optionSelectionUpdated'],
 
                     props: ['option'],
 
@@ -609,6 +939,8 @@
 
                                 totalPrice,
                             });
+
+                            this.emitOptionSelectionUpdated(value);
                         },
                     },
 
@@ -652,6 +984,37 @@
 
                         selectSwatchOption(itemId) {
                             this.selectedItems = String(itemId);
+                        },
+
+                        emitOptionSelectionUpdated(value) {
+                            this.$emit('optionSelectionUpdated', {
+                                optionId: this.option.id,
+                                value: this.getSelectedImageAttributeValue(value),
+                            });
+                        },
+
+                        getSelectedImageAttributeValue(value) {
+                            if (! ['select', 'radio'].includes(this.option.type)) {
+                                return null;
+                            }
+
+                            const selectedItemId = Array.isArray(value)
+                                ? null
+                                : String(value ?? '');
+
+                            if (! selectedItemId || selectedItemId === '0') {
+                                return null;
+                            }
+
+                            const selectedItem = this.optionItems.find((item) => {
+                                return String(item.id) === selectedItemId;
+                            });
+
+                            if (! selectedItem) {
+                                return null;
+                            }
+
+                            return selectedItem.swatch_color || selectedItem.display_label || selectedItem.label;
                         },
 
                         getSwatchAccessibleLabel(item) {
