@@ -8,7 +8,34 @@
 
     $customAttributeValues = $productViewHelper->getAdditionalData($product);
 
-    $attributeData = collect($customAttributeValues)->filter(fn($item) => !empty($item['value']));
+    $uspCodes = ['usp_1', 'usp_2', 'usp_3', 'usp_4'];
+
+    $visibleAttributeData = collect($customAttributeValues)
+        ->filter(fn ($item) => ! empty($item['value']))
+        ->values();
+
+    $attributeValuesByCode = $visibleAttributeData->keyBy('code');
+
+    $uspItems = collect($uspCodes)
+        ->map(function ($code, $index) use ($attributeValuesByCode, $product) {
+            $value = data_get($attributeValuesByCode->get($code), 'value', data_get($product, $code));
+
+            if (blank(trim(strip_tags((string) $value)))) {
+                return null;
+            }
+
+            return [
+                'code'  => $code,
+                'icon'  => $index + 1,
+                'value' => $value,
+            ];
+        })
+        ->filter()
+        ->values();
+
+    $attributeData = $visibleAttributeData
+        ->reject(fn ($item) => in_array($item['code'], $uspCodes, true))
+        ->values();
 @endphp
 
 <!-- SEO Meta Content -->
@@ -172,6 +199,8 @@
 
                                 {!! view_render_event('bagisto.shop.products.price.after', ['product' => $product]) !!}
 
+                                @include('shop::products.view.usp-highlights')
+
                                 {!! view_render_event('bagisto.shop.products.short_description.before', ['product' => $product]) !!}
 
                                 <p class="mt-6 text-lg text-zinc-500 max-sm:mt-1.5 max-sm:text-sm">
@@ -302,33 +331,31 @@
 
                                             <x-slot:content class="bg-white border border-[#AC153A] !p-2.5 mb-3 content-accordion">
                                                 <div class="grid max-w-max grid-cols-[auto_1fr] gap-4 text-base">
-                                                    @foreach ($customAttributeValues as $customAttributeValue)
-                                                        @if (!empty($customAttributeValue['value']))
+                                                    @foreach ($attributeData as $customAttributeValue)
+                                                        <div class="grid">
+                                                            <p class="text-base text-black font-semibold">
+                                                                {{ $customAttributeValue['label'] }}
+                                                            </p>
+                                                        </div>
+
+                                                        @if ($customAttributeValue['type'] == 'file')
+                                                            <a href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                                                download="{{ $customAttributeValue['label'] }}">
+                                                                <span class="icon-download text-2xl"></span>
+                                                            </a>
+                                                        @elseif ($customAttributeValue['type'] == 'image')
+                                                            <a href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
+                                                                download="{{ $customAttributeValue['label'] }}">
+                                                                <img class="h-5 min-h-5 w-5 min-w-5"
+                                                                    src="{{ Storage::url($customAttributeValue['value']) }}"
+                                                                    alt="Product Image" />
+                                                            </a>
+                                                        @else
                                                             <div class="grid">
-                                                                <p class="text-base text-black font-semibold">
-                                                                    {{ $customAttributeValue['label'] }}
+                                                                <p class="text-base">
+                                                                    {{ $customAttributeValue['value'] ?? '-' }}
                                                                 </p>
                                                             </div>
-
-                                                            @if ($customAttributeValue['type'] == 'file')
-                                                                <a href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                                                    download="{{ $customAttributeValue['label'] }}">
-                                                                    <span class="icon-download text-2xl"></span>
-                                                                </a>
-                                                            @elseif ($customAttributeValue['type'] == 'image')
-                                                                <a href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
-                                                                    download="{{ $customAttributeValue['label'] }}">
-                                                                    <img class="h-5 min-h-5 w-5 min-w-5"
-                                                                        src="{{ Storage::url($customAttributeValue['value']) }}"
-                                                                        alt="Product Image" />
-                                                                </a>
-                                                            @else
-                                                                <div class="grid">
-                                                                    <p class="text-base">
-                                                                        {{ $customAttributeValue['value'] ?? '-' }}
-                                                                    </p>
-                                                                </div>
-                                                            @endif
                                                         @endif
                                                     @endforeach
                                                 </div>
@@ -364,7 +391,7 @@
                     return {
                         isWishlist: Boolean(
                             "{{ (bool) auth()->guard()->user()?->wishlist_items->where('channel_id', core()->getCurrentChannel()->id)->where('product_id', $product->id)->count() }}"
-                            ),
+                        ),
 
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
 
@@ -620,8 +647,9 @@
                                     observer.unobserve(entry.target); // Stop observing
                                 }
                             });
-                        },
-                        { threshold: 0.1 }
+                        }, {
+                            threshold: 0.1
+                        }
                     );
 
                     observer.observe(this.$refs.carouselWrapper);
