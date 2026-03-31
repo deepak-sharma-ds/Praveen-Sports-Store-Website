@@ -99,7 +99,8 @@
                     <div class="bg-[#EDEDED] py-10 px-4 lg:px-[60px]">
                         <div class="flex flex-wrap justify-center">
                             <!-- Gallery Blade Inclusion -->
-                            @include('shop::products.view.gallery')
+                            <!-- @include('shop::products.view.gallery') -->
+                            @include('shop::products.view.custom-product-gallery')
 
                             <!-- Details -->
                             <div class="relative w-full md:w-1/2 md:pl-10 pt-5 md:pt-0">
@@ -364,7 +365,7 @@
                     return {
                         isWishlist: Boolean(
                             "{{ (bool) auth()->guard()->user()?->wishlist_items->where('channel_id', core()->getCurrentChannel()->id)->where('product_id', $product->id)->count() }}"
-                            ),
+                        ),
 
                         isCustomer: '{{ auth()->guard('customer')->check() }}',
 
@@ -620,8 +621,9 @@
                                     observer.unobserve(entry.target); // Stop observing
                                 }
                             });
-                        },
-                        { threshold: 0.1 }
+                        }, {
+                            threshold: 0.1
+                        }
                     );
 
                     observer.observe(this.$refs.carouselWrapper);

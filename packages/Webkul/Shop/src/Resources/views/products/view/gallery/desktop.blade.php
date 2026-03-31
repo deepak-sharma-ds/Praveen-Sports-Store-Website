@@ -43,6 +43,22 @@
                     @click="change(media, index)"
                 />
             </template>
+
+            {{-- 360° Thumbnail Button --}}
+            @if(isset($product360Images) && count($product360Images) >= 2)
+                <button
+                    type="button"
+                    class="transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border border-white bg-gray-100 hover:border-navyBlue flex items-center justify-center"
+                    onclick="openProduct360Modal()"
+                    aria-label="View 360° rotation"
+                    tabindex="0"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-navyBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span class="sr-only">360° View</span>
+                </button>
+            @endif
         </div>
 
         <!-- Arrow Down -->

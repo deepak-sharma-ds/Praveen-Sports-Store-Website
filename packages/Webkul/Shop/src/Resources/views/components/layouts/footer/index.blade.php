@@ -75,42 +75,47 @@
         </div>
     </div>
 
-    <div class="features-box">
-        <div class="feature-item">
-            <div class="feature-icon">
-                <img src="https://ana-sports.com/storage/tinymce/iaSi5NxXC3xBm3UO0o7OSA37tMYFpmhfdz0FoWxV.png"
-                    alt="Cricket Bats online" width="110" height="110" />
+    @php
+        $slug = request()->route()?->parameters()['slug'] ?? null;
+    @endphp
+    @if ($slug !== 'about-us')
+        <div class="features-box">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <img src="https://ana-sports.com/storage/tinymce/iaSi5NxXC3xBm3UO0o7OSA37tMYFpmhfdz0FoWxV.png"
+                        alt="Cricket Bats online" width="110" height="110" />
+                </div>
+                <h4>Trusted Products</h4>
+                <p>Engineered for excellence, trusted by athletes worldwide</p>
             </div>
-            <h4>Trusted Products</h4>
-            <p>Engineered for excellence, trusted by athletes worldwide</p>
-        </div>
-        <div class="feature-item">
-            <div class="feature-icon">
-                <img src="https://ana-sports.com/storage/tinymce/DfjvpWVdukWUwx0WDz62zZRDpaGQ5Ibl4WwbCXop.png"
-                    alt="Cricket Bats India" width="110" height="108" />
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <img src="https://ana-sports.com/storage/tinymce/DfjvpWVdukWUwx0WDz62zZRDpaGQ5Ibl4WwbCXop.png"
+                        alt="Cricket Bats India" width="110" height="108" />
+                </div>
+                <h4>After sales support</h4>
+                <p>We stand by our gear - support that goes beyond the purchase</p>
             </div>
-            <h4>After sales support</h4>
-            <p>We stand by our gear - support that goes beyond the purchase</p>
-        </div>
-        <div class="feature-item">
-            <div class="feature-icon">
-                <img src="https://ana-sports.com/storage/tinymce/ELnCpVXIAGcor5c5h4gBhMrCvZh9BZicfuPuofm1.png"
-                    alt="Cheap Cricket Bats" width="110" height="100" />
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <img src="https://ana-sports.com/storage/tinymce/ELnCpVXIAGcor5c5h4gBhMrCvZh9BZicfuPuofm1.png"
+                        alt="Cheap Cricket Bats" width="110" height="100" />
+                </div>
+                <h4>Delivery across globe</h4>
+                <p>
+                    From our shelves to your game - worldwide delivery, seamless service
+                </p>
             </div>
-            <h4>Delivery across globe</h4>
-            <p>
-                From our shelves to your game - worldwide delivery, seamless service
-            </p>
-        </div>
-        <div class="feature-item">
-            <div class="feature-icon">
-                <img src="https://ana-sports.com/storage/tinymce/M3Xt2bnNqqHEdNEFu23Kw01WHblanyYRLGRq3G58.png"
-                    alt="Best Cricket Bats" width="108" height="110" />
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <img src="https://ana-sports.com/storage/tinymce/M3Xt2bnNqqHEdNEFu23Kw01WHblanyYRLGRq3G58.png"
+                        alt="Best Cricket Bats" width="108" height="110" />
+                </div>
+                <h4>Quality home goods</h4>
+                <p>Uncompromising quality for peak performance, every time</p>
             </div>
-            <h4>Quality home goods</h4>
-            <p>Uncompromising quality for peak performance, every time</p>
         </div>
-    </div>
+    @endif
 
     <div class="relative m-auto px-1" data-footer-slider>
         <button type="button"
@@ -222,13 +227,13 @@
                     Khasra No-115, Jalaluddin Maksoodpur, Gaavandi, Meerut, Uttar Pradesh - 250002 <br>
                     CIN - U32300UP2025PTC234915</p>
                 <p class="mt-3"><a class="text-white inline-flex items-center gap-2"
-                        href="mailto:support@ana-sports.com"><span class="icon-telephone"><svg width="26"
+                        href="mailto:supports@ana-sports.com"><span class="icon-telephone"><svg width="26"
                                 height="24" viewBox="0 0 26 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M25.1663 8.12611L13.1663 0.126112C13.043 0.043883 12.8982 0 12.75 0C12.6018 0 12.457 0.043883 12.3338 0.126112L0.333751 8.12611C0.230923 8.19472 0.146646 8.28768 0.0884186 8.39672C0.0301909 8.50576 -0.000182402 8.6275 8.24085e-07 8.75111V21.7511C8.24085e-07 22.2152 0.184375 22.6604 0.512564 22.9885C0.840753 23.3167 1.28587 23.5011 1.75 23.5011H23.75C24.2141 23.5011 24.6592 23.3167 24.9874 22.9885C25.3156 22.6604 25.5 22.2152 25.5 21.7511V8.75111C25.5002 8.6275 25.4698 8.50576 25.4116 8.39672C25.3534 8.28768 25.2691 8.19472 25.1663 8.12611ZM9.2725 15.7511L1.5 21.2386V10.2074L9.2725 15.7511ZM10.8063 16.5011H14.6938L22.48 22.0011H3.02L10.8063 16.5011ZM16.2275 15.7511L24 10.2074V21.2386L16.2275 15.7511ZM12.75 1.65236L23.4287 8.77736L14.6913 15.0011H10.8088L2.07125 8.77236L12.75 1.65236Z"
                                     fill="#DE3638" />
-                            </svg></span>support@ana-sports.com</a></p>
+                            </svg></span>supports@ana-sports.com</a></p>
                 <p class="mt-3"><a class="text-white inline-flex items-center gap-2" href="tel:9311048371"><span
                             class="icon-telephone"><svg width="25" height="25" viewBox="0 0 25 25"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -248,41 +253,36 @@
                     <p class="text-sm font-secondary uppercase tracking-wider text-white" role="heading">Follow us</p>
 
                     <div class="mt-2 flex flex-wrap items-center gap-2.5">
-                        <a
-                            href="https://www.facebook.com/anasportsofficial"
-                            target="_blank"
+                        <a href="https://www.facebook.com/anasportsofficial" target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
-                            aria-label="Facebook"
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M13.5 8.5V6.8c0-.8.5-1.3 1.4-1.3H16V2.5h-2.1c-2.5 0-4 1.5-4 4v2H7.5v3h2.4v10h3.6v-10H16l.4-3h-2.9z"/>
+                            aria-label="Facebook">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true">
+                                <path
+                                    d="M13.5 8.5V6.8c0-.8.5-1.3 1.4-1.3H16V2.5h-2.1c-2.5 0-4 1.5-4 4v2H7.5v3h2.4v10h3.6v-10H16l.4-3h-2.9z" />
                             </svg>
                         </a>
 
-                        <a
-                            href="https://www.instagram.com/anasports_official"
-                            target="_blank"
+                        <a href="https://www.instagram.com/anasports_official" target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
-                            aria-label="Instagram"
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            aria-label="Instagram">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
                                 <circle cx="12" cy="12" r="4"></circle>
                                 <circle cx="17.5" cy="6.5" r="1"></circle>
                             </svg>
                         </a>
 
-                        <a
-                            href="https://x.com/ana_sportsofc"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <a href="https://x.com/ana_sportsofc" target="_blank" rel="noopener noreferrer"
                             class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
-                            aria-label="Twitter"
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.9-6 6.9H2.9l7.3-8.4L.8 2h6.4l4.4 6.3L18.9 2zm-1.1 18h1.7L6.2 4h-1.8l13.4 16z"/>
+                            aria-label="Twitter">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true">
+                                <path
+                                    d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.9-6 6.9H2.9l7.3-8.4L.8 2h6.4l4.4 6.3L18.9 2zm-1.1 18h1.7L6.2 4h-1.8l13.4 16z" />
                             </svg>
                         </a>
 
@@ -298,15 +298,14 @@
                             </svg>
                         </a> --}}
 
-                        <a
-                            href="https://www.linkedin.com/company/aarya-adrija-sports-private-limited/about"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <a href="https://www.linkedin.com/company/aarya-adrija-sports-private-limited/about"
+                            target="_blank" rel="noopener noreferrer"
                             class="inline-flex h-9 w-9 items-center justify-center rounded bg-white text-black transition hover:opacity-80"
-                            aria-label="LinkedIn"
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M6.2 8.7H3.1V21h3.1V8.7zM4.6 7.3c1 0 1.8-.8 1.8-1.8S5.6 3.7 4.6 3.7s-1.8.8-1.8 1.8.8 1.8 1.8 1.8zM21 13.9c0-3.1-1.7-5.4-4.8-5.4-1.4 0-2.4.8-2.8 1.4V8.7h-3V21h3v-6.1c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21h3.1v-7.1z"/>
+                            aria-label="LinkedIn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true">
+                                <path
+                                    d="M6.2 8.7H3.1V21h3.1V8.7zM4.6 7.3c1 0 1.8-.8 1.8-1.8S5.6 3.7 4.6 3.7s-1.8.8-1.8 1.8.8 1.8 1.8 1.8zM21 13.9c0-3.1-1.7-5.4-4.8-5.4-1.4 0-2.4.8-2.8 1.4V8.7h-3V21h3v-6.1c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21h3.1v-7.1z" />
                             </svg>
                         </a>
                     </div>
@@ -452,7 +451,8 @@
                     const getSlideWidth = () => {
                         const firstSlide = slides[0];
 
-                        return firstSlide ? firstSlide.getBoundingClientRect().width + 1 : track.clientWidth;
+                        return firstSlide ? firstSlide.getBoundingClientRect().width + 1 : track
+                            .clientWidth;
                     };
 
                     const normalizeLoopPosition = () => {
@@ -502,10 +502,18 @@
 
                     slider.addEventListener('mouseenter', stopAutoSlide);
                     slider.addEventListener('mouseleave', startAutoSlide);
-                    slider.addEventListener('touchstart', stopAutoSlide, { passive: true });
-                    slider.addEventListener('touchend', startAutoSlide, { passive: true });
-                    track.addEventListener('scroll', normalizeLoopPosition, { passive: true });
-                    window.addEventListener('resize', normalizeLoopPosition, { passive: true });
+                    slider.addEventListener('touchstart', stopAutoSlide, {
+                        passive: true
+                    });
+                    slider.addEventListener('touchend', startAutoSlide, {
+                        passive: true
+                    });
+                    track.addEventListener('scroll', normalizeLoopPosition, {
+                        passive: true
+                    });
+                    window.addEventListener('resize', normalizeLoopPosition, {
+                        passive: true
+                    });
 
                     startAutoSlide();
                 });

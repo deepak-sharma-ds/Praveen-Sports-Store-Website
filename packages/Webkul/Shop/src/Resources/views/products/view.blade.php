@@ -10,9 +10,7 @@
 
     $uspCodes = ['usp_1', 'usp_2', 'usp_3', 'usp_4'];
 
-    $visibleAttributeData = collect($customAttributeValues)
-        ->filter(fn ($item) => ! empty($item['value']))
-        ->values();
+    $visibleAttributeData = collect($customAttributeValues)->filter(fn($item) => !empty($item['value']))->values();
 
     $attributeValuesByCode = $visibleAttributeData->keyBy('code');
 
@@ -25,17 +23,15 @@
             }
 
             return [
-                'code'  => $code,
-                'icon'  => $index + 1,
+                'code' => $code,
+                'icon' => $index + 1,
                 'value' => $value,
             ];
         })
         ->filter()
         ->values();
 
-    $attributeData = $visibleAttributeData
-        ->reject(fn ($item) => in_array($item['code'], $uspCodes, true))
-        ->values();
+    $attributeData = $visibleAttributeData->reject(fn($item) => in_array($item['code'], $uspCodes, true))->values();
 @endphp
 
 <!-- SEO Meta Content -->
@@ -99,6 +95,46 @@
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 
     @pushOnce('scripts')
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            // dataLayer.push({
+            //     event: "view_item",
+            //     ecommerce: {
+            //         currency: "INR",
+            //         value: "{{ $product->special_price ?? 0 }}",
+            //         items: [{
+            //             item_id: "{{ $product->id }}",
+            //             item_name: "{{ addslashes($product->name) }}",
+            //             price: "{{ $product->special_price ?? 0 }}",
+            //             item_category: "{{ $product->type }}"
+            //         }]
+            //     }
+            // });
+
+            const productData = {
+                id: "{{ $product->id }}",
+                name: "{{ addslashes($product->name) }}",
+                price: Number("{{ $product->special_price ?? 0 }}"),
+                category: "{{ $product->type }}"
+            };
+
+            dataLayer.push({
+                event: "view_item",
+                ecommerce: {
+                    currency: "INR",
+                    value: productData.price,
+                    items: [{
+                        item_id: productData.id,
+                        item_name: productData.name,
+                        price: productData.price,
+                        item_category: productData.category,
+                        quantity: 1
+                    }]
+                }
+            });
+        </script>
+
         <script
             type="text/x-template"
             id="v-product-template"
@@ -422,6 +458,45 @@
                             })
                             .then(response => {
                                 if (response.data.message) {
+                                    // GA4 ADD TO CART EVENT
+                                    // window.dataLayer = window.dataLayer || [];
+                                    // dataLayer.push({
+                                    //     event: "add_to_cart",
+                                    //     ecommerce: {
+                                    //         currency: "INR",
+                                    //         value: "{{ $product->special_price ?? 0 }}",
+                                    //         items: [{
+                                    //             item_id: "{{ $product->id }}",
+                                    //             item_name: "{{ addslashes($product->name) }}",
+                                    //             price: "{{ $product->special_price ?? 0 }}",
+                                    //             quantity: 1
+                                    //         }]
+                                    //     }
+                                    // });
+
+                                    // Extract dynamic quantity from form
+                                    const quantity = Number(formData.get('quantity') || 1);
+
+                                    // Numeric price
+                                    const price = Number("{{ $product->special_price ?? 0 }}");
+
+
+                                    // Push event
+                                    window.dataLayer = window.dataLayer || [];
+                                    dataLayer.push({
+                                        event: "add_to_cart",
+                                        ecommerce: {
+                                            currency: "INR",
+                                            value: price * quantity,
+                                            items: [{
+                                                item_id: "{{ $product->id }}",
+                                                item_name: "{{ addslashes($product->name) }}",
+                                                price: price,
+                                                quantity: quantity
+                                            }]
+                                        }
+                                    });
+
                                     this.$emitter.emit('update-mini-cart', response.data.data);
 
                                     this.$emitter.emit('add-flash', {
