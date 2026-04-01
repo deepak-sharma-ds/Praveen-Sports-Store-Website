@@ -220,6 +220,14 @@
 
                             /* Safety: force resize after model load in case layout shifted */
                             configurator.onResize();
+
+                            /* Apply the current combination-image texture if the
+                               user selected options before opening the 3D tab.
+                               The options component stores the resolved .webp path
+                               on window._batCurrentTexturePath via its watcher. */
+                            if (window._batCurrentTexturePath) {
+                                configurator.applyTexture('Bat_Body', window._batCurrentTexturePath);
+                            }
                         }
                     } catch (err) {
                         console.error('[Gallery] 3D init error:', err);

@@ -641,6 +641,24 @@
                                 this.scheduleGallerySync();
                             },
                         },
+
+                        matchedImagePath: {
+                            immediate: true,
+
+                            handler(newPath) {
+                                /* Store globally so the gallery 3D tab can read
+                                   the current texture when it lazy-initializes */
+                                window._batCurrentTexturePath = newPath || null;
+
+                                /* If the 3D configurator is already running,
+                                   apply the texture in real time */
+                                const inst = window._batConfiguratorInstance;
+
+                                if (inst && typeof inst.applyTexture === 'function') {
+                                    inst.applyTexture('Bat_Body', newPath || null);
+                                }
+                            },
+                        },
                     },
 
                     methods: {
