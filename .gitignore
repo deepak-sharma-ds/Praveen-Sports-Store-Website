@@ -31,4 +31,5 @@ yarn-error.log
 /test-results
 /playwright-report
 /.kiro
+/.claude
 /packages/Webkul/Product360

@@ -98,8 +98,8 @@
 
                     <div class="bg-[#EDEDED] py-10 px-4 lg:px-[60px]">
                         <div class="flex flex-wrap justify-center">
-                            <!-- Gallery Blade Inclusion -->
-                            <!-- @include('shop::products.view.gallery') -->
+                            {{-- Gallery Blade Inclusion --}}
+                            {{-- @include('shop::products.view.gallery') --}}
                             @include('shop::products.view.custom-product-gallery')
 
                             <!-- Details -->

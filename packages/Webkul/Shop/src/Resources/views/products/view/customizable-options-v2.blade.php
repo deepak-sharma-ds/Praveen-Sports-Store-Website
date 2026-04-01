@@ -991,6 +991,8 @@
                                 optionId: this.option.id,
                                 value: this.getSelectedImageAttributeValue(value),
                             });
+
+                            this.sync3DConfigurator(value);
                         },
 
                         getSelectedImageAttributeValue(value) {
@@ -1043,6 +1045,73 @@
                             const selectedFiles = $event.target.files;
 
                             this.selectedItems = selectedFiles[0];
+                        },
+
+                        /**
+                         * Bridge: push option changes to the Three.js 3D configurator.
+                         */
+                        sync3DConfigurator(value) {
+                            const inst = window._batConfiguratorInstance;
+                            if (!inst) return;
+
+                            const label = (this.option.label || '').toLowerCase();
+
+                            /* Resolve the display value for select/radio */
+                            const resolveDisplayValue = (val) => {
+                                const itemId = String(val ?? '');
+                                if (!itemId || itemId === '0') return null;
+
+                                const item = this.optionItems.find(i => String(i.id) === itemId);
+                                return item || null;
+                            };
+
+                            /* Sticker Color */
+                            if (/sticker[\s_-]*colou?r/i.test(label)) {
+                                const item = resolveDisplayValue(value);
+                                if (item && item.swatch_color) {
+                                    inst.applyColor('Bat_Sticker', item.swatch_color);
+                                }
+                                return;
+                            }
+
+                            /* Grip Colour */
+                            if (/grip[\s_-]*colou?r/i.test(label)) {
+                                const item = resolveDisplayValue(value);
+                                if (item && item.swatch_color) {
+                                    inst.applyColor('Bat_Grip', item.swatch_color);
+                                }
+                                return;
+                            }
+
+                            /* Bat Profile */
+                            if (/bat[\s_-]*profile/i.test(label)) {
+                                const item = resolveDisplayValue(value);
+                                if (item) {
+                                    const val = (item.display_label || item.label || '').toLowerCase();
+                                    inst.setBatProfile(val.includes('duckbill') ? 'duckbill' : 'full');
+                                }
+                                return;
+                            }
+
+                            /* Toe Shape */
+                            if (/toe[\s_-]*shape/i.test(label)) {
+                                const item = resolveDisplayValue(value);
+                                if (item) {
+                                    const val = (item.display_label || item.label || '').toLowerCase();
+                                    inst.setToeShape(val.includes('round') ? 'round' : 'flat');
+                                }
+                                return;
+                            }
+
+                            /* Engraving (text/textarea) */
+                            if (/engrav/i.test(label)) {
+                                const text = typeof value === 'string' ? value : '';
+                                if (this._engravingDebounce) clearTimeout(this._engravingDebounce);
+                                this._engravingDebounce = setTimeout(() => {
+                                    inst.applyEngraving(text);
+                                }, 400);
+                                return;
+                            }
                         },
                     },
                 });

@@ -733,3 +733,51 @@ h4{
 .product-description * {
     font-family: inherit;
 }
+
+/* ======================================== */
+/* 3D Bat Configurator                      */
+/* ======================================== */
+
+.bat-gallery-tabs .gallery-tab {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+#bat-3d-canvas-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 1rem;
+    cursor: grab;
+}
+
+#bat-3d-canvas-container canvas:active {
+    cursor: grabbing;
+}
+
+/* Loading spinner */
+.bat-3d-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #902129;
+    border-radius: 50%;
+    animation: bat3d-spin 0.8s linear infinite;
+}
+
+@keyframes bat3d-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Loaded fade-out */
+#bat-3d-loading {
+    transition: opacity 0.4s ease;
+}
+
+#bat-3d-loading.loaded {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Engraving input focus glow */
+.engraving-option input:focus {
+    box-shadow: 0 0 0 3px rgba(144, 33, 41, 0.15);
+}

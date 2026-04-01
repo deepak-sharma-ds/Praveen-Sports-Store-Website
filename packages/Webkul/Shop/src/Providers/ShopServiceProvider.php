@@ -56,6 +56,8 @@ class ShopServiceProvider extends ServiceProvider
         Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'shop');
 
         $this->app->register(EventServiceProvider::class);
+
+        $this->app->singleton(\Webkul\Shop\Http\Helpers\CustomizationImageResolver::class);
     }
 
     /**
