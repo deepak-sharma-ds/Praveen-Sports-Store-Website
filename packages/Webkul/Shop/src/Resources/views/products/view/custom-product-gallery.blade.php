@@ -216,7 +216,7 @@
                         await configurator.init();
 
                         if (configurator.renderer) {
-                            await configurator.loadModel("{{ asset('3d-models/cricket-bat.glb') }}");
+                            await configurator.loadModel("{{ asset('3d-models/cricket_bat.glb') }}");
 
                             /* Safety: force resize after model load in case layout shifted */
                             configurator.onResize();
@@ -226,7 +226,7 @@
                                The options component stores the resolved .webp path
                                on window._batCurrentTexturePath via its watcher. */
                             if (window._batCurrentTexturePath) {
-                                configurator.applyTexture('Bat_Body', window._batCurrentTexturePath);
+                                configurator.applyTexture('Bat_Sticker_Front', window._batCurrentTexturePath);
                             }
                         }
                     } catch (err) {

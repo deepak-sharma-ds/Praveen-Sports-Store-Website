@@ -655,7 +655,7 @@
                                 const inst = window._batConfiguratorInstance;
 
                                 if (inst && typeof inst.applyTexture === 'function') {
-                                    inst.applyTexture('Bat_Body', newPath || null);
+                                    inst.applyTexture('Bat_Sticker_Front', newPath || null);
                                 }
                             },
                         },
