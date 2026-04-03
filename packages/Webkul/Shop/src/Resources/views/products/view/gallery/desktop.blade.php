@@ -18,6 +18,25 @@
             ref="swiperContainer"
             class="flex flex-row w-full gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
         >
+            {{-- 360° Thumbnail Button (first) --}}
+            @if(isset($product360Images) && count($product360Images) >= 2)
+                <button
+                    type="button"
+                    class="flex-shrink-0 h-[100px] w-[100px] cursor-pointer rounded-xl flex flex-col items-center justify-center gap-1 transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                    style="background: linear-gradient(135deg, #060C3B 0%, #902129 100%); border: 2px solid transparent;"
+                    onmouseover="this.style.borderColor='#902129'"
+                    onmouseout="this.style.borderColor='transparent'"
+                    onclick="openProduct360Modal()"
+                    aria-label="View 360° rotation"
+                    tabindex="0"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span style="color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.08em;">360°</span>
+                </button>
+            @endif
+
             <template v-for="(media, index) in [...media.images, ...media.videos]">
                 <video
                     v-if="media.type == 'videos'"
@@ -43,22 +62,6 @@
                     @click="change(media, index)"
                 />
             </template>
-
-            {{-- 360° Thumbnail Button --}}
-            @if(isset($product360Images) && count($product360Images) >= 2)
-                <button
-                    type="button"
-                    class="transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border border-white bg-gray-100 hover:border-navyBlue flex items-center justify-center"
-                    onclick="openProduct360Modal()"
-                    aria-label="View 360° rotation"
-                    tabindex="0"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-navyBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                    <span class="sr-only">360° View</span>
-                </button>
-            @endif
         </div>
 
         <!-- Arrow Down -->

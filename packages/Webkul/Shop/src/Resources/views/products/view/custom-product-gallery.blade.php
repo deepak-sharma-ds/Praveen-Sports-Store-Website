@@ -62,19 +62,24 @@
 
             <!-- Panel B: 3D View -->
             <div v-show="galleryActiveTab === '3d'">
-                <!-- 3D wrapper: relative so the loading overlay sits on top of the always-laid-out canvas -->
-                <div class="relative" style="width: 100%; height: 480px;">
+                <!--
+                    Portrait wrapper — cricket bats are tall & narrow.
+                    aspect-ratio: 3/4 gives a tall viewport that frames the
+                    full bat (handle→toe) without wasting horizontal space.
+                    max-height keeps it from growing too tall on wide screens.
+                -->
+                <div class="relative" style="width: 100%; aspect-ratio: 3/4; max-height: 620px; min-height: 420px;">
 
                     <!-- 3D Canvas Container — ALWAYS in the DOM with layout so Three.js reads real dimensions -->
                     <div
                         id="bat-3d-canvas-container"
-                        class="absolute inset-0 rounded-2xl bg-[#F8F5F0] overflow-hidden"
+                        class="absolute inset-0 rounded-2xl bg-[#F5F2EE] overflow-hidden"
                     ></div>
 
                     <!-- Loading Overlay (sits on top of the canvas, removed after load) -->
                     <div
                         id="bat-3d-loading"
-                        class="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-[#F8F5F0]"
+                        class="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-[#F5F2EE]"
                         v-show="bat3dLoading"
                     >
                         <div class="bat-3d-spinner mb-4"></div>
@@ -86,7 +91,7 @@
                     <!-- WebGL Fallback -->
                     <div
                         id="bat-3d-webgl-fallback"
-                        class="absolute inset-0 z-10 flex-col items-center justify-center rounded-2xl bg-[#F8F5F0] p-8 text-center"
+                        class="absolute inset-0 z-10 flex-col items-center justify-center rounded-2xl bg-[#F5F2EE] p-8 text-center"
                         style="display: none;"
                     >
                         <svg class="mx-auto mb-4 h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,12 +226,15 @@
                             /* Safety: force resize after model load in case layout shifted */
                             configurator.onResize();
 
-                            /* Apply the current combination-image texture if the
-                               user selected options before opening the 3D tab.
-                               The options component stores the resolved .webp path
-                               on window._batCurrentTexturePath via its watcher. */
-                            if (window._batCurrentTexturePath) {
-                                configurator.applyTexture('Bat_Sticker_Front', window._batCurrentTexturePath);
+                            /* Apply the current front + back images if the user
+                               already selected options before opening the 3D tab.
+                               The options component stores { front, back } on
+                               window._batCurrentImages via its matchedImages watcher. */
+                            if (window._batCurrentImages) {
+                                configurator.applyBatImages(
+                                    window._batCurrentImages.front || null,
+                                    window._batCurrentImages.back  || null
+                                );
                             }
                         }
                     } catch (err) {

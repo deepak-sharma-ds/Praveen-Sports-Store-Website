@@ -600,19 +600,21 @@
                             }, {});
                         },
 
-                        matchedImagePath() {
+                        matchedImages() {
                             return this.findBestMatch();
                         },
 
                         resolvedGalleryImages() {
-                            if (! this.matchedImagePath) {
+                            const frontPath = this.matchedImages ? this.matchedImages.front : null;
+
+                            if (! frontPath) {
                                 return this.defaultGalleryImages;
                             }
 
-                            const matchedImage = this.createGalleryImage(this.matchedImagePath);
+                            const matchedImage = this.createGalleryImage(frontPath);
 
                             const remainingImages = this.defaultGalleryImages.filter((image) => {
-                                return (image.large_image_url || image.original_image_url) !== this.matchedImagePath;
+                                return (image.large_image_url || image.original_image_url) !== frontPath;
                             });
 
                             return [matchedImage, ...remainingImages];
@@ -642,20 +644,23 @@
                             },
                         },
 
-                        matchedImagePath: {
+                        matchedImages: {
                             immediate: true,
 
-                            handler(newPath) {
+                            handler(newImages) {
                                 /* Store globally so the gallery 3D tab can read
-                                   the current texture when it lazy-initializes */
-                                window._batCurrentTexturePath = newPath || null;
+                                   the current textures when it lazy-initializes */
+                                window._batCurrentImages = newImages || null;
 
                                 /* If the 3D configurator is already running,
-                                   apply the texture in real time */
+                                   apply front + back textures in real time */
                                 const inst = window._batConfiguratorInstance;
 
-                                if (inst && typeof inst.applyTexture === 'function') {
-                                    inst.applyTexture('Bat_Sticker_Front', newPath || null);
+                                if (inst && typeof inst.applyBatImages === 'function') {
+                                    inst.applyBatImages(
+                                        newImages ? newImages.front : null,
+                                        newImages ? newImages.back  : null
+                                    );
                                 }
                             },
                         },
@@ -753,9 +758,20 @@
 
                             while (selectedValues.length) {
                                 const candidateKey = this.generateKey(selectedValues);
+                                const match = this.imageCombinationMap[candidateKey];
 
-                                if (this.imageCombinationMap[candidateKey]) {
-                                    return this.resolveImageUrl(this.imageCombinationMap[candidateKey]);
+                                if (match) {
+                                    /* Hybrid format: { front, back } */
+                                    if (typeof match === 'object' && match !== null && match.front) {
+                                        return {
+                                            front: this.resolveImageUrl(match.front),
+                                            back:  this.resolveImageUrl(match.back || match.front),
+                                        };
+                                    }
+
+                                    /* Legacy format: plain string — use same image for both sides */
+                                    const url = this.resolveImageUrl(match);
+                                    return url ? { front: url, back: url } : null;
                                 }
 
                                 selectedValues.pop();
@@ -1067,69 +1083,14 @@
 
                         /**
                          * Bridge: push option changes to the Three.js 3D configurator.
+                         *
+                         * In hybrid mode the 3D view is driven entirely by
+                         * pre-generated poster images (front + back).  All visual
+                         * updates happen through the matchedImages watcher above —
+                         * there is no per-option mesh manipulation required here.
                          */
                         sync3DConfigurator(value) {
-                            const inst = window._batConfiguratorInstance;
-                            if (!inst) return;
-
-                            const label = (this.option.label || '').toLowerCase();
-
-                            /* Resolve the display value for select/radio */
-                            const resolveDisplayValue = (val) => {
-                                const itemId = String(val ?? '');
-                                if (!itemId || itemId === '0') return null;
-
-                                const item = this.optionItems.find(i => String(i.id) === itemId);
-                                return item || null;
-                            };
-
-                            /* Sticker Color */
-                            if (/sticker[\s_-]*colou?r/i.test(label)) {
-                                const item = resolveDisplayValue(value);
-                                if (item && item.swatch_color) {
-                                    inst.applyColor('Bat_Sticker', item.swatch_color);
-                                }
-                                return;
-                            }
-
-                            /* Grip Colour */
-                            if (/grip[\s_-]*colou?r/i.test(label)) {
-                                const item = resolveDisplayValue(value);
-                                if (item && item.swatch_color) {
-                                    inst.applyColor('Bat_Grip', item.swatch_color);
-                                }
-                                return;
-                            }
-
-                            /* Bat Profile */
-                            if (/bat[\s_-]*profile/i.test(label)) {
-                                const item = resolveDisplayValue(value);
-                                if (item) {
-                                    const val = (item.display_label || item.label || '').toLowerCase();
-                                    inst.setBatProfile(val.includes('duckbill') ? 'duckbill' : 'full');
-                                }
-                                return;
-                            }
-
-                            /* Toe Shape */
-                            if (/toe[\s_-]*shape/i.test(label)) {
-                                const item = resolveDisplayValue(value);
-                                if (item) {
-                                    const val = (item.display_label || item.label || '').toLowerCase();
-                                    inst.setToeShape(val.includes('round') ? 'round' : 'flat');
-                                }
-                                return;
-                            }
-
-                            /* Engraving (text/textarea) */
-                            if (/engrav/i.test(label)) {
-                                const text = typeof value === 'string' ? value : '';
-                                if (this._engravingDebounce) clearTimeout(this._engravingDebounce);
-                                this._engravingDebounce = setTimeout(() => {
-                                    inst.applyEngraving(text);
-                                }, 400);
-                                return;
-                            }
+                            /* no-op — visual state is applied via applyBatImages() */
                         },
                     },
                 });

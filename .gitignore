@@ -33,3 +33,5 @@ yarn-error.log
 /.kiro
 /.claude
 /packages/Webkul/Product360
+/docs
+/scripts

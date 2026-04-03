@@ -221,6 +221,9 @@
                     @endforeach
 
                     @if ($column == 1)
+                        <!-- 360° View Images Blade File -->
+                        @include('admin::catalog.products.edit.product-360-images')
+
                         <!-- Images View Blade File -->
                         @include('admin::catalog.products.edit.images')
 
@@ -248,7 +251,10 @@
 
                 @if ($isSingleColumn && ($column == 1 || $column == 2))
                     <div class="w-[360px] max-w-full max-sm:w-full">
-                        @if ($column == 2) 
+                        @if ($column == 2)
+                            <!-- 360° View Images Blade File -->
+                            @include('admin::catalog.products.edit.product-360-images')
+
                             <!-- Images View Blade File -->
                             @include('admin::catalog.products.edit.images')
 
