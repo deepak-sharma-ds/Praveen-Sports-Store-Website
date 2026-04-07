@@ -104,7 +104,8 @@
             "Webkul\\User\\": "packages/Webkul/User/src",
             "Webkul\\CustomStripePayment\\": "packages/Webkul/CustomStripePayment/src",
             "Webkul\\StripePayment\\": "packages/Webkul/StripePayment/src",
-            "Webkul\\GoogleMerchant\\": "packages/Webkul/GoogleMerchant/src"
+            "Webkul\\GoogleMerchant\\": "packages/Webkul/GoogleMerchant/src",
+            "Webkul\\Brochure\\": "packages/Webkul/Brochure/src"
         }
     },
     "autoload-dev": {
@@ -135,13 +136,15 @@
             ]
         }
     },
-    "repositories": [{
-        "type": "path",
-        "url": "packages/*/*",
-        "options": {
-            "symlink": true
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/*/*",
+            "options": {
+                "symlink": true
+            }
         }
-    }],
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

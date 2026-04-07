@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Brochure module — admin sidebar icon
+ * The icon uses a book/document SVG as inline background.
+ */
+@layer components {
+    .icon-brochure {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("../images/icon-brochure.svg");
+    }
+
+    .active .icon-brochure,
+    .active.icon-brochure {
+        background-image: url("../images/icon-brochure-active.svg");
+    }
+}

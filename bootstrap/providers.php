@@ -49,4 +49,5 @@ return [
     // Razorpay provider
     Wontonee\Razorpay\Providers\RazorpayServiceProvider::class,
     Webkul\GoogleMerchant\Providers\GoogleMerchantServiceProvider::class,
+    Webkul\Brochure\Providers\BrochureServiceProvider::class,
 ];
