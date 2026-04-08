@@ -29,6 +29,7 @@ package-lock.json
 /storage/dcc-data/
 /test-results
 /vendor
+/packages/Webkul/Brochure/node_modules
 yarn.lock
 yarn-error.log
 /test-results

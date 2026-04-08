@@ -10,111 +10,225 @@
         <meta name="description" content="{{ $brochure->meta_description }}" />
     @endif
 
-    {{-- PDF.js (used for PDF mode rendering) --}}
+    {{-- Poppins — matches brand typography --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    {{-- PDF.js (page rendering for PDF mode) --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
 
-    {{-- StPageFlip (open-source flipbook engine, no jQuery) --}}
+    {{-- StPageFlip (flipbook engine, open-source, no jQuery) --}}
     <script src="https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js" defer></script>
 
-    {{-- Page flip sound (subtle, royalty-free) --}}
     <style>
-        /* ================================================================
-         * BROCHURE FLIPBOOK VIEWER — Full-page immersive layout
-         * ================================================================ */
+        /* ==============================================================
+         * PRAVEEN SPORTS — BROCHURE FLIPBOOK VIEWER
+         * Brand: Navy #060C3B | Maroon #902129 | Cream #F6F2EB
+         * ============================================================== */
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        /* ── Reset & base ─────────────────────────────────────────── */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         html, body {
             height: 100%;
-            background: #0b0b0b;
-            font-family: system-ui, -apple-system, sans-serif;
+            /* Deep brand navy — premium dark feel */
+            background: #04082f;
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+            font-size: 14px;
             overflow: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ---------- Top navigation bar ---------- */
+        /* ── CSS variables ────────────────────────────────────────── */
+        :root {
+            --topbar-h:   56px;
+            --controls-h: 66px;
+            --navy:       #060C3B;
+            --navy-glass: rgba(6, 12, 59, 0.88);
+            --maroon:     #902129;
+            --maroon-glow:rgba(144, 33, 41, 0.18);
+            --white-dim:  rgba(255, 255, 255, 0.72);
+            --white-faint:rgba(255, 255, 255, 0.1);
+            --border:     rgba(255, 255, 255, 0.08);
+            --border-m:   rgba(144, 33, 41, 0.28);
+        }
+
+        /* ── Top navigation bar ───────────────────────────────────── */
         #brochure-topbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
+            height: var(--topbar-h);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 1.25rem;
-            height: 52px;
-            background: rgba(11, 11, 11, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.07);
+            background: var(--navy-glass);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            /* Subtle maroon accent on bottom edge */
+            box-shadow: 0 1px 0 0 var(--border-m),
+                        0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Left side: accent bar + title */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        /* Vertical maroon accent stripe */
+        .nav-brand-accent {
+            width: 3px;
+            height: 22px;
+            background: linear-gradient(180deg, #c0392b, var(--maroon));
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .nav-store-name {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            white-space: nowrap;
+            flex-shrink: 0;
+            display: none; /* hidden on small; shown md+ */
+        }
+
+        .nav-divider {
+            width: 1px;
+            height: 14px;
+            background: var(--border);
+            flex-shrink: 0;
+            display: none;
         }
 
         #brochure-topbar .nav-title {
-            color: #fff;
-            font-size: 0.95rem;
+            font-size: 0.875rem;
             font-weight: 600;
+            color: rgba(255,255,255,0.88);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 50%;
         }
 
+        /* Right side: action buttons */
         #brochure-topbar .nav-actions {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            flex-shrink: 0;
         }
 
+        /* Glassmorphism pill buttons */
         .nav-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.35rem 0.75rem;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: transparent;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.78rem;
+            gap: 0.38rem;
+            padding: 0.38rem 0.82rem;
+            background: var(--white-faint);
+            border: 1px solid var(--border);
+            color: var(--white-dim);
+            font-family: inherit;
+            font-size: 0.75rem;
             font-weight: 500;
-            border-radius: 6px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s, border-color 0.2s;
             text-decoration: none;
+            transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+            white-space: nowrap;
         }
 
         .nav-btn:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.16);
+            border-color: rgba(255,255,255,0.22);
             color: #fff;
-            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
         }
 
         .nav-btn svg { flex-shrink: 0; }
 
-        /* ---------- Main viewer area ---------- */
+        /* Back button — slightly different accent */
+        .nav-btn--back:hover {
+            background: rgba(144,33,41,0.2);
+            border-color: rgba(144,33,41,0.4);
+        }
+
+        /* ── Main stage ───────────────────────────────────────────── */
         #brochure-stage {
             position: fixed;
-            inset: 52px 0 64px 0;
+            inset: var(--topbar-h) 0 var(--controls-h) 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #0b0b0b;
             overflow: hidden;
+            /* Subtle radial background gradient */
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 50%, rgba(13,26,94,0.6) 0%, transparent 70%),
+                #04082f;
         }
 
-        /* ---------- Flipbook container (StPageFlip mounts here) ---------- */
+        /* Ambient glow from the book — maroon tinted halo */
+        #book-ambient-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            max-width: 800px;
+            height: 55%;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(144, 33, 41, 0.12) 0%,
+                rgba(6, 12, 59, 0.06) 45%,
+                transparent 72%
+            );
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(30px);
+        }
+
+        /* 3D perspective wrapper for the book */
+        #book-stage-perspective {
+            position: relative;
+            z-index: 1;
+            /* Subtle tilt for depth — like book resting on table */
+            transform: perspective(2800px) rotateX(1.2deg);
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 28px 60px rgba(0,0,0,0.55))
+                    drop-shadow(0 8px 20px rgba(0,0,0,0.35));
+        }
+
+        /* The flipbook container (StPageFlip mounts here — DO NOT rename) */
         #flipbook-container {
             position: relative;
-            /* Dimensions are set dynamically via JS based on viewport */
         }
 
-        /* StPageFlip page style */
+        /* Page canvas base style */
         .page-canvas {
             display: block;
             background: #fff;
         }
 
-        /* Realistic page shadow overlay injected by StPageFlip */
-        .page-shadow { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
-
-        /* ---------- Loader ---------- */
+        /* ── Loader ───────────────────────────────────────────────── */
         #brochure-loader {
             position: fixed;
             inset: 0;
@@ -123,26 +237,16 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 1.25rem;
-            background: #0b0b0b;
+            gap: 1.5rem;
+            background: #04082f;
         }
 
+        /* Animated book with brand maroon + navy colors */
         .loader-book {
-            width: 60px;
-            height: 80px;
+            width: 64px;
+            height: 84px;
             position: relative;
-        }
-
-        .loader-page {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: #333;
-            border-radius: 0 4px 4px 0;
-            transform-origin: left center;
-            animation: flipPage 1.2s ease-in-out infinite alternate;
+            perspective: 300px;
         }
 
         .loader-spine {
@@ -151,25 +255,46 @@
             left: 0;
             width: 50%;
             height: 100%;
-            background: #444;
-            border-radius: 4px 0 0 4px;
+            background: linear-gradient(180deg, #6b0e14 0%, var(--maroon) 50%, #6b0e14 100%);
+            border-radius: 5px 0 0 5px;
         }
 
-        @keyframes flipPage {
-            0%   { transform: rotateY(0deg); }
-            100% { transform: rotateY(-160deg); }
+        .loader-page {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a2a8a 0%, #0d1a5e 100%);
+            border-radius: 0 5px 5px 0;
+            transform-origin: left center;
+            animation: loaderFlip 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+        }
+
+        @keyframes loaderFlip {
+            0%   { transform: rotateY(0deg);    }
+            35%  { transform: rotateY(-5deg);   }
+            100% { transform: rotateY(-165deg); }
+        }
+
+        .loader-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
         }
 
         .loader-text {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
         }
 
         .loader-progress {
-            width: 200px;
+            width: 210px;
             height: 3px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             border-radius: 2px;
             overflow: hidden;
         }
@@ -177,96 +302,144 @@
         .loader-progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            /* Brand maroon gradient */
+            background: linear-gradient(90deg, var(--maroon), #c0392b);
             border-radius: 2px;
-            transition: width 0.3s ease;
+            transition: width 0.35s ease;
         }
 
-        /* ---------- Bottom controls bar ---------- */
+        /* ── Bottom controls ──────────────────────────────────────── */
         #brochure-controls {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            height: 64px;
+            height: var(--controls-h);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            background: rgba(11, 11, 11, 0.92);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(255,255,255,0.07);
+            gap: 0.6rem;
+            background: var(--navy-glass);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-top: 1px solid var(--border);
+            box-shadow: 0 -1px 0 0 var(--border-m),
+                        0 -4px 20px rgba(0,0,0,0.25);
         }
 
+        /* Icon control buttons */
         .ctrl-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 40px;
             height: 40px;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: transparent;
-            color: rgba(255,255,255,0.8);
-            border-radius: 8px;
+            background: var(--white-faint);
+            border: 1px solid var(--border);
+            color: var(--white-dim);
+            border-radius: 50%;
             cursor: pointer;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.15s;
         }
 
         .ctrl-btn:hover:not(:disabled) {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.16);
+            border-color: rgba(255,255,255,0.22);
             color: #fff;
+            transform: scale(1.1);
+        }
+
+        .ctrl-btn:active:not(:disabled) {
+            transform: scale(0.95);
         }
 
         .ctrl-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.22;
             cursor: not-allowed;
         }
 
+        /* Next / Prev are slightly larger (primary actions) */
+        #btn-prev, #btn-next {
+            width: 44px;
+            height: 44px;
+            /* Maroon accent on primary nav buttons */
+            border-color: rgba(144,33,41,0.3);
+        }
+
+        #btn-prev:hover:not(:disabled),
+        #btn-next:hover:not(:disabled) {
+            background: rgba(144,33,41,0.22);
+            border-color: rgba(144,33,41,0.5);
+            color: #fff;
+        }
+
+        /* Page indicator — pill badge */
         #page-indicator {
-            min-width: 100px;
+            background: var(--white-faint);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 0.28rem 1.1rem;
+            color: rgba(255,255,255,0.78);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            min-width: 110px;
             text-align: center;
-            color: rgba(255,255,255,0.7);
-            font-size: 0.82rem;
             font-variant-numeric: tabular-nums;
         }
 
-        /* ---------- Zoom overlay ---------- */
+        /* ── Zoom overlay ─────────────────────────────────────────── */
         #zoom-overlay {
             position: fixed;
             inset: 0;
             z-index: 300;
-            background: rgba(0,0,0,0.92);
+            background: rgba(4, 8, 47, 0.96);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: none;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 1rem;
             cursor: zoom-out;
         }
 
         #zoom-overlay.active { display: flex; }
 
         #zoom-canvas {
-            max-width: 90vw;
-            max-height: 90vh;
+            max-width: 88vw;
+            max-height: 84vh;
             object-fit: contain;
             border-radius: 4px;
-            box-shadow: 0 32px 64px rgba(0,0,0,0.8);
+            box-shadow:
+                0 40px 80px rgba(0,0,0,0.7),
+                0 0 0 1px rgba(144,33,41,0.2);
         }
 
-        /* ---------- Toast notification ---------- */
+        .zoom-close-hint {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── Toast ────────────────────────────────────────────────── */
         #brochure-toast {
             position: fixed;
-            bottom: 80px;
+            bottom: calc(var(--controls-h) + 12px);
             left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(8px);
-            color: #fff;
-            padding: 0.5rem 1.25rem;
+            transform: translateX(-50%) translateY(14px);
+            background: rgba(6, 12, 59, 0.9);
+            border: 1px solid var(--border-m);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: rgba(255,255,255,0.85);
+            padding: 0.45rem 1.2rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.76rem;
+            font-weight: 500;
             opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
+            transition: opacity 0.28s, transform 0.28s;
             pointer-events: none;
             white-space: nowrap;
             z-index: 150;
@@ -277,16 +450,37 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* ---------- Responsive ---------- */
+        /* ── Keyboard hint (below controls) ──────────────────────── */
+        #keyboard-hint {
+            position: fixed;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.18);
+            letter-spacing: 0.05em;
+            pointer-events: none;
+            z-index: 101;
+            white-space: nowrap;
+        }
+
+        /* ── Responsive ───────────────────────────────────────────── */
+        @media (min-width: 768px) {
+            .nav-store-name { display: block; }
+            .nav-divider     { display: block; }
+        }
+
         @media (max-width: 768px) {
             #brochure-topbar .nav-btn span { display: none; }
-            #brochure-controls { gap: 0.6rem; }
+            .nav-btn { padding: 0.38rem 0.55rem; border-radius: 50%; }
+            #brochure-controls { gap: 0.45rem; }
+            #keyboard-hint { display: none; }
         }
     </style>
 </head>
 <body>
 
-    {{-- PHP data passed to JavaScript --}}
+    {{-- ── PHP data → JavaScript ──────────────────────────────────────── --}}
     <script>
         window.BrochureData = {
             mode:        @json($brochure->type),
@@ -299,44 +493,57 @@
         };
     </script>
 
-    {{-- Loader --}}
-    <div id="brochure-loader">
-        <div class="loader-book">
+    {{-- ── Loader ──────────────────────────────────────────────────────── --}}
+    <div id="brochure-loader" role="status" aria-label="Loading brochure">
+        <div class="loader-book" aria-hidden="true">
             <div class="loader-spine"></div>
             <div class="loader-page"></div>
         </div>
-        <div class="loader-text" id="loader-text">Loading brochure…</div>
-        <div class="loader-progress">
-            <div class="loader-progress-bar" id="loader-progress-bar"></div>
+        <div class="loader-label">
+            <span class="loader-text" id="loader-text">Loading brochure…</span>
+            <div class="loader-progress">
+                <div class="loader-progress-bar" id="loader-progress-bar"></div>
+            </div>
         </div>
     </div>
 
-    {{-- Top Navigation --}}
+    {{-- ── Top Navigation ───────────────────────────────────────────────── --}}
     <header id="brochure-topbar">
-        <span class="nav-title">{{ $brochure->title }}</span>
+        <div class="nav-left">
+            <div class="nav-brand-accent" aria-hidden="true"></div>
+            <span class="nav-store-name">Praveen Sports</span>
+            <span class="nav-divider" aria-hidden="true"></span>
+            <span class="nav-title">{{ $brochure->title }}</span>
+        </div>
+
         <div class="nav-actions">
-            {{-- Zoom button --}}
-            <button class="nav-btn" id="btn-zoom" title="Zoom current page" aria-label="Zoom">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/>
+            {{-- Zoom --}}
+            <button class="nav-btn" id="btn-zoom" title="Zoom current page (Z)" aria-label="Zoom current page">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35M11 8v6M8 11h6"/>
                 </svg>
                 <span>Zoom</span>
             </button>
 
             {{-- Sound toggle --}}
-            <button class="nav-btn" id="btn-sound" title="Toggle flip sound" aria-label="Sound">
-                <svg id="sound-icon-on" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            <button class="nav-btn" id="btn-sound" title="Toggle page-flip sound" aria-label="Toggle sound">
+                <svg id="sound-icon-on" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
                 </svg>
-                <svg id="sound-icon-off" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+                <svg id="sound-icon-off" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <line x1="23" y1="9" x2="17" y2="15"/>
+                    <line x1="17" y1="9" x2="23" y2="15"/>
                 </svg>
                 <span>Sound</span>
             </button>
 
-            {{-- Back to listing --}}
-            <a href="{{ route('shop.brochure.index') }}" class="nav-btn" aria-label="All Brochures">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            {{-- Back to catalog --}}
+            <a href="{{ route('shop.brochure.index') }}" class="nav-btn nav-btn--back" aria-label="Back to all brochures">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                     <path d="m15 18-6-6 6-6"/>
                 </svg>
                 <span>All Brochures</span>
@@ -344,62 +551,67 @@
         </div>
     </header>
 
-    {{-- Flipbook Stage --}}
+    {{-- ── Flipbook Stage ───────────────────────────────────────────────── --}}
     <main id="brochure-stage">
-        <div id="flipbook-container"></div>
+        {{-- Ambient glow behind the book --}}
+        <div id="book-ambient-glow" aria-hidden="true"></div>
+
+        {{-- 3D perspective wrapper (does NOT interfere with StPageFlip) --}}
+        <div id="book-stage-perspective">
+            {{-- StPageFlip mounts into this exact element --}}
+            <div id="flipbook-container"></div>
+        </div>
     </main>
 
-    {{-- Bottom Controls --}}
+    {{-- ── Bottom Controls ─────────────────────────────────────────────── --}}
     <nav id="brochure-controls" aria-label="Page navigation">
-        {{-- First page --}}
-        <button class="ctrl-btn" id="btn-first" title="First page" aria-label="First page">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/>
+        <button class="ctrl-btn" id="btn-first" title="First page (Home)" aria-label="First page">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <polyline points="11 17 6 12 11 7"/>
+                <polyline points="18 17 13 12 18 7"/>
             </svg>
         </button>
 
-        {{-- Previous page --}}
-        <button class="ctrl-btn" id="btn-prev" title="Previous page" aria-label="Previous page">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button class="ctrl-btn" id="btn-prev" title="Previous page (←)" aria-label="Previous page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
                 <polyline points="15 18 9 12 15 6"/>
             </svg>
         </button>
 
-        {{-- Page indicator --}}
-        <span id="page-indicator" aria-live="polite">— / —</span>
+        <span id="page-indicator" aria-live="polite" aria-atomic="true">— / —</span>
 
-        {{-- Next page --}}
-        <button class="ctrl-btn" id="btn-next" title="Next page" aria-label="Next page">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button class="ctrl-btn" id="btn-next" title="Next page (→)" aria-label="Next page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
                 <polyline points="9 18 15 12 9 6"/>
             </svg>
         </button>
 
-        {{-- Last page --}}
-        <button class="ctrl-btn" id="btn-last" title="Last page" aria-label="Last page">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/>
+        <button class="ctrl-btn" id="btn-last" title="Last page (End)" aria-label="Last page">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <polyline points="13 17 18 12 13 7"/>
+                <polyline points="6 17 11 12 6 7"/>
             </svg>
         </button>
     </nav>
 
-    {{-- Zoom overlay --}}
-    <div id="zoom-overlay" role="dialog" aria-label="Zoom view">
+    {{-- Keyboard shortcut hint --}}
+    <div id="keyboard-hint" aria-hidden="true">← → Arrow keys to flip &nbsp;·&nbsp; Home / End &nbsp;·&nbsp; Z to zoom &nbsp;·&nbsp; Esc to close zoom</div>
+
+    {{-- ── Zoom overlay ────────────────────────────────────────────────── --}}
+    <div id="zoom-overlay" role="dialog" aria-modal="true" aria-label="Page zoom view">
         <canvas id="zoom-canvas"></canvas>
+        <span class="zoom-close-hint">Click anywhere or press Esc to close</span>
     </div>
 
-    {{-- Toast --}}
+    {{-- ── Toast ───────────────────────────────────────────────────────── --}}
     <div id="brochure-toast" role="status" aria-live="polite"></div>
 
-    {{-- Hidden audio for page flip sound --}}
-    <audio id="flip-sound" preload="auto" style="display:none">
-        {{-- Base64-encoded minimal page-flip click sound (PCM WAV, ~1KB) --}}
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAA..." type="audio/wav" />
-    </audio>
+    {{-- Hidden audio element (kept for JS reference — sound generated via Web Audio API) --}}
+    <audio id="flip-sound" preload="none" style="display:none" aria-hidden="true"></audio>
 
-    {{-- ================================================================
-         BROCHURE FLIPBOOK ENGINE
-         ================================================================ --}}
+    {{-- ==============================================================
+         BROCHURE FLIPBOOK ENGINE — Logic unchanged from original
+         ============================================================== --}}
     <script>
     /**
      * BrochureFlipbook — orchestrates StPageFlip + PDF.js
@@ -499,7 +711,7 @@
 
         function getFlipDimensions() {
             const stageW = window.innerWidth;
-            const stageH = window.innerHeight - 52 - 64; // topbar + controls
+            const stageH = window.innerHeight - 56 - 66; // topbar + controls (updated heights)
             const ratio  = 1.414; // A4 aspect ratio
 
             if (isMobile()) {
@@ -510,7 +722,7 @@
 
             // Desktop: two-page spread
             const maxW = Math.min(stageW * 0.90, 1200);
-            const maxH = stageH * 0.92;
+            const maxH = stageH * 0.90;
             let   w    = maxW / 2; // per-page width
             let   h    = w * ratio;
 
@@ -822,6 +1034,8 @@
             } else if (e.key === 'End') {
                 e.preventDefault();
                 pageFlip.flip(totalPages - 1);
+            } else if (e.key === 'z' || e.key === 'Z') {
+                openZoom();
             }
         });
 

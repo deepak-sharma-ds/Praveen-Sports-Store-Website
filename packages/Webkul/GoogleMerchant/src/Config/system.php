@@ -5,7 +5,7 @@ return [
         'key'  => 'googlemerchant',
         'name' => 'googlemerchant::app.admin.system.title',
         'info' => 'googlemerchant::app.admin.system.title-info',
-        'icon' => 'icon-settings',
+        'icon' => 'settings/settings.svg',
         'sort' => 10,
     ], [
         'key'  => 'googlemerchant.settings',
