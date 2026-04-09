@@ -29,14 +29,13 @@
         action="{{ route('admin.brochure.store') }}"
         method="POST"
         enctype="multipart/form-data"
-        class="mt-5"
     >
         @csrf
 
-        <div class="flex gap-x-4 max-xl:flex-wrap">
+        <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
 
             {{-- Left Column: Main Details --}}
-            <div class="flex flex-1 flex-col gap-2">
+            <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
 
                 {{-- Basic Information Card --}}
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
@@ -194,7 +193,7 @@
             </div>
 
             {{-- Right Column: Settings --}}
-            <div class="flex w-full max-w-xs flex-col gap-2 max-xl:max-w-full">
+            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
 
                 {{-- Status & Order Card --}}
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
