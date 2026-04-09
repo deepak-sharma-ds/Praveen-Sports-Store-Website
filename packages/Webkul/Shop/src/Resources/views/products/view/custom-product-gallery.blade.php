@@ -21,7 +21,7 @@
         <div class="w-full md:w-1/2">
             <!-- Gallery Tab Navigation -->
             <div class="bat-gallery-tabs flex gap-2 mb-4">
-                <button
+                {{-- <button
                     type="button"
                     class="gallery-tab px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 border"
                     :class="galleryActiveTab === 'images'
@@ -30,9 +30,9 @@
                     @click="galleryActiveTab = 'images'"
                 >
                     &#128247; Images
-                </button>
+                </button> --}}
 
-                <button
+                {{-- <button
                     type="button"
                     class="gallery-tab px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 border"
                     :class="galleryActiveTab === '3d'
@@ -41,7 +41,7 @@
                     @click="activate3DTab()"
                 >
                     &#127919; 3D View
-                </button>
+                </button> --}}
             </div>
 
             <!-- Panel A: Images (existing gallery — unchanged) -->
