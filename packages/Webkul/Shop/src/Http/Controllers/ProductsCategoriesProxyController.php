@@ -86,6 +86,10 @@ class ProductsCategoriesProxyController extends Controller
 
             visitor()->visit($product);
 
+            if ($product->categories()->where('categories.id', 14)->exists()) {
+                return view('shop::products.custom-product-view', compact('product'));
+            }
+
             return view('shop::products.view', compact('product'));
         }
 

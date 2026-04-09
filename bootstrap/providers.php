@@ -33,6 +33,7 @@ return [
     Webkul\Payment\Providers\PaymentServiceProvider::class,
     // Webkul\Paypal\Providers\PaypalServiceProvider::class,
     Webkul\Product\Providers\ProductServiceProvider::class,
+    Webkul\Product360\Providers\Product360ServiceProvider::class,
     Webkul\Rule\Providers\RuleServiceProvider::class,
     Webkul\Sales\Providers\SalesServiceProvider::class,
     Webkul\Shipping\Providers\ShippingServiceProvider::class,
@@ -48,4 +49,5 @@ return [
     // Razorpay provider
     Wontonee\Razorpay\Providers\RazorpayServiceProvider::class,
     Webkul\GoogleMerchant\Providers\GoogleMerchantServiceProvider::class,
+    Webkul\Brochure\Providers\BrochureServiceProvider::class,
 ];

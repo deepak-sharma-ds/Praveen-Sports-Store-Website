@@ -18,6 +18,9 @@ package-lock.json
 /playwright-report
 /public/css
 /public/js
+# !/public/js/
+# /public/js/*
+# !/public/js/bat-3d-configurator.js
 /public/hot
 /public/storage
 /public/vendor
@@ -26,7 +29,25 @@ package-lock.json
 /storage/dcc-data/
 /test-results
 /vendor
+/packages/Webkul/Brochure/node_modules
 yarn.lock
 yarn-error.log
 /test-results
 /playwright-report
+/.kiro
+/.claude
+# /packages/Webkul/Product360
+/packages/Webkul/Product360/tests
+/packages/Webkul/Product360/*.md
+/packages/Webkul/Product360/*.sh
+/packages/Webkul/Product360/*.ps1
+/docs
+# !/docs/
+# /docs/*
+# !/docs/dynamic-3d-cricket-bat.md
+/scripts
+# !/scripts/
+# /scripts/*
+# !/scripts/gen_bat_glb.py
+# !/scripts/gen_test_posters.py
+# !/scripts/gen_test_posters.ps1

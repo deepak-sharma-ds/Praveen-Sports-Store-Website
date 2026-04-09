@@ -91,6 +91,7 @@
             "Webkul\\Paypal\\": "packages/Webkul/Paypal/src",
             "Webkul\\Payment\\": "packages/Webkul/Payment/src",
             "Webkul\\Product\\": "packages/Webkul/Product/src",
+            "Webkul\\Product360\\": "packages/Webkul/Product360/src",
             "Webkul\\Rule\\": "packages/Webkul/Rule/src",
             "Webkul\\Sales\\": "packages/Webkul/Sales/src",
             "Webkul\\Shipping\\": "packages/Webkul/Shipping/src",
@@ -103,7 +104,8 @@
             "Webkul\\User\\": "packages/Webkul/User/src",
             "Webkul\\CustomStripePayment\\": "packages/Webkul/CustomStripePayment/src",
             "Webkul\\StripePayment\\": "packages/Webkul/StripePayment/src",
-            "Webkul\\GoogleMerchant\\": "packages/Webkul/GoogleMerchant/src"
+            "Webkul\\GoogleMerchant\\": "packages/Webkul/GoogleMerchant/src",
+            "Webkul\\Brochure\\": "packages/Webkul/Brochure/src"
         }
     },
     "autoload-dev": {
@@ -134,13 +136,15 @@
             ]
         }
     },
-    "repositories": [{
-        "type": "path",
-        "url": "packages/*/*",
-        "options": {
-            "symlink": true
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/*/*",
+            "options": {
+                "symlink": true
+            }
         }
-    }],
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",

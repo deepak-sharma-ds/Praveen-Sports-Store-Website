@@ -20,6 +20,24 @@
     </v-product-carousel>
 </div>
 
+{{-- 360° Thumbnail Button for Mobile --}}
+@if(isset($product360Images) && count($product360Images) >= 2)
+    <div class="mt-4 flex justify-center lg:hidden">
+        <button
+            type="button"
+            class="flex items-center gap-2 px-6 py-3 bg-navyBlue text-white rounded-lg hover:bg-opacity-90 transition-all"
+            onclick="openProduct360Modal()"
+            aria-label="View 360° rotation"
+            tabindex="0"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span class="text-sm font-medium">View 360°</span>
+        </button>
+    </div>
+@endif
+
 @pushOnce('scripts')
     <script
         type="text/x-template"

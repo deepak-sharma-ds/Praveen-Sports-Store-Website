@@ -136,8 +136,8 @@
                             <svg class="flex-[0_0_26px]" width="26" height="24" fill="#000">
                                 <path d="M12 12L24 4v16H0V4l12 8z" />
                             </svg>
-                            <a href="mailto:support@ana-sports.com" class="text-lg">
-                                support@ana-sports.com
+                            <a href="mailto:supports@ana-sports.com" class="text-lg">
+                                supports@ana-sports.com
                             </a>
                         </p>
 
