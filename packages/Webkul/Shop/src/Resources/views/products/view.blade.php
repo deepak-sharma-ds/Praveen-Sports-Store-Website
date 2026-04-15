@@ -98,20 +98,6 @@
         <script>
             window.dataLayer = window.dataLayer || [];
 
-            // dataLayer.push({
-            //     event: "view_item",
-            //     ecommerce: {
-            //         currency: "INR",
-            //         value: "{{ $product->special_price ?? 0 }}",
-            //         items: [{
-            //             item_id: "{{ $product->id }}",
-            //             item_name: "{{ addslashes($product->name) }}",
-            //             price: "{{ $product->special_price ?? 0 }}",
-            //             item_category: "{{ $product->type }}"
-            //         }]
-            //     }
-            // });
-
             const productData = {
                 id: "{{ $product->id }}",
                 name: "{{ addslashes($product->name) }}",
@@ -459,20 +445,6 @@
                             .then(response => {
                                 if (response.data.message) {
                                     // GA4 ADD TO CART EVENT
-                                    // window.dataLayer = window.dataLayer || [];
-                                    // dataLayer.push({
-                                    //     event: "add_to_cart",
-                                    //     ecommerce: {
-                                    //         currency: "INR",
-                                    //         value: "{{ $product->special_price ?? 0 }}",
-                                    //         items: [{
-                                    //             item_id: "{{ $product->id }}",
-                                    //             item_name: "{{ addslashes($product->name) }}",
-                                    //             price: "{{ $product->special_price ?? 0 }}",
-                                    //             quantity: 1
-                                    //         }]
-                                    //     }
-                                    // });
 
                                     // Extract dynamic quantity from form
                                     const quantity = Number(formData.get('quantity') || 1);
