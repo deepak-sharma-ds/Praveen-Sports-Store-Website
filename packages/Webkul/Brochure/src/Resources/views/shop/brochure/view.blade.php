@@ -856,20 +856,39 @@
                     pages.push(canvas);
                 }
 
-                // Size all canvases from page 1 viewport — DPR-aware for crisp text
-                const firstPage = await pdfDoc.getPage(1);
-                const dpr       = window.devicePixelRatio || 1;
-                const baseScale = isMobile() ? 1.5 : 2.5;
-                const scale     = baseScale * dpr;
-                const viewport  = firstPage.getViewport({ scale });
-                const logicalW  = Math.round(viewport.width  / dpr);
-                const logicalH  = Math.round(viewport.height / dpr);
+                // ── Pixel-perfect rendering strategy ──────────────────────
+                //
+                // StPageFlip displays page elements as DIRECT DOM nodes with
+                // CSS width/height set to its configured page dimensions, plus
+                // translate3d() for GPU compositing.
+                //
+                // If the canvas pixel buffer doesn't match the CSS display size,
+                // the browser CSS-scales the canvas. Under GPU compositing with
+                // translate3d + subpixel positioning, this scaling introduces
+                // visible blur — especially on standard-DPI screens.
+                //
+                // FIX: render PDF pages at EXACTLY the display size (× DPR).
+                // No CSS scaling needed → pixel-perfect 1:1 mapping → sharp.
+                //
+                // For zoom, we re-render the page at high resolution on demand
+                // (zoom bypasses StPageFlip entirely, so no GPU blur).
+                // ──────────────────────────────────────────────────────────────
+
+                const { width: displayW, height: displayH } = getFlipDimensions();
+                const dpr = window.devicePixelRatio || 1;
+
+                // Determine the exact scale that maps PDF points → display pixels × DPR.
+                // This makes each canvas pixel map 1:1 to a physical screen pixel.
+                const firstPage     = await pdfDoc.getPage(1);
+                const nativeVP      = firstPage.getViewport({ scale: 1.0 });
+                const displayScale  = (displayW * dpr) / nativeVP.width;
+
+                const bufferW = Math.round(displayW * dpr);
+                const bufferH = Math.round(displayH * dpr);
 
                 pages.forEach(c => {
-                    c.width        = viewport.width;   // hi-res pixel buffer
-                    c.height       = viewport.height;
-                    c.style.width  = logicalW + 'px';  // CSS display at logical size
-                    c.style.height = logicalH + 'px';
+                    c.width  = bufferW;
+                    c.height = bufferH;
                 });
 
                 initPageFlipInstance(pages);
@@ -884,7 +903,6 @@
 
                 updateIndicator(currentPage, totalPages);
 
-                // Jump to deep-linked page
                 if (currentPage > 1 && pageFlip) {
                     pageFlip.turnToPage(currentPage - 1);
                 }
@@ -905,9 +923,17 @@
         /**
          * Render a range of PDF pages [fromIdx, toIdx] (0-based indices).
          * Skips already-rendered pages. Reports progress when withProgress=true.
+         *
+         * Uses display-matched scale: canvas buffer = StPageFlip display × DPR.
+         * No CSS scaling needed → pixel-perfect, no GPU-compositing blur.
          */
         async function renderPdfPages(fromIdx, toIdx, withProgress = false) {
             if (!pdfDoc) return;
+
+            const { width: displayW, height: displayH } = getFlipDimensions();
+            const dpr      = window.devicePixelRatio || 1;
+            const bufferW  = Math.round(displayW * dpr);
+            const bufferH  = Math.round(displayH * dpr);
 
             for (let i = fromIdx; i <= toIdx; i++) {
                 if (renderedPages[i]) continue;
@@ -915,21 +941,19 @@
                 renderedPages[i] = true; // mark immediately to prevent duplicate renders
 
                 try {
-                    const pageNum   = i + 1;
-                    const page      = await pdfDoc.getPage(pageNum);
-                    const canvas    = document.getElementById('pdf-page-' + pageNum);
+                    const pageNum = i + 1;
+                    const page    = await pdfDoc.getPage(pageNum);
+                    const canvas  = document.getElementById('pdf-page-' + pageNum);
 
                     if (!canvas) continue;
 
-                    const dpr       = window.devicePixelRatio || 1;
-                    const baseScale = isMobile() ? 1.5 : 2.5;
-                    const scale     = baseScale * dpr;
-                    const viewport  = page.getViewport({ scale });
+                    // Compute exact scale for this page to fill the display buffer
+                    const nativeVP = page.getViewport({ scale: 1.0 });
+                    const scale    = (displayW * dpr) / nativeVP.width;
+                    const viewport = page.getViewport({ scale });
 
-                    canvas.width        = viewport.width;
-                    canvas.height       = viewport.height;
-                    canvas.style.width  = Math.round(viewport.width  / dpr) + 'px';
-                    canvas.style.height = Math.round(viewport.height / dpr) + 'px';
+                    canvas.width  = bufferW;
+                    canvas.height = bufferH;
 
                     const ctx = canvas.getContext('2d');
 
@@ -1009,11 +1033,42 @@
         }
 
         // ── ZOOM ───────────────────────────────────────────────────────
+        //
+        // Flipbook pages are rendered at display-matched resolution for
+        // pixel-perfect sharpness. Zoom re-renders the page at HIGH
+        // resolution (scale 3.0) on demand — gives crisp detail without
+        // bloating the flipbook's canvas buffers.
 
-        function openZoom() {
+        async function openZoom() {
             if (!pageFlip) return;
 
-            const idx  = pageFlip.getCurrentPageIndex(); // 0-based
+            const idx     = pageFlip.getCurrentPageIndex(); // 0-based
+            const pageNum = idx + 1;
+
+            // PDF mode: re-render at high resolution for crisp zoom
+            if (DATA.mode === 'pdf' && pdfDoc) {
+                try {
+                    const page       = await pdfDoc.getPage(pageNum);
+                    const hiResScale = 3.0;
+                    const vp         = page.getViewport({ scale: hiResScale });
+
+                    zoomCanvas.width  = vp.width;
+                    zoomCanvas.height = vp.height;
+
+                    await page.render({
+                        canvasContext: zoomCanvas.getContext('2d'),
+                        viewport:     vp,
+                    }).promise;
+
+                    zoomOverlay.classList.add('active');
+                } catch (e) {
+                    console.warn('[Brochure] Zoom render failed:', e);
+                    showToast('Could not zoom. Please try again.', 2000);
+                }
+                return;
+            }
+
+            // Image mode / fallback: copy from the page element directly
             const page = document.querySelectorAll('.page-canvas')[idx];
 
             if (!page) return;
