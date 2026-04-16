@@ -45,6 +45,8 @@ A **Digital Brochure System** for Bagisto — lets your team publish product cat
 | **WebP conversion** | Uploaded images auto-converted to WebP via PHP GD |
 | **SEO fields** | Meta title + meta description per brochure |
 | **Sort order** | Control listing display order from admin |
+| **Cover thumbnail** | Upload a real cover image per brochure — shown on the listing card grid |
+| **PDF download** | Download button in viewer nav + keyboard shortcut `D` |
 
 ---
 
@@ -384,26 +386,24 @@ packages/Webkul/Brochure/
 
 ## Extending This Module
 
-### Add a cover thumbnail
+### ✅ Cover thumbnail (implemented)
 
-1. Add a `cover_image` column to the migration
-2. Add `cover_image` to `$fillable` in `Brochure.php`
-3. Add an image upload field in `create.blade.php` / `edit.blade.php`
-4. In `BrochureRepository::createWithUpload()`, handle the new file upload
-5. Use `$brochure->cover_image` in `shop/brochure/index.blade.php` to show real thumbnails
+The `cover_image` column is already in the `brochures` table (migration `2024_01_02_000000_add_cover_image_to_brochures_table.php`).
 
-### Add a download button in the viewer
+- Upload a cover image via Admin → Brochure → Create/Edit (right column, **Cover Image** card)
+- Accepted formats: JPG, PNG, WebP — max 2 MB
+- When a cover image is set, it replaces the generic book-pattern on the listing cards
+- Accessor `$brochure->cover_image_url` returns the public URL
+- Stored at `storage/app/public/brochure/covers/`
 
-In `view.blade.php`, add to the top nav:
-
-```blade
-@if ($brochure->pdf_url)
-    <a href="{{ $brochure->pdf_url }}" download class="nav-btn">
-        <svg ...> <!-- download icon --> </svg>
-        <span>Download</span>
-    </a>
-@endif
+Run the migration if not done:
+```bash
+php artisan migrate
 ```
+
+### ✅ Download button in the viewer (implemented)
+
+A **Download PDF** button appears in the top-right nav of the viewer whenever a PDF is attached to the brochure. Keyboard shortcut: `D`.
 
 ### Connect to a custom analytics provider
 

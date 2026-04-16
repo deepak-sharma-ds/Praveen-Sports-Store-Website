@@ -165,10 +165,21 @@
 
         .nav-btn svg { flex-shrink: 0; }
 
-        /* Back button — slightly different accent */
+        /* Back button — maroon accent */
         .nav-btn--back:hover {
             background: rgba(144,33,41,0.2);
             border-color: rgba(144,33,41,0.4);
+        }
+
+        /* Download button — green accent */
+        .nav-btn--download {
+            border-color: rgba(34,197,94,0.22);
+        }
+
+        .nav-btn--download:hover {
+            background: rgba(34,197,94,0.15);
+            border-color: rgba(34,197,94,0.4);
+            color: #86efac;
         }
 
         /* ── Main stage ───────────────────────────────────────────── */
@@ -541,6 +552,22 @@
                 <span>Sound</span>
             </button>
 
+            {{-- Download PDF --}}
+            @if ($brochure->pdf_url)
+            <a href="{{ $brochure->pdf_url }}"
+               download="{{ \Illuminate\Support\Str::slug($brochure->title) }}.pdf"
+               class="nav-btn nav-btn--download"
+               title="Download PDF"
+               aria-label="Download PDF">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Download</span>
+            </a>
+            @endif
+
             {{-- Back to catalog --}}
             <a href="{{ route('shop.brochure.index') }}" class="nav-btn nav-btn--back" aria-label="Back to all brochures">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -595,7 +622,7 @@
     </nav>
 
     {{-- Keyboard shortcut hint --}}
-    <div id="keyboard-hint" aria-hidden="true">← → Arrow keys to flip &nbsp;·&nbsp; Home / End &nbsp;·&nbsp; Z to zoom &nbsp;·&nbsp; Esc to close zoom</div>
+    <div id="keyboard-hint" aria-hidden="true">← → Arrow keys to flip &nbsp;·&nbsp; Home / End &nbsp;·&nbsp; Z to zoom &nbsp;·&nbsp; Esc to close zoom &nbsp;·&nbsp; D to download</div>
 
     {{-- ── Zoom overlay ────────────────────────────────────────────────── --}}
     <div id="zoom-overlay" role="dialog" aria-modal="true" aria-label="Page zoom view">
@@ -711,18 +738,18 @@
 
         function getFlipDimensions() {
             const stageW = window.innerWidth;
-            const stageH = window.innerHeight - 56 - 66; // topbar + controls (updated heights)
+            const stageH = window.innerHeight - 56 - 66; // topbar + controls heights
             const ratio  = 1.414; // A4 aspect ratio
 
             if (isMobile()) {
-                // Single-page mode on mobile — fill most of the stage
-                const w = Math.min(stageW * 0.92, 420);
+                // Single-page mode on mobile — fill nearly full stage width
+                const w = Math.min(stageW * 0.97, 520);
                 return { width: Math.round(w), height: Math.round(w * ratio) };
             }
 
-            // Desktop: two-page spread
-            const maxW = Math.min(stageW * 0.90, 1200);
-            const maxH = stageH * 0.90;
+            // Desktop: two-page spread — fill 96% of available space
+            const maxW = stageW * 0.96;
+            const maxH = stageH * 0.96;
             let   w    = maxW / 2; // per-page width
             let   h    = w * ratio;
 
@@ -808,7 +835,12 @@
                 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
             try {
-                pdfDoc     = await pdfjsLib.getDocument({ url: DATA.pdfUrl, cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/', cMapPacked: true }).promise;
+                pdfDoc     = await pdfjsLib.getDocument({
+                    url:                 DATA.pdfUrl,
+                    cMapUrl:             'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
+                    cMapPacked:          true,
+                    standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/standard_fonts/',
+                }).promise;
                 totalPages = pdfDoc.numPages;
 
                 setProgress(20, 'Preparing pages…');
@@ -824,14 +856,20 @@
                     pages.push(canvas);
                 }
 
-                // Size all canvases from page 1 viewport
+                // Size all canvases from page 1 viewport — DPR-aware for crisp text
                 const firstPage = await pdfDoc.getPage(1);
-                const scale     = isMobile() ? 1.2 : 2.0;
+                const dpr       = window.devicePixelRatio || 1;
+                const baseScale = isMobile() ? 1.5 : 2.5;
+                const scale     = baseScale * dpr;
                 const viewport  = firstPage.getViewport({ scale });
+                const logicalW  = Math.round(viewport.width  / dpr);
+                const logicalH  = Math.round(viewport.height / dpr);
 
                 pages.forEach(c => {
-                    c.width  = viewport.width;
-                    c.height = viewport.height;
+                    c.width        = viewport.width;   // hi-res pixel buffer
+                    c.height       = viewport.height;
+                    c.style.width  = logicalW + 'px';  // CSS display at logical size
+                    c.style.height = logicalH + 'px';
                 });
 
                 initPageFlipInstance(pages);
@@ -877,17 +915,21 @@
                 renderedPages[i] = true; // mark immediately to prevent duplicate renders
 
                 try {
-                    const pageNum = i + 1;
-                    const page    = await pdfDoc.getPage(pageNum);
-                    const canvas  = document.getElementById('pdf-page-' + pageNum);
+                    const pageNum   = i + 1;
+                    const page      = await pdfDoc.getPage(pageNum);
+                    const canvas    = document.getElementById('pdf-page-' + pageNum);
 
                     if (!canvas) continue;
 
-                    const scale    = isMobile() ? 1.2 : 2.0;
-                    const viewport = page.getViewport({ scale });
+                    const dpr       = window.devicePixelRatio || 1;
+                    const baseScale = isMobile() ? 1.5 : 2.5;
+                    const scale     = baseScale * dpr;
+                    const viewport  = page.getViewport({ scale });
 
-                    canvas.width  = viewport.width;
-                    canvas.height = viewport.height;
+                    canvas.width        = viewport.width;
+                    canvas.height       = viewport.height;
+                    canvas.style.width  = Math.round(viewport.width  / dpr) + 'px';
+                    canvas.style.height = Math.round(viewport.height / dpr) + 'px';
 
                     const ctx = canvas.getContext('2d');
 
@@ -1036,6 +1078,12 @@
                 pageFlip.flip(totalPages - 1);
             } else if (e.key === 'z' || e.key === 'Z') {
                 openZoom();
+            } else if ((e.key === 'd' || e.key === 'D') && DATA.pdfUrl) {
+                // Trigger download via hidden link
+                const dl = document.createElement('a');
+                dl.href     = DATA.pdfUrl;
+                dl.download = DATA.slug + '.pdf';
+                dl.click();
             }
         });
 

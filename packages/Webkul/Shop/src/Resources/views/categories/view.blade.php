@@ -17,6 +17,84 @@
     @endif
 @endPush
 
+@pushOnce('styles')
+    <style>
+        .category-description-read-more .category-description-content {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-description-read-more .category-description-toggle {
+            display: none;
+        }
+
+        .category-description-read-more .category-description-actions {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .category-description-read-more.is-overflowing .category-description-content {
+            max-height: 120px;
+        }
+
+        .category-description-read-more.is-overflowing .category-description-content::after {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(237, 237, 237, 0), #EDEDED);
+            content: "";
+            pointer-events: none;
+        }
+
+        .category-description-read-more.is-overflowing .category-description-actions {
+            display: block !important;
+        }
+
+        .category-description-read-more .category-description-read-less {
+            display: none !important;
+        }
+
+        .category-description-read-more:has(.category-description-toggle:checked) .category-description-content {
+            max-height: none;
+        }
+
+        .category-description-read-more:has(.category-description-toggle:checked) .category-description-content::after {
+            display: none;
+        }
+
+        .category-description-read-more:has(.category-description-toggle:checked) .category-description-read-more-button {
+            display: none !important;
+        }
+
+        .category-description-read-more:has(.category-description-toggle:checked) .category-description-read-less {
+            display: inline-flex !important;
+        }
+
+        .category-description-button {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 3px;
+            background-color: #111827;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            padding: 0.5rem 1.25rem;
+            transition: background-color 0.2s ease;
+            user-select: none;
+        }
+
+        .category-description-button:hover {
+            background-color: #374151;
+        }
+    </style>
+@endPushOnce
+
 <x-shop::layouts>
     <!-- Page Title -->
     <x-slot:title>
@@ -47,8 +125,49 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
+            @php
+                $categoryDescription = $category->description;
+                $plainCategoryDescription = trim(preg_replace('/\s+/', ' ', strip_tags($categoryDescription)));
+                $hasLongCategoryDescription = \Illuminate\Support\Str::length($plainCategoryDescription) > 700;
+            @endphp
+
             <div class="bg-[#EDEDED] container py-[34px] px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
-                {!! $category->description !!}
+                @if ($hasLongCategoryDescription)
+                    <div
+                        class="category-description-read-more is-overflowing"
+                        data-category-read-more
+                    >
+                        <div class="category-description-content body-text">
+                            {!! $categoryDescription !!}
+                        </div>
+
+                        <div class="category-description-actions">
+                            <input
+                                type="checkbox"
+                                id="category-description-toggle-{{ $category->id }}"
+                                class="category-description-toggle"
+                            />
+
+                            <label
+                                for="category-description-toggle-{{ $category->id }}"
+                                class="category-description-button category-description-read-more-button"
+                            >
+                                Read More
+                            </label>
+
+                            <label
+                                for="category-description-toggle-{{ $category->id }}"
+                                class="category-description-button category-description-read-less"
+                            >
+                                Read Less
+                            </label>
+                        </div>
+                    </div>
+                @else
+                    <div>
+                        {!! $categoryDescription !!}
+                    </div>
+                @endif
             </div>
         @endif
     @endif

@@ -106,17 +106,17 @@
                 Bats
             </a>
 
-            <a href="/blog"
+            {{-- <a href="/blog"
                class="hover:text-primary transition"
                :class="{ 'text-primary font-semibold': activeTab === 'blog' }">
                 Blog
-            </a>
+            </a> --}}
 
-            <a href="{{ route('shop.cms.page', 'about-us') }}"
+            {{-- <a href="{{ route('shop.cms.page', 'about-us') }}"
                class="hover:text-primary transition"
                :class="{ 'text-primary font-semibold': activeTab === 'about' }">
                 About Us
-            </a>
+            </a> --}}
 
             <a href="{{ url('/customize-your-bat') }}"
                class="hover:text-primary transition"

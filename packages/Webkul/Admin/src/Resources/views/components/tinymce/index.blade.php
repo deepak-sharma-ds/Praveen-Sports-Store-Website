@@ -218,7 +218,7 @@
     <script type="module">
         app.component('v-tinymce', {
             template: '#v-tinymce-template',
-                
+
             props: ['selector', 'field', 'prompt'],
 
             data() {
@@ -245,7 +245,7 @@
                 this.init();
 
                 this.$emitter.on('change-theme', (theme) => {
-                    tinymce.get(0).destroy();
+                    this.destroyEditor();
 
                     this.currentSkin = theme === 'dark' ? 'oxide-dark' : 'oxide';
                     this.currentContentCSS = theme === 'dark' ? 'dark' : 'default';
@@ -255,6 +255,22 @@
             },
 
             methods: {
+                editorId() {
+                    return this.selector.replace(/^textarea#/, '').replace(/^#/, '');
+                },
+
+                getEditor() {
+                    return tinymce.get(this.editorId());
+                },
+
+                destroyEditor() {
+                    let editor = this.getEditor();
+
+                    if (editor) {
+                        editor.destroy();
+                    }
+                },
+
                 init() {
                     let self = this;
 
@@ -262,7 +278,7 @@
                         initTinyMCE: function(extraConfiguration) {
                             let self2 = this;
 
-                            let config = {  
+                            let config = {
                                 relative_urls: false,
                                 menubar: false,
                                 remove_script_host: false,
@@ -341,7 +357,7 @@
                                 if (xhr.status < 200 || xhr.status >= 300) {
                                     try {
                                         json = JSON.parse(xhr.responseText);
-                                        
+
                                         if (json.error) {
                                             reject(json.error);
                                         } else {
@@ -377,10 +393,121 @@
 
                     tinyMCEHelper.initTinyMCE({
                         selector: this.selector,
-                        plugins: 'image media wordcount save fullscreen code table lists link',
-                        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor image alignleft aligncenter alignright alignjustify | link hr |numlist bullist outdent indent  | removeformat | code | table | aibutton',
+                        plugins: 'lists link image media table code fullscreen preview paste wordcount save',
+                        toolbar1: 'undo redo | blocks | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | removeformat | preview fullscreen code | aibutton',
+                        toolbar_mode: 'sliding',
+                        block_formats: 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
+                        forced_root_block: 'p',
+                        branding: false,
+                        promotion: false,
+                        image_title: true,
                         image_advtab: true,
-                        directionality : "{{ core()->getCurrentLocale()->direction }}",
+                        automatic_uploads: true,
+                        file_picker_types: 'image',
+                        table_default_styles: {},
+                        table_default_attributes: {
+                            class: 'table',
+                        },
+                        formats: {
+                            underline: {
+                                inline: 'u',
+                                exact: true,
+                            },
+                            strikethrough: {
+                                inline: 's',
+                                exact: true,
+                            },
+                            alignleft: {
+                                selector: 'p,h2,h3,li,td,th',
+                                classes: 'text-left',
+                            },
+                            aligncenter: {
+                                selector: 'p,h2,h3,li,td,th',
+                                classes: 'text-center',
+                            },
+                            alignright: {
+                                selector: 'p,h2,h3,li,td,th',
+                                classes: 'text-right',
+                            },
+                            alignjustify: {
+                                selector: 'p,h2,h3,li,td,th',
+                                classes: 'text-justify',
+                            },
+                        },
+                        paste_preprocess: (plugin, args) => {
+                            let parser = new DOMParser();
+                            let doc = parser.parseFromString(`<div>${args.content}</div>`, 'text/html');
+                            let container = doc.body.firstElementChild;
+
+                            if (! container) {
+                                return;
+                            }
+
+                            container.querySelectorAll('[style]').forEach(element => element.removeAttribute('style'));
+
+                            container.querySelectorAll('h1').forEach(element => {
+                                let heading = doc.createElement('h2');
+                                heading.innerHTML = element.innerHTML;
+
+                                element.replaceWith(heading);
+                            });
+
+                            container.querySelectorAll('h4, h5, h6').forEach(element => {
+                                let heading = doc.createElement('h3');
+                                heading.innerHTML = element.innerHTML;
+
+                                element.replaceWith(heading);
+                            });
+
+                            args.content = container.innerHTML;
+                        },
+                        content_style: `
+                            body {
+                                font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                                font-size: 14px;
+                                line-height: 1.6;
+                            }
+
+                            h2 {
+                                font-size: 1.5rem;
+                                font-weight: 700;
+                                line-height: 1.3;
+                            }
+
+                            h3 {
+                                font-size: 1.25rem;
+                                font-weight: 600;
+                                line-height: 1.35;
+                            }
+
+                            table {
+                                border-collapse: collapse;
+                                width: 100%;
+                            }
+
+                            td,
+                            th {
+                                border: 1px solid #d1d5db;
+                                padding: 0.5rem;
+                            }
+
+                            .text-left {
+                                text-align: left;
+                            }
+
+                            .text-center {
+                                text-align: center;
+                            }
+
+                            .text-right {
+                                text-align: right;
+                            }
+
+                            .text-justify {
+                                text-align: justify;
+                            }
+                        `,
+                        directionality: "{{ core()->getCurrentLocale()->direction }}",
 
                         setup: editor => {
                             editor.ui.registry.addIcon('magic', '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"> <g clip-path="url(#clip0_3148_2242)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1484 9.31989L9.31995 12.1483L19.9265 22.7549L22.755 19.9265L12.1484 9.31989ZM12.1484 10.7341L10.7342 12.1483L13.5626 14.9767L14.9768 13.5625L12.1484 10.7341Z" fill="#2563EB"/> <path d="M11.0877 3.30949L13.5625 4.44748L16.0374 3.30949L14.8994 5.78436L16.0374 8.25924L13.5625 7.12124L11.0877 8.25924L12.2257 5.78436L11.0877 3.30949Z" fill="#2563EB"/> <path d="M2.39219 2.39217L5.78438 3.95197L9.17656 2.39217L7.61677 5.78436L9.17656 9.17655L5.78438 7.61676L2.39219 9.17655L3.95198 5.78436L2.39219 2.39217Z" fill="#2563EB"/> <path d="M3.30947 11.0877L5.78434 12.2257L8.25922 11.0877L7.12122 13.5626L8.25922 16.0374L5.78434 14.8994L3.30947 16.0374L4.44746 13.5626L3.30947 11.0877Z" fill="#2563EB"/> </g> <defs> <clipPath id="clip0_3148_2242"> <rect width="24" height="24" fill="white"/> </clipPath> </defs> </svg>');
@@ -401,7 +528,7 @@
                                 }
                             });
 
-                            editor.on('keyup', () => {
+                            editor.on('change input keyup undo redo SetContent', () => {
                                 this.field.onInput(editor.getContent());
                             });
                         },
@@ -436,9 +563,16 @@
                         return;
                     }
 
-                    tinymce.get(this.selector.replace('textarea#', '')).setContent(this.ai.content.replace(/\r?\n/g, '<br />'))
+                    let editor = this.getEditor();
+                    let content = this.ai.content.replace(/\r?\n/g, '<br />');
 
-                    this.field.onInput(this.ai.content.replace(/\r?\n/g, '<br />'));
+                    if (! editor) {
+                        return;
+                    }
+
+                    editor.setContent(content);
+
+                    this.field.onInput(content);
 
                     this.$refs.magicAIModal.close();
                 },

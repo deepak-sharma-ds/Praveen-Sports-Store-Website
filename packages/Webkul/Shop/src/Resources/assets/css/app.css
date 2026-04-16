@@ -781,3 +781,86 @@ h4{
 .engraving-option input:focus {
     box-shadow: 0 0 0 3px rgba(144, 33, 41, 0.15);
 }
+
+
+:is(.blog-content, .body-text) h2{
+    font-size: 26px;
+    margin: 30px 0 15px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+}
+:is(.blog-content, .body-text) h2:first-child{
+    margin-top: 0;
+}
+:is(.blog-content, .body-text) h3{
+    font-size: 22px;
+    margin: 0 0 15px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+}
+:is(.blog-content, .body-text) h4{
+    font-size: 18px;
+    margin: 0 0 15px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+}
+:is(.blog-content, .body-text) h5{
+    font-size: 16px;
+    margin: 0 0 15px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+}
+:is(.blog-content, .body-text) p{
+    font-size: 16px;
+    margin: 0 0 15px;
+}
+:is(.blog-content, .body-text) ul{
+    font-size: 16px;
+    margin: 0 0 15px;
+    list-style: disc;
+    padding-left: 20px;
+}
+:is(.blog-content, .body-text) ul li{
+    margin: 0 0 5px;
+}
+
+.related-bolg-part{
+    padding-top: 30px !important;
+}
+.blog-post-box h2{
+    font-size: 16px;
+    margin: 0 0 15px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+    line-height: 1.35;
+}
+.blog-post-box .card-text{
+    font-size: 14px;
+}
+
+@media (max-width: 767px){
+    :is(.blog-content, .body-text) h2{
+        font-size: 22px;
+        margin: 20px 0 10px;
+    }
+    :is(.blog-content, .body-text) h3{
+        font-size: 18px;
+        margin: 0 0 10px;
+    }
+    :is(.blog-content, .body-text) h4{
+        font-size: 16px;
+        margin: 0 0 10px;
+    }
+    :is(.blog-content, .body-text) h5{
+        font-size: 14px;
+        margin: 0 0 10px;
+    }
+    :is(.blog-content, .body-text) p{
+        font-size: 14px;
+        margin: 0 0 10px;
+    }
+    :is(.blog-content, .body-text) ul{
+        font-size: 14px;
+        margin: 0 0 10px;
+    }
+}

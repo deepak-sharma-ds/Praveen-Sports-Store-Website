@@ -245,6 +245,38 @@
                     </div>
                 </div>
 
+                {{-- Cover Image Card --}}
+                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
+                        @lang('brochure::app.admin.create.cover-image')
+                    </p>
+
+                    <div class="mb-2">
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label>
+                                @lang('brochure::app.admin.fields.cover-image')
+                            </x-admin::form.control-group.label>
+
+                            <div class="flex flex-col gap-1">
+                                <input
+                                    type="file"
+                                    name="cover_image"
+                                    id="cover_image"
+                                    accept="image/*"
+                                    class="w-full rounded border border-gray-200 px-3 py-2 text-sm text-gray-800 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                />
+                                <p class="text-xs text-gray-500 dark:text-gray-400">
+                                    @lang('brochure::app.admin.fields.cover-image-hint')
+                                </p>
+                            </div>
+
+                            @error('cover_image')
+                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
+                            @enderror
+                        </x-admin::form.control-group>
+                    </div>
+                </div>
+
                 {{-- Submit --}}
                 <div class="flex justify-end gap-2">
                     <a href="{{ route('admin.brochure.index') }}" class="transparent-button">
