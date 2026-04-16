@@ -52,11 +52,11 @@ class BrochureController extends Controller
                 'meta_description',
             ]);
 
-            $pdfFile    = $request->hasFile('pdf_file') ? $request->file('pdf_file') : null;
-            $pageImages = $request->hasFile('page_images') ? $request->file('page_images') : [];
+            $pdfFile        = $request->hasFile('pdf_file')     ? $request->file('pdf_file')     : null;
+            $pageImages     = $request->hasFile('page_images')  ? $request->file('page_images')  : [];
+            $coverImageFile = $request->hasFile('cover_image')  ? $request->file('cover_image')  : null;
 
-
-            $this->brochureRepository->createWithUpload($data, $pdfFile, $pageImages);
+            $this->brochureRepository->createWithUpload($data, $pdfFile, $pageImages, $coverImageFile);
 
             session()->flash('success', trans('brochure::app.admin.create-success'));
 
@@ -95,10 +95,11 @@ class BrochureController extends Controller
                 'meta_description',
             ]);
 
-            $pdfFile    = $request->hasFile('pdf_file') ? $request->file('pdf_file') : null;
-            $pageImages = $request->hasFile('page_images') ? $request->file('page_images') : [];
+            $pdfFile        = $request->hasFile('pdf_file')    ? $request->file('pdf_file')    : null;
+            $pageImages     = $request->hasFile('page_images') ? $request->file('page_images') : [];
+            $coverImageFile = $request->hasFile('cover_image') ? $request->file('cover_image') : null;
 
-            $this->brochureRepository->updateWithUpload($brochure, $data, $pdfFile, $pageImages);
+            $this->brochureRepository->updateWithUpload($brochure, $data, $pdfFile, $pageImages, $coverImageFile);
 
             session()->flash('success', trans('brochure::app.admin.update-success'));
 

@@ -37,10 +37,14 @@ class BrochureRepository extends Repository
     /**
      * Create a brochure with file upload handling.
      */
-    public function createWithUpload(array $data, $pdfFile = null, array $pageImages = []): Brochure
+    public function createWithUpload(array $data, $pdfFile = null, array $pageImages = [], $coverImageFile = null): Brochure
     {
         if ($pdfFile) {
             $data['pdf_path'] = $pdfFile->store('brochure/pdf', 'public');
+        }
+
+        if ($coverImageFile) {
+            $data['cover_image'] = $coverImageFile->store('brochure/covers', 'public');
         }
 
         $data['slug'] = Brochure::generateUniqueSlug($data['title']);
@@ -57,7 +61,7 @@ class BrochureRepository extends Repository
     /**
      * Update a brochure with optional file replacement.
      */
-    public function updateWithUpload(Brochure $brochure, array $data, $pdfFile = null, array $pageImages = []): Brochure
+    public function updateWithUpload(Brochure $brochure, array $data, $pdfFile = null, array $pageImages = [], $coverImageFile = null): Brochure
     {
         if ($pdfFile) {
             // Remove old PDF if it exists
@@ -66,6 +70,15 @@ class BrochureRepository extends Repository
             }
 
             $data['pdf_path'] = $pdfFile->store('brochure/pdf', 'public');
+        }
+
+        if ($coverImageFile) {
+            // Remove old cover image if it exists
+            if ($brochure->cover_image) {
+                Storage::disk('public')->delete($brochure->cover_image);
+            }
+
+            $data['cover_image'] = $coverImageFile->store('brochure/covers', 'public');
         }
 
         // Regenerate slug only if title changed
@@ -96,6 +109,11 @@ class BrochureRepository extends Repository
         // Remove PDF file
         if ($brochure->pdf_path) {
             Storage::disk('public')->delete($brochure->pdf_path);
+        }
+
+        // Remove cover image
+        if ($brochure->cover_image) {
+            Storage::disk('public')->delete($brochure->cover_image);
         }
 
         // Remove page images directory

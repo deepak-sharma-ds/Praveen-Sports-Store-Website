@@ -556,14 +556,25 @@
                                 {{-- ── Book face (cover) ─── --}}
                                 <a href="{{ route('shop.brochure.view', $brochure->slug) }}" class="bc-book-face" aria-label="{{ $brochure->title }}">
 
-                                    {{-- Spine --}}
+                                    {{-- Real cover image (when uploaded) --}}
+                                    @if ($brochure->cover_image_url)
+                                        <img
+                                            src="{{ $brochure->cover_image_url }}"
+                                            alt="{{ $brochure->title }}"
+                                            loading="lazy"
+                                            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;"
+                                        />
+                                    @endif
+
+                                    {{-- Spine (always on top of cover image) --}}
                                     <div class="bc-spine" aria-hidden="true"></div>
                                     <div class="bc-spine-crease" aria-hidden="true"></div>
 
-                                    {{-- Concentric circle pattern --}}
+                                    {{-- Concentric circle pattern — hidden when cover image present --}}
+                                    @if (! $brochure->cover_image_url)
                                     <div class="bc-cover-pattern" aria-hidden="true"></div>
 
-                                    {{-- Centre icon — cricket / sports SVG --}}
+                                    {{-- Centre icon — shown only without cover image --}}
                                     <div class="bc-cover-icon-wrap" aria-hidden="true">
                                         <svg viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                                             {{-- Open book symbol --}}
@@ -579,23 +590,24 @@
                                             <line x1="36" y1="36" x2="52" y2="36" opacity="0.5"/>
                                         </svg>
                                     </div>
+                                    @endif
 
                                     {{-- Cover footer --}}
-                                    <div class="bc-cover-footer">
-                                        <span class="bc-cover-brand-name">Praveen Sports</span>
+                                    <div class="bc-cover-footer" style="z-index:8;">
+                                        <span class="bc-cover-brand-name">{{config('app.name','ANA Sports')}}</span>
                                         <span class="bc-cover-title-text">{{ $brochure->title }}</span>
                                     </div>
 
                                     {{-- Gloss overlay --}}
-                                    <div class="bc-cover-gloss" aria-hidden="true"></div>
+                                    <div class="bc-cover-gloss" aria-hidden="true" style="z-index:9;"></div>
 
                                     {{-- Type badge --}}
-                                    <span class="bc-type-badge">
+                                    <span class="bc-type-badge" style="z-index:10;">
                                         {{ $brochure->type === 'pdf' ? 'PDF' : 'Catalog' }}
                                     </span>
 
                                     {{-- Hover CTA overlay --}}
-                                    <div class="bc-cover-hover-overlay" aria-hidden="true">
+                                    <div class="bc-cover-hover-overlay" aria-hidden="true" style="z-index:11;">
                                         <span class="bc-hover-btn">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>

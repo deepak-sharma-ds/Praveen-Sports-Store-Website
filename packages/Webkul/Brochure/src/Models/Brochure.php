@@ -20,6 +20,7 @@ class Brochure extends Model
         'title',
         'slug',
         'pdf_path',
+        'cover_image',
         'type',
         'status',
         'sort_order',
@@ -45,6 +46,18 @@ class Brochure extends Model
         }
 
         return Storage::url($this->pdf_path);
+    }
+
+    /**
+     * Get the cover image public URL.
+     */
+    public function getCoverImageUrlAttribute(): ?string
+    {
+        if (! $this->cover_image) {
+            return null;
+        }
+
+        return Storage::url($this->cover_image);
     }
 
     /**
