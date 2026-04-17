@@ -848,6 +848,12 @@ h4{
     @apply grid grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 2xl:grid-cols-4;
 }
 
+.blog-hero-image .hero-main-title{
+    font-family: 'Monument Extended';
+    line-height: 1.25 !important;
+    max-width: 900px !important;
+}
+
 
 @media (max-width: 767px){
     :is(.blog-content, .body-text) h2{
