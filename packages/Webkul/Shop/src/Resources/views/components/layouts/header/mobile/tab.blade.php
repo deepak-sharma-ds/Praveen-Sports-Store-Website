@@ -1,8 +1,8 @@
-<v-desktop-tabs></v-desktop-tabs>
+<v-mobile-tabs></v-mobile-tabs>
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-desktop-tabs-template">
-        <div class="flex items-center gap-3 xl:gap-8 font-medium text-black uppercase tracking-widest">
+    <script type="text/x-template" id="v-mobile-tabs-template">
+        <div class="flex flex-col p-5 gap-3 xl:gap-8 font-medium text-black uppercase tracking-widest w-full">
 
             <a href="{{ route('shop.home.index') }}"
                class="hover:text-primary transition"
@@ -18,7 +18,7 @@
             >
                 <button
                     type="button"
-                    class="hover:text-primary transition flex items-center gap-2 uppercase"
+                    class="hover:text-primary transition flex items-center justify-between gap-2 uppercase w-full"
                     :class="{ 'text-primary font-semibold': isCategoryDropdownOpen }"
                     @click.stop="toggleCategoryDropdown"
                 >
@@ -36,18 +36,18 @@
 
                 <div
                     v-show="isCategoryDropdownOpen"
-                    class="absolute left-0 top-full -mt-1 z-20 min-w-[320px] max-h-[420px] overflow-auto rounded-md border border-zinc-200 bg-white py-3 shadow-lg normal-case tracking-normal"
+                    class="w-full"
                 >
                     <div
                         v-if="isLoading"
-                        class="px-4 py-2 text-sm text-zinc-500"
+                        class="py-2 text-sm text-zinc-500"
                     >
                         Loading categories...
                     </div>
 
                     <template v-else>
                         <div
-                            class="px-4 py-2"
+                            class="py-2"
                         >
                             <p class="text-sm font-semibold text-black">
                                 Series
@@ -73,7 +73,7 @@
 
                         <div
                             v-if="featuredCollections.length"
-                            class="px-4 py-2"
+                            class="py-2"
                         >
                             <p class="text-sm font-semibold text-black">
                                 Featured Collections
@@ -106,17 +106,17 @@
                 Bats
             </a>
 
-            {{-- <a href="/blog"
+            <a href="/blog"
                class="hover:text-primary transition"
                :class="{ 'text-primary font-semibold': activeTab === 'blog' }">
                 Blog
-            </a> --}}
+            </a>
 
-            {{-- <a href="{{ route('shop.cms.page', 'about-us') }}"
+            <a href="{{ route('shop.cms.page', 'about-us') }}"
                class="hover:text-primary transition"
                :class="{ 'text-primary font-semibold': activeTab === 'about' }">
                 About Us
-            </a> --}}
+            </a>
 
             <a href="{{ url('/customize-your-bat') }}"
                class="hover:text-primary transition"
@@ -127,8 +127,8 @@
     </script>
 
     <script type="module">
-        app.component('v-desktop-tabs', {
-            template: '#v-desktop-tabs-template',
+        app.component('v-mobile-tabs', {
+            template: '#v-mobile-tabs-template',
 
             data() {
                 return {
