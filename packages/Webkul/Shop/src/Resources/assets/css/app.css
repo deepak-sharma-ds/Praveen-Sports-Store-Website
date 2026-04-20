@@ -608,7 +608,7 @@ h4{
 }
 
 .feature-item {
-  @apply w-full lg:w-1/4 px-4;
+  @apply w-full lg:w-1/4 px-4 text-center;
 }
 
 .feature-item:not(:last-child) {
@@ -837,6 +837,23 @@ h4{
 .blog-post-box .card-text{
     font-size: 14px;
 }
+
+.broucher-section{
+    @apply py-10 lg:py-20
+}
+.broucher-section .container{
+    @apply max-lg:px-4
+}
+.grid-boxes{
+    @apply grid grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 2xl:grid-cols-4;
+}
+
+.blog-hero-image .hero-main-title{
+    font-family: 'Monument Extended';
+    line-height: 1.25 !important;
+    max-width: 900px !important;
+}
+
 
 @media (max-width: 767px){
     :is(.blog-content, .body-text) h2{

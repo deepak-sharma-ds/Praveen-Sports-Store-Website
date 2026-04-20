@@ -258,7 +258,7 @@
 
             <x-slot:content class="!p-0">
                 <!-- Account Profile Hero Section -->
-                <div class="border-b border-zinc-200 p-4">
+                <div class="p-4">
                     <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">
                         <div>
                             <img
@@ -394,17 +394,17 @@
         id="v-mobile-category-template"
     >
         <!-- Wrapper with transition effects -->
-        <div class="relative h-full overflow-hidden">
+        <div class="relative overflow-hidden">
             <!-- Sliding container -->
             <div
-                class="flex h-full transition-transform duration-300"
+                class="flex transition-transform duration-300"
                 :class="{
                     'ltr:translate-x-0 rtl:translate-x-0': currentViewLevel !== 'third',
                     'ltr:-translate-x-full rtl:translate-x-full': currentViewLevel === 'third'
                 }"
             >
                 <!-- First level view -->
-                <div class="h-full w-full flex-shrink-0 overflow-auto px-6">
+                {{-- <div class="w-full flex-shrink-0 overflow-auto px-6">
                     <div class="py-4">
                         <div
                             v-for="category in categories"
@@ -440,26 +440,16 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+
+                <!-- -- Desktop Static tab --- -->
+                <x-shop::layouts.header.mobile.tab />
 
                 <!-- Third level view -->
                 <div
                     class="h-full w-full flex-shrink-0"
                     v-if="currentViewLevel === 'third'"
                 >
-                    <div class="border-b border-gray-200 px-6 py-4">
-                        <button
-                            @click="goBackToMainView"
-                            class="flex items-center justify-center gap-2 focus:outline-none"
-                            aria-label="Go back"
-                        >
-                            <span class="icon-arrow-left rtl:icon-arrow-right text-lg"></span>
-                            <div class="text-base font-medium text-black">
-                                @lang('shop::app.components.layouts.header.mobile.back-button')
-                            </div>
-                        </button>
-                    </div>
-
                     <!-- Third Level Content -->
                     <div class="px-6 py-4">
                         <div
@@ -474,6 +464,18 @@
                                 @{{ thirdLevelCategory.name }}
                             </a>
                         </div>
+                    </div>
+                    <div class="px-6 py-4">
+                        <button
+                            @click="goBackToMainView"
+                            class="flex items-center justify-center gap-2 focus:outline-none"
+                            aria-label="Go back"
+                        >
+                            <span class="icon-arrow-left rtl:icon-arrow-right text-lg"></span>
+                            <div class="text-base font-medium text-black">
+                                @lang('shop::app.components.layouts.header.mobile.back-button')
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
