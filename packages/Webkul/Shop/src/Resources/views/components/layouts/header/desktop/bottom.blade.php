@@ -1,13 +1,21 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.before') !!}
 
 <div
-    class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1239:px-8">
+    class="flex min-h-[78px] w-full border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1239:px-8 gap-4">
     <!--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
     -->
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.before') !!}
+    <a class="py-1" href="{{ route('shop.home.index') }}" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.bagisto')">
+        <img src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}" width="131"
+            height="29" alt="{{ config('app.name') }}">
+    </a>
+
+    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.after') !!}
+
     <!-- Left Nagivation Section -->
-    <div class="flex items-center gap-x-10 max-[1239px]:gap-x-5">
+    <div class="flex items-center gap-x-10 max-[1239px]:gap-x-5 md:ml-10">
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.before') !!}
 
         {{-- <v-desktop-category>
@@ -35,16 +43,10 @@
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.after') !!}
     </div>
 
-    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.before') !!}
-    <a class="py-1" href="{{ route('shop.home.index') }}" aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.bagisto')">
-        <img src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}" width="131"
-            height="29" alt="{{ config('app.name') }}">
-    </a>
-
-    {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.after') !!}
+    
 
     <!-- Right Nagivation Section -->
-    <div class="flex items-center gap-x-9 max-[1100px]:gap-x-6 max-lg:gap-x-8">
+    <div class="flex items-center gap-x-9 max-[1100px]:gap-x-6 max-lg:gap-x-8 ml-auto">
 
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.search_bar.before') !!}
 

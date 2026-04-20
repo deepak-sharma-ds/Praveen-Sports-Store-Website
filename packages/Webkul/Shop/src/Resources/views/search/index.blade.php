@@ -16,10 +16,8 @@ $isAllProductsPage = request()->routeIs('shop.all.product.index');
         <style>
             .seo-read-more-block {
                 background: #ffffff;
-                padding: 2rem;
                 width: 100%;
                 margin: 0 auto;
-                font-family: 'Poppins', sans-serif !important;
                 font-size: 16px;
                 line-height: 1.7;
                 color: #333;
@@ -168,7 +166,7 @@ $isAllProductsPage = request()->routeIs('shop.all.product.index');
 
     @if ($isAllProductsPage)
         <section class="bg-white">
-            <div class="seo-read-more-block">
+            <div class="seo-read-more-block py-8 px-4 md:p-8">
 
                 <h2 class="seo-main-heading">ANA Sports: Quality Cricket Bats and Cricket Sport Equipment in India
                 </h2>
@@ -457,10 +455,8 @@ $isAllProductsPage = request()->routeIs('shop.all.product.index');
                         should choose a bat that feels comfortable to lift and swing, allowing good control without
                         sacrificing power on shots.</p>
                 </div>
-
                 <label for="toggle-read-more" class="seo-btn seo-btn-read-more">Read More</label>
                 <label for="toggle-read-more" class="seo-btn seo-btn-read-less">Read Less</label>
-
             </div>
         </section>
     @endif
